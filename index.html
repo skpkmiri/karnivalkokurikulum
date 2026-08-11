@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="ms" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karnival Kokurikulum SPK Zon Borneo 2026</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        petanque: { 50: '#ecfdf5', 100: '#d1fae5', 600: '#059669', 800: '#065f46', 900: '#064e3b' },
+                        english: { 50: '#f5f3ff', 100: '#ede9fe', 600: '#7c3aed', 800: '#5b21b6', 900: '#4c1d95', gold: '#fbbf24' },
+                        semarak: { 50: '#fff7ed', 100: '#ffedd5', 600: '#ea580c', 800: '#9f1239', 900: '#7f1d1d' }, // Orange to Maroon
+                        primary: '#1e40af', // Dark blue general theme
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'glow': '0 0 15px rgba(255, 255, 255, 0.5)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            /* Accessibility: Ensure minimum text size and good contrast */
+            font-size: 110%; 
+            color: #1f2937;
+            background-color: #f9fafb;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: -0.025em;
+        }
+        .page-section {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .page-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Custom Scrollbar for better visibility */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* Focus styles for keyboard accessibility */
+        *:focus-visible {
+            outline: 3px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        /* Masonry Grid */
+        .masonry {
+            column-count: 1;
+            column-gap: 1rem;
+        }
+        @media (min-width: 640px) { .masonry { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry { column-count: 3; } }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+        }
+        .toast {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="bg-white/95 backdrop-blur-md shadow-soft sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <!-- Logo & Title -->
+                <div class="flex items-center cursor-pointer" onclick="navigate('home')" aria-label="Ke Halaman Utama">
+                    <div class="flex-shrink-0 flex items-center gap-3">
+                        <img src="logo.png" alt="Logo SKPK" class="w-12 h-12 object-contain drop-shadow-md">
+                        <div class="hidden md:block">
+                            <span class="block font-heading font-bold text-gray-900 text-lg leading-tight">KARNIVAL ZON BORNEO 2026</span>
+                            <span class="block text-sm text-gray-500 font-medium">SK Pendidikan Khas Miri</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-1">
+                    <button onclick="navigate('home')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Home</button>
+                    <button onclick="scrollToSection('tentatif')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Tentatif</button>
+                    <button onclick="scrollToSection('pertandingan')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Pertandingan</button>
+                    <button onclick="navigate('home'); setTimeout(()=>scrollToSection('pengumuman'), 100)" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Pengumuman</button>
+                    <button onclick="navigate('galeri')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Galeri</button>
+                    <button onclick="scrollToSection('footer')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Hubungi</button>
+                    
+                    <div class="w-px h-6 bg-gray-300 mx-2"></div>
+                    
+                    <button onclick="navigate('admin-login')" class="ml-2 flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors shadow-md" aria-label="Log Masuk Admin">
+                        <i class="fas fa-cog"></i> Admin
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="flex items-center lg:hidden">
+                    <button type="button" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-expanded="false">
+                        <span class="sr-only">Buka menu utama</span>
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <button onclick="navigate('home'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Home</button>
+                <button onclick="navigate('home'); setTimeout(()=>scrollToSection('tentatif'), 100); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Tentatif</button>
+                <button onclick="navigate('home'); setTimeout(()=>scrollToSection('pertandingan'), 100); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Pertandingan</button>
+                <button onclick="navigate('galeri'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Galeri</button>
+                <button onclick="navigate('admin-login'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 mt-4 rounded-md text-base font-semibold bg-gray-900 text-white"><i class="fas fa-lock mr-2"></i> Admin Portal</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast fixed bottom-4 right-4 z-[60] bg-gray-900 text-white px-6 py-3 rounded-xl shadow-xl flex items-center gap-3">
+        <i id="toast-icon" class="fas fa-info-circle"></i>
+        <span id="toast-message" class="font-medium">Message</span>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow">
+        
+        <!-- ================= PAGE: HOME ================= -->
+        <div id="page-home" class="page-section active">
+            
+            <!-- Hero Section -->
+            <section class="relative bg-gradient-to-br from-blue-900 via-indigo-800 to-purple-900 text-white overflow-hidden min-h-[calc(100vh-80px)] flex items-center justify-center">
+                <!-- Background Pattern -->
+                <div class="absolute inset-0 opacity-10">
+                    <svg class="h-full w-full" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M0 40L40 0H20L0 20M40 40V20L20 40" stroke="currentColor" stroke-width="2" fill="none"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid-pattern)"/></svg>
+                </div>
+                
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col items-center text-center w-full">
+                    <h1 class="text-3xl md:text-5xl lg:text-6xl font-heading font-extrabold tracking-tight mb-4 leading-tight">
+                        KARNIVAL KOKURIKULUM <br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">SEKOLAH PENDIDIKAN KHAS</span><br/>
+                        ZON BORNEO 2026
+                    </h1>
+                    <p class="text-lg md:text-xl text-blue-100 max-w-3xl mb-2 font-medium">19 – 21 November 2026</p>
+                    <p class="text-base text-blue-200 font-semibold mb-6 flex items-center gap-2">
+                        <i class="fas fa-map-marker-alt"></i> SK Pendidikan Khas Miri, Sarawak
+                    </p>
+                    
+                    <!-- Countdown -->
+                    <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 md:p-6 mb-8 shadow-2xl">
+                        <p class="text-xs font-bold text-blue-200 uppercase tracking-widest mb-3">Menuju Karnival</p>
+                        <div class="flex gap-4 md:gap-6 justify-center">
+                            <div class="flex flex-col items-center">
+                                <span id="cd-days" class="text-3xl md:text-5xl font-heading font-bold">00</span>
+                                <span class="text-[10px] md:text-xs text-blue-200 mt-1 uppercase">Hari</span>
+                            </div>
+                            <div class="text-2xl md:text-4xl font-light opacity-50 mt-1">:</div>
+                            <div class="flex flex-col items-center">
+                                <span id="cd-hours" class="text-3xl md:text-5xl font-heading font-bold">00</span>
+                                <span class="text-[10px] md:text-xs text-blue-200 mt-1 uppercase">Jam</span>
+                            </div>
+                            <div class="text-2xl md:text-4xl font-light opacity-50 mt-1">:</div>
+                            <div class="flex flex-col items-center">
+                                <span id="cd-mins" class="text-3xl md:text-5xl font-heading font-bold">00</span>
+                                <span class="text-[10px] md:text-xs text-blue-200 mt-1 uppercase">Minit</span>
+                            </div>
+                            <div class="text-2xl md:text-4xl font-light opacity-50 mt-1">:</div>
+                            <div class="flex flex-col items-center">
+                                <span id="cd-secs" class="text-3xl md:text-5xl font-heading font-bold">00</span>
+                                <span class="text-[10px] md:text-xs text-blue-200 mt-1 uppercase">Saat</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <button onclick="scrollToSection('pertandingan')" class="px-6 py-3 rounded-xl bg-yellow-400 text-gray-900 font-bold text-base hover:bg-yellow-300 shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-all transform hover:-translate-y-1">
+                            Lihat Pertandingan
+                        </button>
+                        <button onclick="scrollToSection('tentatif')" class="px-6 py-3 rounded-xl bg-white/10 text-white font-bold text-base border border-white/30 hover:bg-white/20 transition-all transform hover:-translate-y-1">
+                            Tentatif Program
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pilih Pertandingan -->
+            <section id="pertandingan" class="bg-white min-h-[calc(100vh-80px)] flex flex-col justify-center pt-20 pb-12 scroll-mt-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl md:text-3xl font-heading font-bold text-gray-900 mb-2">Pilih Pertandingan</h2>
+                        <div class="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
+                        <p class="mt-3 text-sm md:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                            Tiga acara utama yang dipertandingkan sepanjang karnival berlangsung, direka khusus untuk mencungkil bakat murid-murid Pendidikan Khas.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Petanque Card -->
+                        <div class="group bg-petanque-50 rounded-3xl p-6 border border-petanque-100 shadow-soft hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer" onclick="navigate('petanque')">
+                            <div class="w-16 h-16 bg-petanque-100 text-petanque-600 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-heading font-bold text-petanque-900 mb-2">PÉTANQUE</h3>
+                            <p class="text-petanque-800 text-sm md:text-base font-medium mb-3 flex items-center gap-2"><i class="far fa-calendar-alt"></i> 19 November 2026</p>
+                            <p class="text-gray-600 text-sm mb-6 flex-grow">Pertandingan kemahiran Pétanque kategori Triple Campuran Murid dan Guru secara Double Elimination.</p>
+                            <button class="w-full py-2.5 rounded-xl bg-petanque-600 text-white font-bold hover:bg-petanque-800 transition-colors flex items-center justify-center gap-2 text-sm">
+                                Lihat Pertandingan <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <!-- English Carnival Card -->
+                        <div class="group bg-english-50 rounded-3xl p-6 border border-english-100 shadow-soft hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer" onclick="navigate('english')">
+                            <div class="w-16 h-16 bg-english-100 text-english-600 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-heading font-bold text-english-900 mb-2">ENGLISH CARNIVAL</h3>
+                            <p class="text-english-800 text-sm md:text-base font-medium mb-1 flex items-center gap-2"><i class="far fa-calendar-alt"></i> 20 November 2026</p>
+                            <p class="text-english-600 text-xs font-semibold mb-3 italic">"Festival of Lights: Illuminating English Minds"</p>
+                            <p class="text-gray-600 text-sm mb-6 flex-grow">Tujuh aktiviti berbahasa Inggeris interaktif termasuk Spelling Bee, Action Song, dan Treasure Hunt.</p>
+                            <button class="w-full py-2.5 rounded-xl bg-english-600 text-white font-bold hover:bg-english-800 transition-colors flex items-center justify-center gap-2 text-sm">
+                                Explore Carnival <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <!-- Semarak Seni Card -->
+                        <div class="group bg-semarak-50 rounded-3xl p-6 border border-semarak-100 shadow-soft hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer" onclick="navigate('semarak')">
+                            <div class="w-16 h-16 bg-semarak-100 text-semarak-600 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-theater-masks"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-heading font-bold text-semarak-900 mb-2">SEMARAK SENI 6</h3>
+                            <p class="text-semarak-800 text-sm md:text-base font-medium mb-3 flex items-center gap-2"><i class="far fa-calendar-alt"></i> 21 November 2026</p>
+                            <p class="text-gray-600 text-sm mb-6 flex-grow">Pertandingan Tarian Kolattam antara sekolah menampilkan kreativiti koreografi dan kebudayaan.</p>
+                            <button class="w-full py-2.5 rounded-xl bg-semarak-600 text-white font-bold hover:bg-semarak-800 transition-colors flex items-center justify-center gap-2 text-sm">
+                                Lihat Pertandingan <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tentatif 3 Hari -->
+            <section id="tentatif" class="py-12 bg-gray-50 scroll-mt-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-10">
+                        <h2 class="text-2xl md:text-3xl font-heading font-bold text-gray-900 mb-3">Tentatif Keseluruhan</h2>
+                        <div class="w-16 h-1 bg-blue-600 mx-auto rounded-full"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Hari 1 -->
+                        <div class="bg-white p-6 rounded-2xl shadow-soft border-t-4 border-petanque-600 relative hover:-translate-y-1 transition-transform">
+                            <div class="absolute -top-4 right-4 w-8 h-8 bg-petanque-600 text-white rounded-full flex items-center justify-center font-bold">1</div>
+                            <span class="inline-block px-3 py-1 bg-petanque-100 text-petanque-800 font-bold rounded-full text-xs mb-3">19 NOV 2026 (KHAMIS)</span>
+                            <h3 class="text-lg font-heading font-bold text-gray-900 mb-2">Pertandingan Pétanque</h3>
+                            <p class="text-gray-600 text-sm mb-4"><i class="fas fa-map-marker-alt text-petanque-600 mr-2"></i> SK Pendidikan Khas Miri</p>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="flex gap-3"><span class="font-bold text-petanque-700">07:30</span> <span>Pendaftaran</span></li>
+                                <li class="flex gap-3"><span class="font-bold text-petanque-700">08:00</span> <span>Perlawanan Kumpulan</span></li>
+                                <li class="flex gap-3"><span class="font-bold text-petanque-700">14:00</span> <span>Perlawanan Akhir</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- Hari 2 -->
+                        <div class="bg-white p-6 rounded-2xl shadow-soft border-t-4 border-english-600 relative hover:-translate-y-1 transition-transform">
+                            <div class="absolute -top-4 right-4 w-8 h-8 bg-english-600 text-white rounded-full flex items-center justify-center font-bold">2</div>
+                            <span class="inline-block px-3 py-1 bg-english-100 text-english-800 font-bold rounded-full text-xs mb-3">20 NOV 2026 (JUMAAT)</span>
+                            <h3 class="text-lg font-heading font-bold text-gray-900 mb-2">English Carnival</h3>
+                            <p class="text-gray-600 text-sm mb-4"><i class="fas fa-map-marker-alt text-english-600 mr-2"></i> SK Pendidikan Khas Miri</p>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="flex gap-3"><span class="font-bold text-english-700">08:00</span> <span>Spelling Bee</span></li>
+                                <li class="flex gap-3"><span class="font-bold text-english-700">10:00</span> <span>Action Song</span></li>
+                                <li class="flex gap-3"><span class="font-bold text-english-700">14:00</span> <span>Treasure Hunt</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- Hari 3 -->
+                        <div class="bg-white p-6 rounded-2xl shadow-soft border-t-4 border-semarak-600 relative hover:-translate-y-1 transition-transform">
+                            <div class="absolute -top-4 right-4 w-8 h-8 bg-semarak-600 text-white rounded-full flex items-center justify-center font-bold">3</div>
+                            <span class="inline-block px-3 py-1 bg-semarak-100 text-semarak-800 font-bold rounded-full text-xs mb-3">21 NOV 2026 (SABTU)</span>
+                            <h3 class="text-lg font-heading font-bold text-gray-900 mb-2">Semarak Seni 6</h3>
+                            <p class="text-gray-600 text-sm mb-4"><i class="fas fa-map-marker-alt text-semarak-600 mr-2"></i> Dewan Mutiara, SKPK Miri</p>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="flex gap-3"><span class="font-bold text-semarak-700">08:00</span> <span>Tarian Kolattam</span></li>
+                                <li class="flex gap-3"><span class="font-bold text-semarak-700">11:30</span> <span>Ketibaan VIP</span></li>
+                                <li class="flex gap-3"><span class="font-bold text-semarak-700">12:00</span> <span>Majlis Penutupan</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sekolah Terlibat -->
+            <section class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">Sekolah Terlibat</h2>
+                    <div class="w-24 h-1.5 bg-blue-600 mx-auto rounded-full mb-12"></div>
+                    
+                    <h3 class="text-xl font-bold text-gray-700 mb-6 border-b pb-2 inline-block">Kategori SPK (Zon Borneo)</h3>
+                    <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-12">
+                        <!-- Loop Schools -->
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Miri</div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Sibu</div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Kota Samarahan</div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Kuching</div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Kota Kinabalu</div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Tuaran</div>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-gray-700 mb-6 border-b pb-2 inline-block">Kategori PPKI (Semarak Seni)</h3>
+                    <div class="flex flex-wrap justify-center gap-4 md:gap-6">
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">PPKI SMK Dato' Permaisuri</div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">PPKI SMK Luak</div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">PPKI SMK Lutong</div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">PPKI SMK St. Joseph</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pengumuman & Download Center -->
+            <section id="pengumuman" class="py-20 bg-gray-50 scroll-mt-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        
+                        <!-- Pengumuman Column -->
+                        <div>
+                            <div class="flex items-center gap-3 mb-8">
+                                <div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center text-2xl"><i class="fas fa-bullhorn"></i></div>
+                                <h2 class="text-3xl font-heading font-bold text-gray-900">Pengumuman Terkini</h2>
+                            </div>
+                            
+                            <!-- Dynamic Announcement List -->
+                            <div id="public-announcements-list" class="space-y-4">
+                                <div class="text-center py-8 text-gray-500 bg-white rounded-2xl shadow-soft border border-gray-100">
+                                    <i class="fas fa-spinner fa-spin text-2xl mb-2"></i><br>Memuatkan pengumuman...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Download Center Column -->
+                        <div>
+                            <div class="flex items-center gap-3 mb-8">
+                                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-2xl"><i class="fas fa-cloud-download-alt"></i></div>
+                                <h2 class="text-3xl font-heading font-bold text-gray-900">Pusat Muat Turun</h2>
+                            </div>
+
+                            <div class="bg-white rounded-2xl shadow-soft border border-gray-100 p-2">
+                                <div id="public-documents-list" class="divide-y divide-gray-100">
+                                    <div class="text-center py-8 text-gray-500">
+                                        <i class="fas fa-spinner fa-spin text-2xl mb-2"></i><br>Memuatkan dokumen...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE: PÉTANQUE ================= -->
+        <div id="page-petanque" class="page-section">
+            <div class="min-h-[calc(100vh-80px)] flex flex-col justify-center bg-petanque-50 py-8 px-4">
+                <div class="max-w-6xl mx-auto w-full">
+                    
+                    <!-- Header Compact -->
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 bg-petanque-600 text-white rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 shadow-lg">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h1 class="text-3xl md:text-5xl font-heading font-bold text-petanque-900 mb-2">Pertandingan Pétanque</h1>
+                        <p class="text-petanque-700 font-medium">19 November 2026 | Gelanggang Pétanque SKPK Miri</p>
+                    </div>
+
+                    <!-- Content Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Kategori -->
+                        <div class="bg-white p-6 rounded-3xl shadow-soft border border-petanque-100 flex flex-col justify-center">
+                            <h3 class="text-xl font-bold text-petanque-900 mb-4 border-b pb-2">Kategori & Format</h3>
+                            <ul class="space-y-4 text-sm">
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-users text-petanque-600 mt-1"></i>
+                                    <div>
+                                        <strong class="block text-gray-800 text-base">Triple Campuran Murid</strong>
+                                        <span class="text-gray-600">3 pemain bagi setiap sekolah (wajib minimum 1 peserta perempuan).</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-chalkboard-teacher text-petanque-600 mt-1"></i>
+                                    <div>
+                                        <strong class="block text-gray-800 text-base">Triple Campuran Guru</strong>
+                                        <span class="text-gray-600">3 pemain (guru pengiring/pegawai) setiap sekolah.</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-sitemap text-petanque-600 mt-1"></i>
+                                    <div>
+                                        <strong class="block text-gray-800 text-base">Format Perlawanan</strong>
+                                        <span class="text-gray-600">Double Elimination (Kalah Mati Ganda). Papan markah akan dipaparkan semasa perlawanan.</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Results -->
+                        <div class="bg-white p-6 rounded-3xl shadow-soft border border-petanque-100 flex flex-col">
+                            <h3 class="text-xl font-bold text-petanque-900 mb-4 border-b pb-2">Keputusan Semasa</h3>
+                            <div id="petanque-results" class="flex-grow bg-petanque-50 rounded-xl border border-petanque-200 flex items-center justify-center p-6 text-center">
+                                <div>
+                                    <i class="fas fa-clock text-4xl text-petanque-300 mb-3"></i>
+                                    <p class="text-petanque-800 font-medium text-sm">Keputusan akan dikemas kini oleh Urusetia secara lansung di sini.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE: ENGLISH CARNIVAL ================= -->
+        <div id="page-english" class="page-section">
+            <div class="min-h-[calc(100vh-80px)] flex flex-col justify-center bg-english-900 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] py-8 px-4 relative">
+                <div class="max-w-7xl mx-auto w-full relative z-10">
+                    
+                    <!-- Header Compact -->
+                    <div class="text-center mb-8">
+                        <h1 class="text-4xl md:text-5xl font-heading font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-english-gold to-yellow-200 mb-2 drop-shadow-md">
+                            English Carnival 2026
+                        </h1>
+                        <p class="text-lg md:text-xl font-light text-english-100 mb-3">"Festival of Lights: Illuminating English Minds"</p>
+                        <span class="text-xs text-english-200 font-semibold bg-english-800/50 px-4 py-1.5 rounded-full border border-english-600/50">20 November 2026 | SK Pendidikan Khas Miri</span>
+                    </div>
+
+                    <!-- Cards Compact Grid -->
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 lg:gap-6">
+                        <!-- Card 1 -->
+                        <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-soft p-4 border border-english-200 hover:-translate-y-1 transition-transform">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 bg-english-600 text-white rounded-lg flex items-center justify-center text-lg"><i class="fas fa-spell-check"></i></div>
+                                <h3 class="text-sm md:text-base font-bold text-english-900 leading-tight">Spelling Bee</h3>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-3 line-clamp-2">Ujian ejaan perkataan Inggeris mengikut pelbagai tahap kesukaran.</p>
+                            <div class="text-[10px] md:text-xs font-bold text-english-700 bg-english-100 p-2 rounded"><i class="far fa-clock mr-1"></i>08:00 Pagi - Dewan Utama</div>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-soft p-4 border border-english-200 hover:-translate-y-1 transition-transform">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 bg-english-600 text-white rounded-lg flex items-center justify-center text-lg"><i class="fas fa-question-circle"></i></div>
+                                <h3 class="text-sm md:text-base font-bold text-english-900 leading-tight">English Quiz</h3>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-3 line-clamp-2">Kuiz interaktif merangkumi tatabahasa dan pengetahuan am.</p>
+                            <div class="text-[10px] md:text-xs font-bold text-english-700 bg-english-100 p-2 rounded"><i class="far fa-clock mr-1"></i>08:45 Pagi - Bilik Tayangan</div>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-soft p-4 border border-english-200 hover:-translate-y-1 transition-transform">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 bg-english-600 text-white rounded-lg flex items-center justify-center text-lg"><i class="fas fa-music"></i></div>
+                                <h3 class="text-sm md:text-base font-bold text-english-900 leading-tight">Action Song</h3>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-3 line-clamp-2">Persembahan nyanyian berkumpulan dengan pergerakan kreatif.</p>
+                            <div class="text-[10px] md:text-xs font-bold text-english-700 bg-english-100 p-2 rounded"><i class="far fa-clock mr-1"></i>09:45 Pagi - Dewan Utama</div>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-soft p-4 border border-english-200 hover:-translate-y-1 transition-transform">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 bg-english-600 text-white rounded-lg flex items-center justify-center text-lg"><i class="fas fa-microphone-alt"></i></div>
+                                <h3 class="text-sm md:text-base font-bold text-english-900 leading-tight">Jazz Chants</h3>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-3 line-clamp-2">Penyampaian irama bahasa melalui corak rentak (rhythm) jazz.</p>
+                            <div class="text-[10px] md:text-xs font-bold text-english-700 bg-english-100 p-2 rounded"><i class="far fa-clock mr-1"></i>10:00 Pagi - Dewan Utama</div>
+                        </div>
+                        <!-- Card 5 -->
+                        <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-soft p-4 border border-english-200 hover:-translate-y-1 transition-transform">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 bg-english-600 text-white rounded-lg flex items-center justify-center text-lg"><i class="fas fa-tshirt"></i></div>
+                                <h3 class="text-sm md:text-base font-bold text-english-900 leading-tight">Best Costumes</h3>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-3 line-clamp-2">Pertandingan pakaian beragam bertemakan "Festival of Lights".</p>
+                            <div class="text-[10px] md:text-xs font-bold text-english-700 bg-english-100 p-2 rounded"><i class="far fa-clock mr-1"></i>10:45 Pagi - Pentas Terbuka</div>
+                        </div>
+                        <!-- Card 6 -->
+                        <div class="bg-white/95 backdrop-blur-sm rounded-2xl shadow-soft p-4 border border-english-200 hover:-translate-y-1 transition-transform">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 bg-english-600 text-white rounded-lg flex items-center justify-center text-lg"><i class="fas fa-map-marked-alt"></i></div>
+                                <h3 class="text-sm md:text-base font-bold text-english-900 leading-tight">Treasure Hunt</h3>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-3 line-clamp-2">Eksplorasi berpandukan klu berbahasa Inggeris di sekitar sekolah.</p>
+                            <div class="text-[10px] md:text-xs font-bold text-english-700 bg-english-100 p-2 rounded"><i class="far fa-clock mr-1"></i>14:00 Petang - Sekitar Sekolah</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE: SEMARAK SENI 6 ================= -->
+        <div id="page-semarak" class="page-section">
+             <div class="min-h-[calc(100vh-80px)] flex flex-col justify-center bg-semarak-50 py-8 px-4">
+                <div class="max-w-6xl mx-auto w-full">
+                    
+                    <!-- Header Compact -->
+                    <div class="text-center mb-8">
+                        <span class="uppercase tracking-widest font-bold text-white bg-semarak-600 px-4 py-1 rounded-full text-xs mb-3 inline-block shadow">Semarak Seni 6</span>
+                        <h1 class="text-3xl md:text-5xl font-heading font-bold text-semarak-900 mb-2">Pertandingan Tarian Kolattam</h1>
+                        <p class="text-semarak-700 font-medium text-sm md:text-base">21 November 2026 | Dewan Mutiara, SKPK Miri</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- Kriteria Pemarkahan -->
+                        <div class="bg-white rounded-3xl shadow-soft border border-semarak-100 p-6 md:p-8 flex flex-col justify-center">
+                            <h2 class="text-xl font-heading font-bold text-semarak-900 mb-6 border-b pb-2">Kriteria Pemarkahan</h2>
+                            <div class="space-y-5 text-sm">
+                                <div>
+                                    <div class="flex justify-between mb-1.5 font-semibold text-gray-700"><span>Kreativiti Koreografi</span> <span>35%</span></div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-semarak-600 h-2.5 rounded-full" style="width: 35%"></div></div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1.5 font-semibold text-gray-700"><span>Teknik Tari (Postur & Rentak)</span> <span>25%</span></div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-orange-500 h-2.5 rounded-full" style="width: 25%"></div></div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1.5 font-semibold text-gray-700"><span>Koordinasi Muzik & Gerakan</span> <span>15%</span></div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-amber-500 h-2.5 rounded-full" style="width: 15%"></div></div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1.5 font-semibold text-gray-700"><span>Keseragaman & Keselarian</span> <span>15%</span></div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-amber-400 h-2.5 rounded-full" style="width: 15%"></div></div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1.5 font-semibold text-gray-700"><span>Busana & Tatarias</span> <span>10%</span></div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-yellow-400 h-2.5 rounded-full" style="width: 10%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Kategori & Popular -->
+                        <div class="flex flex-col gap-6">
+                            <!-- Kategori Info -->
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-white p-5 rounded-2xl shadow-sm border border-semarak-100 text-center flex flex-col justify-center">
+                                    <h4 class="font-bold text-semarak-800 mb-1">Kategori A</h4>
+                                    <p class="text-xs text-gray-600">Sekolah Pendidikan Khas Zon Borneo</p>
+                                </div>
+                                <div class="bg-white p-5 rounded-2xl shadow-sm border border-semarak-100 text-center flex flex-col justify-center">
+                                    <h4 class="font-bold text-semarak-800 mb-1">Kategori B</h4>
+                                    <p class="text-xs text-gray-600">PPKI Sekolah Menengah Daerah Miri</p>
+                                </div>
+                            </div>
+
+                            <!-- Kumpulan Popular -->
+                            <div class="bg-gradient-to-br from-semarak-600 to-semarak-800 text-white rounded-3xl p-6 md:p-8 text-center flex-grow flex flex-col justify-center items-center shadow-md">
+                                <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center text-2xl mb-4 backdrop-blur-sm">
+                                    <i class="fab fa-facebook-f text-white"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2">Undian Kumpulan Popular</h3>
+                                <p class="text-semarak-100 text-xs md:text-sm mb-6 max-w-sm">Sokong pasukan sekolah pilihan anda! Kumpulan dengan "Likes" terbanyak di Facebook rasmi SKPK Miri akan memenangi anugerah ini.</p>
+                                <a href="#" class="inline-block bg-white text-semarak-800 font-bold py-2.5 px-6 rounded-xl hover:bg-gray-100 transition shadow-sm text-sm">
+                                    Undi Sekarang
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE: GALERI ================= -->
+        <div id="page-galeri" class="page-section">
+            <div class="min-h-[calc(100vh-80px)] flex flex-col justify-center bg-gray-900 text-white py-8 px-4">
+                <div class="max-w-7xl mx-auto w-full">
+                    
+                    <!-- Header Compact -->
+                    <div class="text-center mb-8">
+                        <h1 class="text-3xl md:text-5xl font-heading font-bold mb-2">Galeri Memori</h1>
+                        <p class="text-sm md:text-base text-gray-400 font-medium">Himpunan momen indah sepanjang Karnival Zon Borneo 2026</p>
+                    </div>
+                    
+                    <!-- Grid Gallery (Fit to page configuration) -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4 max-h-[60vh] overflow-y-auto md:max-h-none md:overflow-visible">
+                        <div class="col-span-2 row-span-2 rounded-2xl overflow-hidden shadow-soft bg-gray-800">
+                            <img src="https://placehold.co/600x400/059669/ffffff?text=Pertandingan+Petanque" class="w-full h-full object-cover aspect-video hover:scale-105 transition-transform duration-500" alt="Galeri 1">
+                        </div>
+                        <div class="rounded-2xl overflow-hidden shadow-soft bg-gray-800">
+                            <img src="https://placehold.co/400x400/7c3aed/ffffff?text=English+Carnival" class="w-full h-full object-cover aspect-square hover:scale-105 transition-transform duration-500" alt="Galeri 2">
+                        </div>
+                        <div class="rounded-2xl overflow-hidden shadow-soft bg-gray-800">
+                            <img src="https://placehold.co/400x400/ea580c/ffffff?text=Tarian+Kolattam" class="w-full h-full object-cover aspect-square hover:scale-105 transition-transform duration-500" alt="Galeri 3">
+                        </div>
+                        <div class="rounded-2xl overflow-hidden shadow-soft bg-gray-800">
+                            <img src="https://placehold.co/400x400/2563eb/ffffff?text=Sekitar+Karnival" class="w-full h-full object-cover aspect-square hover:scale-105 transition-transform duration-500" alt="Galeri 4">
+                        </div>
+                        <div class="rounded-2xl overflow-hidden shadow-soft bg-gray-800">
+                            <img src="https://placehold.co/400x400/9f1239/ffffff?text=Penyampaian+Hadiah" class="w-full h-full object-cover aspect-square hover:scale-105 transition-transform duration-500" alt="Galeri 5">
+                        </div>
+                        <div class="col-span-2 md:col-span-1 lg:col-span-2 rounded-2xl overflow-hidden shadow-soft bg-gray-800">
+                            <img src="https://placehold.co/800x400/4c1d95/ffffff?text=Majlis+Penutupan" class="w-full h-full object-cover aspect-[2/1] md:aspect-auto hover:scale-105 transition-transform duration-500" alt="Galeri 6">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE: ADMIN LOGIN ================= -->
+        <div id="page-admin-login" class="page-section bg-gray-50 flex items-center justify-center min-h-[70vh]">
+            <div class="bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-gray-100 max-w-md w-full mx-4 my-12">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-gray-900 text-white rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 shadow-md">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h2 class="text-2xl font-heading font-bold text-gray-900">Admin Portal</h2>
+                    <p class="text-gray-500 mt-2 text-sm">Log masuk khusus untuk urusetia karnival.</p>
+                </div>
+                
+                <form id="admin-login-form" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Email Urusetia</label>
+                        <input type="email" id="login-email" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" placeholder="admin@skpk.edu.my">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Kata Laluan</label>
+                        <input type="password" id="login-password" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-xl bg-gray-900 text-white font-bold hover:bg-gray-800 transition shadow-md flex justify-center items-center gap-2">
+                        <i class="fas fa-sign-in-alt"></i> Log Masuk
+                    </button>
+                    <p class="text-xs text-center text-gray-500 mt-4">Peringatan: Jika ini kali pertama, sistem akan setup environment admin (Mockup).</p>
+                </form>
+            </div>
+        </div>
+
+        <!-- ================= PAGE: ADMIN DASHBOARD ================= -->
+        <div id="page-admin-dashboard" class="page-section bg-gray-100 min-h-screen">
+            <div class="flex flex-col md:flex-row max-w-7xl mx-auto px-4 py-8 gap-8">
+                
+                <!-- Sidebar -->
+                <div class="w-full md:w-64 flex-shrink-0">
+                    <div class="bg-white rounded-2xl shadow-soft p-4 sticky top-24">
+                        <div class="flex items-center gap-3 pb-4 mb-4 border-b border-gray-100">
+                            <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-lg"><i class="fas fa-user-tie"></i></div>
+                            <div>
+                                <div class="font-bold text-gray-900 leading-none">Urusetia</div>
+                                <div class="text-xs text-green-600 font-semibold mt-1">Online</div>
+                            </div>
+                        </div>
+                        <nav class="space-y-1">
+                            <button onclick="switchAdminTab('dashboard')" id="tab-dashboard" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-blue-700 bg-blue-50 transition"><i class="fas fa-home w-5"></i> Utama</button>
+                            <button onclick="switchAdminTab('pengumuman')" id="tab-pengumuman" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-bullhorn w-5"></i> Pengumuman</button>
+                            <button onclick="switchAdminTab('dokumen')" id="tab-dokumen" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-file-pdf w-5"></i> Muat Turun</button>
+                            <button onclick="adminLogout()" class="w-full flex items-center gap-3 px-4 py-3 mt-4 text-sm font-medium rounded-xl text-red-600 hover:bg-red-50 transition border border-transparent hover:border-red-100"><i class="fas fa-sign-out-alt w-5"></i> Log Keluar</button>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Main Content Panel -->
+                <div class="flex-grow bg-white rounded-2xl shadow-soft p-6 md:p-8">
+                    
+                    <!-- Tab: Dashboard -->
+                    <div id="admin-panel-dashboard" class="admin-panel">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Papan Pemuka Keseluruhan</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-blue-50 rounded-xl p-6 border border-blue-100">
+                                <div class="text-blue-500 text-2xl mb-2"><i class="fas fa-school"></i></div>
+                                <div class="text-3xl font-bold text-gray-900 mb-1">10</div>
+                                <div class="text-sm font-semibold text-gray-600">Sekolah Terlibat</div>
+                            </div>
+                            <div class="bg-emerald-50 rounded-xl p-6 border border-emerald-100">
+                                <div class="text-emerald-500 text-2xl mb-2"><i class="fas fa-users"></i></div>
+                                <div class="text-3xl font-bold text-gray-900 mb-1">120+</div>
+                                <div class="text-sm font-semibold text-gray-600">Peserta Berdaftar</div>
+                            </div>
+                            <div class="bg-purple-50 rounded-xl p-6 border border-purple-100">
+                                <div class="text-purple-500 text-2xl mb-2"><i class="fas fa-trophy"></i></div>
+                                <div class="text-3xl font-bold text-gray-900 mb-1">9</div>
+                                <div class="text-sm font-semibold text-gray-600">Acara Dipertandingkan</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-500 text-sm">Gunakan menu di sebelah kiri untuk mengurus kandungan portal rasmi.</p>
+                    </div>
+
+                    <!-- Tab: Pengumuman -->
+                    <div id="admin-panel-pengumuman" class="admin-panel hidden">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-2xl font-bold text-gray-900">Urus Pengumuman</h2>
+                        </div>
+                        
+                        <!-- Form Tambah -->
+                        <form id="form-add-announcement" class="bg-gray-50 p-6 rounded-xl border border-gray-200 mb-8 space-y-4">
+                            <h3 class="font-bold text-gray-800 mb-2">Tambah Pengumuman Baru</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Tajuk</label>
+                                    <input type="text" id="ann-title" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Label (Badge)</label>
+                                    <select id="ann-badge" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none">
+                                        <option value="INFO">INFO</option>
+                                        <option value="PENTING">PENTING</option>
+                                        <option value="TERKINI">TERKINI</option>
+                                    </select>
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm text-gray-600 mb-1">Kandungan / Isi</label>
+                                    <textarea id="ann-content" required rows="3" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Simpan Pengumuman</button>
+                        </form>
+
+                        <!-- Senarai Pengumuman -->
+                        <div>
+                            <h3 class="font-bold text-gray-800 mb-4">Senarai Semasa</h3>
+                            <div id="admin-announcements-list" class="space-y-3">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Dokumen -->
+                    <div id="admin-panel-dokumen" class="admin-panel hidden">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-2xl font-bold text-gray-900">Pusat Muat Turun</h2>
+                        </div>
+                        
+                        <!-- Form Tambah -->
+                        <form id="form-add-document" class="bg-gray-50 p-6 rounded-xl border border-gray-200 mb-8 space-y-4">
+                            <h3 class="font-bold text-gray-800 mb-2">Tambah Dokumen Baru</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Nama Dokumen</label>
+                                    <input type="text" id="doc-title" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Cth: Kertas Kerja Induk">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Pautan URL (GDrive/Cloud)</label>
+                                    <input type="url" id="doc-url" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="https://...">
+                                </div>
+                            </div>
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Tambah Pautan Dokumen</button>
+                        </form>
+
+                        <!-- Senarai Dokumen -->
+                        <div>
+                            <h3 class="font-bold text-gray-800 mb-4">Senarai Dokumen</h3>
+                            <div class="border rounded-xl overflow-hidden">
+                                <table class="w-full text-left text-sm text-gray-600">
+                                    <thead class="bg-gray-50 border-b">
+                                        <tr>
+                                            <th class="px-4 py-3 font-semibold text-gray-900">Nama Dokumen</th>
+                                            <th class="px-4 py-3 font-semibold text-gray-900 w-24">Tindakan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="admin-documents-list" class="divide-y">
+                                        <!-- Populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="footer" class="bg-gray-900 text-gray-300 py-12 border-t border-gray-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-center md:text-left">
+                <!-- Info -->
+                <div class="md:col-span-1">
+                    <h3 class="text-white font-heading font-bold text-lg mb-4">Karnival Kokurikulum Sekolah-Sekolah Pendidikan Khas Zon Borneo 2026</h3>
+                    <p class="text-sm mb-4">Acara berprestij menghimpunkan bakat-bakat istimewa dari seluruh Zon Borneo dalam saingan sihat dan harmoni.</p>
+                    <div class="inline-block bg-blue-900/50 text-blue-300 font-semibold px-4 py-2 rounded-lg text-sm italic border border-blue-800">
+                        "Agar Dapat Turut Berbakti"
+                    </div>
+                </div>
+                
+                <!-- Penganjur -->
+                <div class="md:col-span-1">
+                    <h3 class="text-white font-bold text-lg mb-4">Penganjur Rasmi</h3>
+                    <p class="text-sm font-semibold text-gray-100 mb-1">SK Pendidikan Khas Miri</p>
+                    <p class="text-sm leading-relaxed text-gray-400">
+                        <i class="fas fa-map-marker-alt w-5"></i> Jalan Datuk Muip, Piasau Jaya,<br>
+                        <span class="pl-5">98000 Miri, Sarawak.</span>
+                    </p>
+                    <p class="text-sm mt-2 text-gray-400"><i class="fas fa-phone w-5"></i> Tel: +6085-XXX XXX</p>
+                    <p class="text-sm mt-1 text-gray-400"><i class="fas fa-envelope w-5"></i> yba4103@moe.edu.my</p>
+                </div>
+
+                <!-- Pautan Pantas -->
+                <div class="md:col-span-1">
+                    <h3 class="text-white font-bold text-lg mb-4">Pautan Pantas</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" onclick="navigate('home'); event.preventDefault()" class="hover:text-blue-400 transition">Halaman Utama</a></li>
+                        <li><a href="#" onclick="navigate('petanque'); event.preventDefault()" class="hover:text-blue-400 transition">Pertandingan Pétanque</a></li>
+                        <li><a href="#" onclick="navigate('english'); event.preventDefault()" class="hover:text-blue-400 transition">English Carnival</a></li>
+                        <li><a href="#" onclick="navigate('semarak'); event.preventDefault()" class="hover:text-blue-400 transition">Semarak Seni 6</a></li>
+                        <li><a href="#" onclick="navigate('galeri'); event.preventDefault()" class="hover:text-blue-400 transition">Galeri Gambar</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
+                <p>&copy; 2026 SK Pendidikan Khas Miri. All Rights Reserved.</p>
+                <p class="mt-1 text-xs">Developed for SPK Zon Borneo 2026.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FIREBASE & JAVASCRIPT LOGIC -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, collection, addDoc, onSnapshot, deleteDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Firebase Configuration (From canvas environment)
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'spk-zon-borneo-2026';
+        let app, db, auth;
+        let currentUser = null;
+        let isAdmin = false;
+
+        try {
+            const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+                // Dummy config for fallback if not injected
+                apiKey: "dummy", projectId: "dummy"
+            };
+            app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+            initAuth();
+        } catch (e) {
+            console.warn("Firebase initialization skipped or failed (Running local/fallback mode).", e);
+        }
+
+        // Authentication Initialization
+        async function initAuth() {
+            onAuthStateChanged(auth, (user) => {
+                currentUser = user;
+                if (user) {
+                    // Check if it's our mocked admin session via local storage flag
+                    if(localStorage.getItem('karnival_admin') === 'true'){
+                        isAdmin = true;
+                        if(document.getElementById('page-admin-login').classList.contains('active')){
+                            navigate('admin-dashboard');
+                        }
+                    }
+                    setupRealtimeListeners();
+                } else {
+                    isAdmin = false;
+                }
+            });
+
+            if (!auth.currentUser) {
+                try {
+                    const token = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+                    if (token) {
+                        await signInWithCustomToken(auth, token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                } catch (e) {
+                    console.error("Auth error:", e);
+                }
+            }
+        }
+
+        // Global functions accessible outside module
+        window.navigate = function(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+            // Show target
+            const target = document.getElementById(`page-${pageId}`);
+            if(target) {
+                target.classList.add('active');
+                window.scrollTo(0,0);
+            }
+            
+            // Special check for Admin Dashboard protection
+            if(pageId === 'admin-dashboard' && !isAdmin) {
+                navigate('admin-login');
+                showToast("Sila log masuk sebagai admin dahulu.", "error");
+            }
+        };
+
+        window.scrollToSection = function(id) {
+            const el = document.getElementById(id);
+            if(el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        };
+
+        window.toggleMobileMenu = function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        };
+
+        window.showToast = function(msg, type="info") {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toast-icon');
+            document.getElementById('toast-message').textContent = msg;
+            
+            toast.className = 'toast fixed bottom-4 right-4 z-[60] text-white px-6 py-3 rounded-xl shadow-xl flex items-center gap-3 ' + (type==='error'?'bg-red-600':'bg-gray-900');
+            icon.className = type==='error' ? 'fas fa-exclamation-circle' : 'fas fa-check-circle';
+            
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        };
+
+        window.switchAdminTab = function(tabName) {
+            document.querySelectorAll('.admin-panel').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.admin-tab').forEach(el => {
+                el.classList.remove('text-blue-700', 'bg-blue-50');
+                el.classList.add('text-gray-600');
+            });
+            
+            document.getElementById(`admin-panel-${tabName}`).classList.remove('hidden');
+            const activeTab = document.getElementById(`tab-${tabName}`);
+            activeTab.classList.remove('text-gray-600');
+            activeTab.classList.add('text-blue-700', 'bg-blue-50');
+        };
+
+        window.adminLogout = function() {
+            isAdmin = false;
+            localStorage.removeItem('karnival_admin');
+            navigate('home');
+            showToast("Berjaya log keluar dari portal admin.");
+        };
+
+        // Mock Login Handler
+        document.getElementById('admin-login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            // Mock authentication for preview purposes
+            if(email.includes('admin')) {
+                isAdmin = true;
+                localStorage.setItem('karnival_admin', 'true');
+                navigate('admin-dashboard');
+                showToast("Log masuk berjaya!");
+            } else {
+                showToast("Akses ditolak. Sila guna emel admin.", "error");
+            }
+        });
+
+        // Countdown Logic (Target: Nov 19, 2026 08:00:00)
+        const targetDate = new Date('2026-11-19T08:00:00').getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if(distance < 0) return; // Event passed
+
+            document.getElementById('cd-days').textContent = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+            document.getElementById('cd-hours').textContent = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+            document.getElementById('cd-mins').textContent = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            document.getElementById('cd-secs').textContent = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+        }, 1000);
+
+        // --- FIREBASE DATA OPERATIONS ---
+        
+        const pathAnnouncements = () => collection(db, 'artifacts', appId, 'public', 'data', 'announcements');
+        const pathDocuments = () => collection(db, 'artifacts', appId, 'public', 'data', 'documents');
+
+        // Setup Realtime Listeners
+        function setupRealtimeListeners() {
+            if(!db || !currentUser) return;
+
+            // Listen to Announcements
+            onSnapshot(pathAnnouncements(), (snapshot) => {
+                let htmlPublic = '';
+                let htmlAdmin = '';
+                
+                if(snapshot.empty) {
+                    htmlPublic = `<p class="text-gray-500 text-center py-6">Tiada pengumuman setakat ini.</p>`;
+                    htmlAdmin = `<p class="text-gray-500 text-sm">Tiada rekod.</p>`;
+                } else {
+                    // Manual sorting since complex queries might fail depending on canvas index setup
+                    const docs = [];
+                    snapshot.forEach(doc => docs.push({id: doc.id, ...doc.data()}));
+                    docs.sort((a,b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+
+                    docs.forEach(data => {
+                        const dateStr = data.timestamp ? new Date(data.timestamp.seconds * 1000).toLocaleDateString('ms-MY') : 'Baru';
+                        let badgeColor = data.badge === 'PENTING' ? 'bg-red-100 text-red-700' : (data.badge === 'TERKINI' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700');
+                        
+                        // Public View
+                        htmlPublic += `
+                        <div class="bg-white p-6 rounded-2xl shadow-soft border border-gray-100 hover:shadow-md transition">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="px-3 py-1 rounded-full text-xs font-bold ${badgeColor}">${data.badge}</span>
+                                <span class="text-sm text-gray-500"><i class="far fa-calendar-alt"></i> ${dateStr}</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">${data.title}</h3>
+                            <p class="text-gray-600">${data.content}</p>
+                        </div>`;
+
+                        // Admin View
+                        htmlAdmin += `
+                        <div class="bg-white p-4 rounded-xl border flex justify-between items-center gap-4">
+                            <div>
+                                <span class="text-xs font-bold ${badgeColor} px-2 py-0.5 rounded mr-2">${data.badge}</span>
+                                <span class="font-semibold text-gray-800">${data.title}</span>
+                            </div>
+                            <button onclick="deleteDocItem('announcements', '${data.id}')" class="text-red-500 hover:bg-red-50 p-2 rounded-lg transition"><i class="fas fa-trash"></i></button>
+                        </div>`;
+                    });
+                }
+                
+                const pList = document.getElementById('public-announcements-list');
+                const aList = document.getElementById('admin-announcements-list');
+                if(pList) pList.innerHTML = htmlPublic;
+                if(aList) aList.innerHTML = htmlAdmin;
+            }, (error) => console.error("Error fetching announcements:", error));
+
+            // Listen to Documents
+            onSnapshot(pathDocuments(), (snapshot) => {
+                let htmlPublic = '';
+                let htmlAdmin = '';
+                
+                if(snapshot.empty) {
+                    htmlPublic = `<div class="p-6 text-center text-gray-500">Tiada dokumen dimuat naik.</div>`;
+                    htmlAdmin = `<tr><td colspan="2" class="px-4 py-4 text-center text-gray-500">Tiada rekod</td></tr>`;
+                } else {
+                    const docs = [];
+                    snapshot.forEach(doc => docs.push({id: doc.id, ...doc.data()}));
+                    docs.sort((a,b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+
+                    docs.forEach(data => {
+                        htmlPublic += `
+                        <a href="${data.url}" target="_blank" class="flex items-center justify-between p-5 hover:bg-blue-50 transition group">
+                            <div class="flex items-center gap-4">
+                                <div class="text-red-500 text-2xl group-hover:scale-110 transition-transform"><i class="far fa-file-pdf"></i></div>
+                                <span class="font-semibold text-gray-800 group-hover:text-blue-600">${data.title}</span>
+                            </div>
+                            <i class="fas fa-download text-gray-400 group-hover:text-blue-600"></i>
+                        </a>`;
+
+                        htmlAdmin += `
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-4 py-3 font-medium text-gray-800">${data.title}</td>
+                            <td class="px-4 py-3">
+                                <button onclick="deleteDocItem('documents', '${data.id}')" class="text-red-500 hover:text-red-700 p-1"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>`;
+                    });
+                }
+                const pList = document.getElementById('public-documents-list');
+                const aList = document.getElementById('admin-documents-list');
+                if(pList) pList.innerHTML = htmlPublic;
+                if(aList) aList.innerHTML = htmlAdmin;
+            }, (error) => console.error("Error fetching documents:", error));
+        }
+
+        // Add Announcement
+        document.getElementById('form-add-announcement').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(!currentUser) return showToast("Sila log masuk.", "error");
+            
+            const title = document.getElementById('ann-title').value;
+            const badge = document.getElementById('ann-badge').value;
+            const content = document.getElementById('ann-content').value;
+            const btn = e.target.querySelector('button');
+            const originalText = btn.textContent;
+            
+            try {
+                btn.textContent = "Menyimpan...";
+                btn.disabled = true;
+                await addDoc(pathAnnouncements(), {
+                    title, badge, content,
+                    timestamp: serverTimestamp()
+                });
+                e.target.reset();
+                showToast("Pengumuman berjaya ditambah.");
+            } catch (err) {
+                console.error(err);
+                showToast("Ralat menyimpan.", "error");
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // Add Document
+        document.getElementById('form-add-document').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(!currentUser) return showToast("Sila log masuk.", "error");
+            
+            const title = document.getElementById('doc-title').value;
+            const url = document.getElementById('doc-url').value;
+            const btn = e.target.querySelector('button');
+            const originalText = btn.textContent;
+
+            try {
+                btn.textContent = "Menyimpan...";
+                btn.disabled = true;
+                await addDoc(pathDocuments(), {
+                    title, url,
+                    timestamp: serverTimestamp()
+                });
+                e.target.reset();
+                showToast("Dokumen berjaya ditambah.");
+            } catch (err) {
+                console.error(err);
+                showToast("Ralat menyimpan.", "error");
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // Delete Helper (Exposed to window so onclick inline handler can access)
+        window.deleteDocItem = async function(colName, docId) {
+            if(!isAdmin || !currentUser) return;
+            // Use custom modal/confirm replacement (simple logical confirm for UI sake without alert)
+            // Ideally we build a custom dialog, but since we cannot use alert(), we will just delete with a toast undo or direct delete
+            try {
+                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', colName, docId));
+                showToast("Rekod dipadam.");
+            } catch(e) {
+                console.error(e);
+                showToast("Gagal memadam rekod.", "error");
+            }
+        };
+
+        // Initialize state (Check auth status on load to set up admin local bypass if already set)
+        if(localStorage.getItem('karnival_admin') === 'true'){
+            isAdmin = true;
+        }
+
+    </script>
+</body>
+</html>
