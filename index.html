@@ -111,10 +111,7 @@
                 <div class="flex items-center cursor-pointer" onclick="navigate('home')" aria-label="Ke Halaman Utama">
                     <div class="flex-shrink-0 flex items-center gap-3">
                         <img src="logo.png" alt="Logo SKPK" class="w-12 h-12 object-contain drop-shadow-md">
-                        <div class="hidden md:block">
-                            <span class="block font-heading font-bold text-gray-900 text-lg leading-tight">SPECCO</span>
-                            <span class="block text-sm text-gray-500 font-medium">SK Pendidikan Khas Miri</span>
-                        </div>
+                        <span class="hidden md:block font-heading font-extrabold text-gray-900 text-2xl tracking-wide flex items-center">SPECCO</span>
                     </div>
                 </div>
 
@@ -565,6 +562,38 @@
             </div>
         </div>
 
+        <!-- ================= PAGE: HUBUNGI ================= -->
+        <div id="page-hubungi" class="page-section">
+            <section class="bg-white min-h-[calc(100vh-80px)] flex flex-col justify-center py-12 px-4">
+                <div class="max-w-5xl mx-auto w-full">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-heading font-bold text-gray-900 mb-2">Hubungi Kami</h2>
+                        <div class="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-4"></div>
+                        <p class="text-gray-600">Sila tekan pada ID Card Pegawai Perhubungan di bawah untuk maklumat lanjut dan imbasan QR WhatsApp.</p>
+                    </div>
+                    
+                    <div class="flex justify-center w-full relative max-w-4xl mx-auto shadow-xl rounded-2xl overflow-hidden border border-gray-100 bg-yellow-300">
+                        <img src="lo.png" alt="Pegawai Perhubungan" class="w-full h-auto block">
+                        
+                        <!-- 1. En Bryan (Top Left) -->
+                        <div onclick="openQRModal('bryanqr.png', '60145588627', 'En. Bryan')" class="absolute cursor-pointer hover:bg-black/10 transition-colors" style="top: 25%; left: 4%; width: 28%; height: 26%;"></div>
+                        
+                        <!-- 2. En Hairol (Top Center) -->
+                        <div onclick="openQRModal('hairolqr.png', '60168751757', 'En. Hairol')" class="absolute cursor-pointer hover:bg-black/10 transition-colors" style="top: 25%; left: 34%; width: 28%; height: 26%;"></div>
+                        
+                        <!-- 3. En Fazri (Top Right) -->
+                        <div onclick="openQRModal('fazriqr.png', '60148927166', 'En. Fazri')" class="absolute cursor-pointer hover:bg-black/10 transition-colors" style="top: 25%; left: 66%; width: 28%; height: 26%;"></div>
+                        
+                        <!-- 4. Pn Aida (Bottom Left-Center) -->
+                        <div onclick="openQRModal('aidaqr.png', '60139072804', 'Pn. Aida')" class="absolute cursor-pointer hover:bg-black/10 transition-colors" style="top: 55%; left: 19%; width: 28%; height: 26%;"></div>
+                        
+                        <!-- 5. Pn Amal (Bottom Right-Center) -->
+                        <div onclick="openQRModal('amalqr.png', '601110813763', 'Pn. Amal')" class="absolute cursor-pointer hover:bg-black/10 transition-colors" style="top: 55%; left: 51%; width: 28%; height: 26%;"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
         <!-- ================= PAGE: ADMIN LOGIN ================= -->
         <div id="page-admin-login" class="page-section">
             <div class="bg-gray-50 flex items-center justify-center min-h-[70vh]">
@@ -883,6 +912,7 @@
 
         window.openQRModal = function(qrSrc, phone, name) {
             document.getElementById('qr-image').src = qrSrc;
+            document.getElementById('qr-name').textContent = name;
             
             const message = encodeURIComponent(`Salam sejahtera ${name}`);
             document.getElementById('qr-link').href = `https://wa.me/${phone}?text=${message}`;
