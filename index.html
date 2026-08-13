@@ -387,7 +387,7 @@
 
         <!-- ================= PAGE: PENDAFTARAN ================= -->
         <div id="page-pendaftaran" class="page-section">
-            <section class="bg-blue-50 min-h-[calc(100vh-80px)] flex flex-col justify-center py-12 px-4">
+            <section class="bg-blue-50 min-h-[calc(100vh-80px)] flex flex-col justify-start pt-12 md:pt-20 pb-12 px-4">
                 <div class="max-w-5xl mx-auto w-full">
                     <div class="bg-white rounded-3xl shadow-xl border border-blue-100 p-8 md:p-12 flex flex-col md:flex-row gap-10 items-center">
                         <div class="flex-1">
@@ -457,9 +457,26 @@
                     </div>
                     
                     <div class="flex justify-center items-center bg-gray-50 p-6 md:p-10 rounded-3xl shadow-soft border border-gray-100">
-                        <!-- Image Section Only -->
-                        <div class="rounded-2xl overflow-hidden shadow-md border border-gray-200 bg-white p-2 max-w-4xl w-full">
-                            <img src="lo.png" alt="Maklumat Pegawai Perhubungan" class="w-full h-auto rounded-xl object-contain hover:scale-105 transition-transform duration-500">
+                        <div class="rounded-2xl overflow-hidden shadow-md border border-gray-200 bg-white p-2 max-w-4xl w-full relative">
+                            <!-- Container untuk Image Mapping CSS -->
+                            <div class="relative inline-block w-full">
+                                <img src="lo.png" alt="Maklumat Pegawai Perhubungan" class="w-full h-auto rounded-xl object-contain">
+                                
+                                <!-- Hotspot 1: Tuaran -->
+                                <button onclick="openQRModal('En. Bryan (SKPK Tuaran)', '60145588627', 'bryanqr.png', 'En. Bryan')" class="absolute rounded-xl hover:bg-white/20 hover:backdrop-blur-[2px] hover:ring-2 hover:ring-white/60 transition-all cursor-pointer" style="top: 25%; left: 5%; width: 28%; height: 26%;" aria-label="Hubungi En. Bryan"></button>
+                                
+                                <!-- Hotspot 2: KK -->
+                                <button onclick="openQRModal('En. Hairol (SKPK Kota Kinabalu)', '60168751757', 'hairolqr.png', 'En. Hairol')" class="absolute rounded-xl hover:bg-white/20 hover:backdrop-blur-[2px] hover:ring-2 hover:ring-white/60 transition-all cursor-pointer" style="top: 25%; left: 36%; width: 28%; height: 26%;" aria-label="Hubungi En. Hairol"></button>
+                                
+                                <!-- Hotspot 3: Sibu -->
+                                <button onclick="openQRModal('En. Fazri (SKPK Sibu)', '60148927166', 'fazriqr.png', 'En. Fazri')" class="absolute rounded-xl hover:bg-white/20 hover:backdrop-blur-[2px] hover:ring-2 hover:ring-white/60 transition-all cursor-pointer" style="top: 25%; left: 67%; width: 28%; height: 26%;" aria-label="Hubungi En. Fazri"></button>
+                                
+                                <!-- Hotspot 4: Samarahan -->
+                                <button onclick="openQRModal('Pn. Aida (SKPK Kota Samarahan)', '60139072804', 'aidaqr.png', 'Pn. Aida')" class="absolute rounded-xl hover:bg-white/20 hover:backdrop-blur-[2px] hover:ring-2 hover:ring-white/60 transition-all cursor-pointer" style="top: 56%; left: 20.5%; width: 28%; height: 26%;" aria-label="Hubungi Pn. Aida"></button>
+                                
+                                <!-- Hotspot 5: Kuching -->
+                                <button onclick="openQRModal('Pn. Amal (SKPK Kuching)', '601110813763', 'amalqr.png', 'Pn. Amal')" class="absolute rounded-xl hover:bg-white/20 hover:backdrop-blur-[2px] hover:ring-2 hover:ring-white/60 transition-all cursor-pointer" style="top: 56%; left: 51.5%; width: 28%; height: 26%;" aria-label="Hubungi Pn. Amal"></button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -870,6 +887,30 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal QR Code WhatsApp -->
+        <div id="qr-modal" class="fixed inset-0 z-[100] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+            <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-6 relative transform scale-95 transition-transform duration-300" id="qr-modal-content">
+                <button onclick="closeQRModal()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-gray-500 hover:text-red-500 hover:bg-red-50 transition"><i class="fas fa-times text-lg"></i></button>
+                <div class="text-center pt-2">
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-3 shadow-inner">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-1" id="qr-name">Nama LO</h3>
+                    <p class="text-gray-500 text-sm mb-5">Imbas kod QR di bawah atau klik butang untuk terus ke WhatsApp.</p>
+                    
+                    <div class="bg-gray-50 p-3 rounded-2xl inline-block mb-5 border border-gray-200 shadow-sm">
+                        <!-- Placeholder jika imej QR (cth: qr-tuaran.png) belum di-upload -->
+                        <img id="qr-image" src="" onerror="this.src='https://placehold.co/200x200/ffffff/16a34a?text=Sila+Muat+Naik+QR'" alt="QR Code WhatsApp" class="w-48 h-48 object-cover rounded-xl">
+                    </div>
+                    <br>
+                    <a id="qr-link" href="#" target="_blank" class="w-full inline-flex items-center justify-center gap-2 bg-green-500 text-white font-bold py-3 px-6 rounded-xl hover:bg-green-600 transition shadow-md">
+                        <i class="fab fa-whatsapp text-lg"></i> Hantar Mesej
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- FOOTER -->
@@ -1034,6 +1075,38 @@
             localStorage.removeItem('karnival_admin');
             navigate('home');
             showToast("Berjaya log keluar dari portal admin.");
+        };
+
+        // Modal QR WhatsApp Functions
+        window.openQRModal = function(name, phone, qrSrc, shortName) {
+            document.getElementById('qr-name').textContent = name;
+            document.getElementById('qr-image').src = qrSrc;
+            
+            // Format auto-mesej
+            const message = encodeURIComponent(`Salam sejahtera ${shortName},`);
+            document.getElementById('qr-link').href = `https://wa.me/${phone}?text=${message}`;
+            
+            const modal = document.getElementById('qr-modal');
+            const content = document.getElementById('qr-modal-content');
+            
+            modal.classList.remove('hidden');
+            // Trigger animation frame
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+            }, 10);
+        };
+
+        window.closeQRModal = function() {
+            const modal = document.getElementById('qr-modal');
+            const content = document.getElementById('qr-modal-content');
+            
+            modal.classList.add('opacity-0');
+            content.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
         };
 
         // Mock Login Handler
