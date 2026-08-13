@@ -124,9 +124,9 @@
                     <button onclick="navigate('tentatif')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Tentatif</button>
                     <button onclick="navigate('pertandingan')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Pertandingan</button>
                     <button onclick="navigate('pendaftaran')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Pendaftaran</button>
-                    <button onclick="navigate('pengumuman')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Pengumuman</button>
+                    <button onclick="navigate('rujukan')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Bahan Rujukan</button>
                     <button onclick="navigate('galeri')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Galeri</button>
-                    <button onclick="scrollToSection('footer')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Hubungi</button>
+                    <button onclick="navigate('hubungi')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Hubungi</button>
                     
                     <div class="w-px h-6 bg-gray-300 mx-2"></div>
                     
@@ -152,8 +152,9 @@
                 <button onclick="navigate('tentatif'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Tentatif</button>
                 <button onclick="navigate('pertandingan'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Pertandingan</button>
                 <button onclick="navigate('pendaftaran'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Pendaftaran</button>
-                <button onclick="navigate('pengumuman'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Pengumuman</button>
+                <button onclick="navigate('rujukan'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Bahan Rujukan</button>
                 <button onclick="navigate('galeri'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Galeri</button>
+                <button onclick="navigate('hubungi'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Hubungi</button>
                 <button onclick="navigate('admin-login'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 mt-4 rounded-md text-base font-semibold bg-gray-900 text-white"><i class="fas fa-lock mr-2"></i> Admin Portal</button>
             </div>
         </div>
@@ -421,44 +422,78 @@
             </section>
         </div>
 
-        <!-- ================= PAGE: PENGUMUMAN ================= -->
-        <div id="page-pengumuman" class="page-section">
-            <!-- Pengumuman & Download Center -->
-            <section class="bg-gray-50 min-h-[calc(100vh-80px)] flex flex-col justify-center py-12">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                        
-                        <!-- Pengumuman Column -->
-                        <div>
-                            <div class="flex items-center gap-3 mb-8">
-                                <div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center text-2xl"><i class="fas fa-bullhorn"></i></div>
-                                <h2 class="text-3xl font-heading font-bold text-gray-900">Pengumuman Terkini</h2>
+        <!-- ================= PAGE: BAHAN RUJUKAN ================= -->
+        <div id="page-rujukan" class="page-section">
+            <section class="bg-gray-50 min-h-[calc(100vh-80px)] flex flex-col justify-center py-12 px-4">
+                <div class="max-w-4xl mx-auto w-full">
+                    <div class="text-center mb-10">
+                        <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 shadow-sm">
+                            <i class="fas fa-cloud-download-alt"></i>
+                        </div>
+                        <h2 class="text-3xl font-heading font-bold text-gray-900 mb-2">Bahan Rujukan & Muat Turun</h2>
+                        <div class="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-4"></div>
+                        <p class="text-gray-600">Pusat sehenti untuk memuat turun kertas kerja, peraturan, surat makluman, dan borang berkaitan karnival.</p>
+                    </div>
+
+                    <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-4 md:p-8">
+                        <div id="public-documents-list" class="divide-y divide-gray-100">
+                            <div class="text-center py-8 text-gray-500">
+                                <i class="fas fa-spinner fa-spin text-2xl mb-2"></i><br>Memuatkan dokumen...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE: HUBUNGI ================= -->
+        <div id="page-hubungi" class="page-section">
+            <section class="bg-white min-h-[calc(100vh-80px)] flex flex-col justify-center py-12 px-4">
+                <div class="max-w-5xl mx-auto w-full">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-heading font-bold text-gray-900 mb-2">Hubungi Kami</h2>
+                        <div class="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-4"></div>
+                        <p class="text-gray-600">Maklumat lanjut, sila hubungi urusetia atau rujuk peta ke lokasi rasmi karnival di bawah.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center bg-gray-50 p-6 md:p-10 rounded-3xl shadow-soft border border-gray-100">
+                        <!-- Contact Info -->
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-xl flex-shrink-0 shadow-sm">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 text-lg mb-1">Lokasi Rasmi</h4>
+                                    <p class="text-gray-600">SK Pendidikan Khas Miri<br>Jalan Datuk Muip, Piasau Jaya,<br>98000 Miri, Sarawak.</p>
+                                </div>
                             </div>
                             
-                            <!-- Dynamic Announcement List -->
-                            <div id="public-announcements-list" class="space-y-4">
-                                <div class="text-center py-8 text-gray-500 bg-white rounded-2xl shadow-soft border border-gray-100">
-                                    <i class="fas fa-spinner fa-spin text-2xl mb-2"></i><br>Memuatkan pengumuman...
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center text-xl flex-shrink-0 shadow-sm">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 text-lg mb-1">Urusetia</h4>
+                                    <p class="text-gray-600">Pn Hilwa Hayati binti Mohamad Ajalan<br>018-9840948</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-xl flex-shrink-0 shadow-sm">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 text-lg mb-1">E-mel Rasmi</h4>
+                                    <p class="text-gray-600">yba4103@moe.edu.my</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Download Center Column -->
-                        <div>
-                            <div class="flex items-center gap-3 mb-8">
-                                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-2xl"><i class="fas fa-cloud-download-alt"></i></div>
-                                <h2 class="text-3xl font-heading font-bold text-gray-900">Pusat Muat Turun</h2>
-                            </div>
-
-                            <div class="bg-white rounded-2xl shadow-soft border border-gray-100 p-2">
-                                <div id="public-documents-list" class="divide-y divide-gray-100">
-                                    <div class="text-center py-8 text-gray-500">
-                                        <i class="fas fa-spinner fa-spin text-2xl mb-2"></i><br>Memuatkan dokumen...
-                                    </div>
-                                </div>
-                            </div>
+                        <!-- Image Section -->
+                        <div class="rounded-2xl overflow-hidden shadow-md border border-gray-200 bg-white p-2">
+                            <img src="lo.png" alt="Lokasi Karnival" class="w-full h-auto rounded-xl object-cover hover:scale-105 transition-transform duration-500">
                         </div>
-
                     </div>
                 </div>
             </section>
@@ -901,7 +936,7 @@
                         <li><a href="#" onclick="navigate('petanque'); event.preventDefault()" class="hover:text-blue-400 transition">Pertandingan Pétanque</a></li>
                         <li><a href="#" onclick="navigate('english'); event.preventDefault()" class="hover:text-blue-400 transition">English Carnival</a></li>
                         <li><a href="#" onclick="navigate('semarak'); event.preventDefault()" class="hover:text-blue-400 transition">Semarak Seni 6</a></li>
-                        <li><a href="#" onclick="navigate('galeri'); event.preventDefault()" class="hover:text-blue-400 transition">Galeri Gambar</a></li>
+                        <li><a href="#" onclick="navigate('rujukan'); event.preventDefault()" class="hover:text-blue-400 transition">Bahan Rujukan</a></li>
                     </ul>
                 </div>
             </div>
