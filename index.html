@@ -797,72 +797,40 @@
     <!-- FIREBASE & JAVASCRIPT LOGIC -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, collection, addDoc, onSnapshot, deleteDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, collection, addDoc, onSnapshot, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Firebase Configuration (From canvas environment)
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'spk-zon-borneo-2026';
-        let app, db, auth;
-        let currentUser = null;
+        // Konfigurasi Firebase Rasmi SKPK Miri
+        const firebaseConfig = {
+            apiKey: "AIzaSyB3PAkl8iql0rB9C-2jEgtRXEc-i03sVWo",
+            authDomain: "karnivalkokurikulum-b0fa4.firebaseapp.com",
+            projectId: "karnivalkokurikulum-b0fa4",
+            storageBucket: "karnivalkokurikulum-b0fa4.firebasestorage.app",
+            messagingSenderId: "664500826720",
+            appId: "1:664500826720:web:fa731bcaaf034c28508905",
+            measurementId: "G-4VZDDP4DNC"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
         let isAdmin = false;
 
-        try {
-            const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-                // Dummy config for fallback if not injected
-                apiKey: "dummy", projectId: "dummy"
-            };
-            app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            auth = getAuth(app);
-            initAuth();
-        } catch (e) {
-            console.warn("Firebase initialization skipped or failed (Running local/fallback mode).", e);
-        }
-
-        // Authentication Initialization
-        async function initAuth() {
-            onAuthStateChanged(auth, (user) => {
-                currentUser = user;
-                if (user) {
-                    // Check if it's our mocked admin session via local storage flag
-                    if(localStorage.getItem('karnival_admin') === 'true'){
-                        isAdmin = true;
-                        if(document.getElementById('page-admin-login').classList.contains('active')){
-                            navigate('admin-dashboard');
-                        }
-                    }
-                    setupRealtimeListeners();
-                } else {
-                    isAdmin = false;
-                }
-            });
-
-            if (!auth.currentUser) {
-                try {
-                    const token = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-                    if (token) {
-                        await signInWithCustomToken(auth, token);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                } catch (e) {
-                    console.error("Auth error:", e);
-                }
+        // Initialize state
+        if(localStorage.getItem('karnival_admin') === 'true'){
+            isAdmin = true;
+            if(document.getElementById('page-admin-login').classList.contains('active')){
+                navigate('admin-dashboard');
             }
         }
 
         // Global functions accessible outside module
         window.navigate = function(pageId) {
-            // Hide all pages
             document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
-            // Show target
             const target = document.getElementById(`page-${pageId}`);
             if(target) {
                 target.classList.add('active');
                 window.scrollTo(0,0);
             }
-            
-            // Special check for Admin Dashboard protection
             if(pageId === 'admin-dashboard' && !isAdmin) {
                 navigate('admin-login');
                 showToast("Sila log masuk sebagai admin dahulu.", "error");
@@ -913,20 +881,16 @@
             showToast("Berjaya log keluar dari portal admin.");
         };
 
-        // Modal QR WhatsApp Functions
-        window.openQRModal = function(name, phone, qrSrc, shortName) {
-            document.getElementById('qr-name').textContent = name;
+        window.openQRModal = function(qrSrc, phone, name) {
             document.getElementById('qr-image').src = qrSrc;
             
-            // Format auto-mesej
-            const message = encodeURIComponent(`Salam sejahtera ${shortName},`);
+            const message = encodeURIComponent(`Salam sejahtera ${name}`);
             document.getElementById('qr-link').href = `https://wa.me/${phone}?text=${message}`;
             
             const modal = document.getElementById('qr-modal');
             const content = document.getElementById('qr-modal-content');
             
             modal.classList.remove('hidden');
-            // Trigger animation frame
             setTimeout(() => {
                 modal.classList.remove('opacity-0');
                 content.classList.remove('scale-95');
@@ -955,7 +919,6 @@
                 localStorage.setItem('karnival_admin', 'true');
                 document.getElementById('login-password').value = ''; 
                 
-                // Hide login form completely and show dashboard
                 document.getElementById('page-admin-login').classList.remove('active');
                 document.getElementById('page-admin-dashboard').classList.add('active');
                 window.scrollTo(0,0);
@@ -995,120 +958,108 @@
 
         // --- FIREBASE DATA OPERATIONS ---
         
-        const pathAnnouncements = () => collection(db, 'artifacts', appId, 'public', 'data', 'announcements');
-        const pathDocuments = () => collection(db, 'artifacts', appId, 'public', 'data', 'documents');
+        const pathAnnouncements = () => collection(db, 'announcements');
+        const pathDocuments = () => collection(db, 'documents');
 
-        // Setup Realtime Listeners
+        function renderAnnouncements(docs) {
+            let htmlAdmin = '';
+            let latestAnn = null;
+            const floatingBanner = document.getElementById('floating-announcement');
+            
+            if(docs.length === 0) {
+                htmlAdmin = `<p class="text-gray-500 text-sm">Tiada rekod.</p>`;
+                if(floatingBanner) {
+                    floatingBanner.classList.remove('hidden');
+                    document.getElementById('floating-badge').className = 'px-2 py-1 text-[10px] font-bold rounded whitespace-nowrap shadow-sm tracking-wider uppercase bg-white text-red-900';
+                    document.getElementById('floating-badge').textContent = 'INFO';
+                    document.getElementById('floating-text').innerHTML = `<span class="font-bold mr-2 text-yellow-200">Selamat Datang:</span> Ke Portal Rasmi Karnival Kokurikulum Pendidikan Khas Zon Borneo 2026.`;
+                }
+            } else {
+                docs.sort((a,b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+
+                latestAnn = docs[0];
+                if (latestAnn && floatingBanner) {
+                    floatingBanner.classList.remove('hidden');
+                    const fBadge = document.getElementById('floating-badge');
+                    const fText = document.getElementById('floating-text');
+                    
+                    let badgeColor = latestAnn.badge === 'PENTING' ? 'bg-yellow-400 text-red-900' : (latestAnn.badge === 'TERKINI' ? 'bg-green-400 text-green-900' : 'bg-gray-100 text-gray-900');
+                    fBadge.className = `px-2 py-1 text-[10px] font-bold rounded whitespace-nowrap shadow-sm tracking-wider uppercase ${badgeColor}`;
+                    fBadge.textContent = latestAnn.badge;
+                    fText.innerHTML = `<span class="font-bold mr-2 text-yellow-200">${latestAnn.title}:</span> ${latestAnn.content}`;
+                }
+
+                docs.forEach(data => {
+                    let badgeColor = data.badge === 'PENTING' ? 'bg-red-100 text-red-700' : (data.badge === 'TERKINI' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700');
+                    htmlAdmin += `
+                    <div class="bg-white p-4 rounded-xl border flex justify-between items-center gap-4">
+                        <div>
+                            <span class="text-xs font-bold ${badgeColor} px-2 py-0.5 rounded mr-2">${data.badge}</span>
+                            <span class="font-semibold text-gray-800">${data.title}</span>
+                        </div>
+                        <button onclick="deleteDocItem('announcements', '${data.id}')" class="text-red-500 hover:bg-red-50 p-2 rounded-lg transition"><i class="fas fa-trash"></i></button>
+                    </div>`;
+                });
+            }
+            
+            const aList = document.getElementById('admin-announcements-list');
+            if(aList) aList.innerHTML = htmlAdmin;
+        }
+
+        function renderDocuments(docs) {
+            let htmlPublic = '';
+            let htmlAdmin = '';
+            
+            if(docs.length === 0) {
+                htmlPublic = `<div class="p-6 text-center text-gray-500">Tiada dokumen dimuat naik buat masa ini.</div>`;
+                htmlAdmin = `<tr><td colspan="2" class="px-4 py-4 text-center text-gray-500">Tiada rekod</td></tr>`;
+            } else {
+                docs.sort((a,b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+
+                docs.forEach(data => {
+                    let fileUrl = data.url;
+                    if (!fileUrl.match(/^https?:\/\//i)) {
+                        fileUrl = 'https://' + fileUrl;
+                    }
+                    htmlPublic += `
+                    <a href="${fileUrl}" target="_blank" class="flex items-center justify-between p-5 hover:bg-blue-50 transition group border-b border-gray-100 last:border-0">
+                        <div class="flex items-center gap-4">
+                            <div class="text-red-500 text-2xl group-hover:scale-110 transition-transform"><i class="far fa-file-pdf"></i></div>
+                            <span class="font-semibold text-gray-800 group-hover:text-blue-600">${data.title}</span>
+                        </div>
+                        <i class="fas fa-download text-gray-400 group-hover:text-blue-600"></i>
+                    </a>`;
+
+                    htmlAdmin += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3 font-medium text-gray-800">${data.title}</td>
+                        <td class="px-4 py-3">
+                            <button onclick="deleteDocItem('documents', '${data.id}')" class="text-red-500 hover:text-red-700 p-1"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>`;
+                });
+            }
+            const pList = document.getElementById('public-documents-list');
+            const aList = document.getElementById('admin-documents-list');
+            if(pList) pList.innerHTML = htmlPublic;
+            if(aList) aList.innerHTML = htmlAdmin;
+        }
+
         function setupRealtimeListeners() {
-            if(!db || !currentUser) return;
+            if(!db) return;
 
             // Listen to Announcements
             onSnapshot(pathAnnouncements(), (snapshot) => {
-                let htmlPublic = '';
-                let htmlAdmin = '';
-                let latestAnn = null;
-                const floatingBanner = document.getElementById('floating-announcement');
-                
-                if(snapshot.empty) {
-                    htmlPublic = `<p class="text-gray-500 text-center py-6">Tiada pengumuman setakat ini.</p>`;
-                    htmlAdmin = `<p class="text-gray-500 text-sm">Tiada rekod.</p>`;
-                    
-                    // Tunjuk mesej lalai jika tiada pengumuman (jangan sembunyikan banner)
-                    if(floatingBanner) {
-                        floatingBanner.classList.remove('hidden');
-                        document.getElementById('floating-badge').className = 'px-2 py-1 text-[10px] font-bold rounded whitespace-nowrap shadow-sm tracking-wider uppercase bg-white text-red-900';
-                        document.getElementById('floating-badge').textContent = 'INFO';
-                        document.getElementById('floating-text').innerHTML = `<span class="font-bold mr-2 text-yellow-200">Selamat Datang:</span> Ke Portal Rasmi Karnival Kokurikulum Pendidikan Khas Zon Borneo 2026.`;
-                    }
-                } else {
-                    // Manual sorting since complex queries might fail depending on canvas index setup
-                    const docs = [];
-                    snapshot.forEach(doc => docs.push({id: doc.id, ...doc.data()}));
-                    docs.sort((a,b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
-
-                    // Setup floating banner with the latest announcement
-                    latestAnn = docs[0];
-                    if (latestAnn && floatingBanner) {
-                        floatingBanner.classList.remove('hidden');
-                        const fBadge = document.getElementById('floating-badge');
-                        const fText = document.getElementById('floating-text');
-                        
-                        // Kemaskini warna badge supaya kontras dengan latar belakang merah
-                        let badgeColor = latestAnn.badge === 'PENTING' ? 'bg-yellow-400 text-red-900' : (latestAnn.badge === 'TERKINI' ? 'bg-green-400 text-green-900' : 'bg-gray-100 text-gray-900');
-                        fBadge.className = `px-2 py-1 text-[10px] font-bold rounded whitespace-nowrap shadow-sm tracking-wider uppercase ${badgeColor}`;
-                        fBadge.textContent = latestAnn.badge;
-                        fText.innerHTML = `<span class="font-bold mr-2 text-yellow-200">${latestAnn.title}:</span> ${latestAnn.content}`;
-                    }
-
-                    docs.forEach(data => {
-                        const dateStr = data.timestamp ? new Date(data.timestamp.seconds * 1000).toLocaleDateString('ms-MY') : 'Baru';
-                        let badgeColor = data.badge === 'PENTING' ? 'bg-red-100 text-red-700' : (data.badge === 'TERKINI' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700');
-                        
-                        // Public View
-                        htmlPublic += `
-                        <div class="bg-white p-6 rounded-2xl shadow-soft border border-gray-100 hover:shadow-md transition">
-                            <div class="flex items-center gap-3 mb-2">
-                                <span class="px-3 py-1 rounded-full text-xs font-bold ${badgeColor}">${data.badge}</span>
-                                <span class="text-sm text-gray-500"><i class="far fa-calendar-alt"></i> ${dateStr}</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-2">${data.title}</h3>
-                            <p class="text-gray-600">${data.content}</p>
-                        </div>`;
-
-                        // Admin View
-                        htmlAdmin += `
-                        <div class="bg-white p-4 rounded-xl border flex justify-between items-center gap-4">
-                            <div>
-                                <span class="text-xs font-bold ${badgeColor} px-2 py-0.5 rounded mr-2">${data.badge}</span>
-                                <span class="font-semibold text-gray-800">${data.title}</span>
-                            </div>
-                            <button onclick="deleteDocItem('announcements', '${data.id}')" class="text-red-500 hover:bg-red-50 p-2 rounded-lg transition"><i class="fas fa-trash"></i></button>
-                        </div>`;
-                    });
-                }
-                
-                const pList = document.getElementById('public-announcements-list');
-                const aList = document.getElementById('admin-announcements-list');
-                if(pList) pList.innerHTML = htmlPublic;
-                if(aList) aList.innerHTML = htmlAdmin;
+                const docs = [];
+                snapshot.forEach(doc => docs.push({id: doc.id, ...doc.data()}));
+                renderAnnouncements(docs);
             }, (error) => console.error("Error fetching announcements:", error));
 
             // Listen to Documents
             onSnapshot(pathDocuments(), (snapshot) => {
-                let htmlPublic = '';
-                let htmlAdmin = '';
-                
-                if(snapshot.empty) {
-                    htmlPublic = `<div class="p-6 text-center text-gray-500">Tiada dokumen dimuat naik.</div>`;
-                    htmlAdmin = `<tr><td colspan="2" class="px-4 py-4 text-center text-gray-500">Tiada rekod</td></tr>`;
-                } else {
-                    const docs = [];
-                    snapshot.forEach(doc => docs.push({id: doc.id, ...doc.data()}));
-                    docs.sort((a,b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
-
-                    docs.forEach(data => {
-                        htmlPublic += `
-                        <a href="${data.url}" target="_blank" class="flex items-center justify-between p-5 hover:bg-blue-50 transition group">
-                            <div class="flex items-center gap-4">
-                                <div class="text-red-500 text-2xl group-hover:scale-110 transition-transform"><i class="far fa-file-pdf"></i></div>
-                                <span class="font-semibold text-gray-800 group-hover:text-blue-600">${data.title}</span>
-                            </div>
-                            <i class="fas fa-download text-gray-400 group-hover:text-blue-600"></i>
-                        </a>`;
-
-                        htmlAdmin += `
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-4 py-3 font-medium text-gray-800">${data.title}</td>
-                            <td class="px-4 py-3">
-                                <button onclick="deleteDocItem('documents', '${data.id}')" class="text-red-500 hover:text-red-700 p-1"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>`;
-                    });
-                }
-                const pList = document.getElementById('public-documents-list');
-                const aList = document.getElementById('admin-documents-list');
-                if(pList) pList.innerHTML = htmlPublic;
-                if(aList) aList.innerHTML = htmlAdmin;
+                const docs = [];
+                snapshot.forEach(doc => docs.push({id: doc.id, ...doc.data()}));
+                renderDocuments(docs);
             }, (error) => console.error("Error fetching documents:", error));
         }
 
@@ -1126,15 +1077,17 @@
             try {
                 btn.textContent = "Menyimpan...";
                 btn.disabled = true;
+
                 await addDoc(pathAnnouncements(), {
                     title, badge, content,
                     timestamp: serverTimestamp()
                 });
+                
                 e.target.reset();
                 showToast("Pengumuman berjaya ditambah.");
             } catch (err) {
                 console.error(err);
-                showToast("Ralat menyimpan. Sila cuba lagi.", "error");
+                showToast("Ralat. Pastikan Firebase Firestore Rules di set ke allow read, write: if true", "error");
             } finally {
                 btn.textContent = originalText;
                 btn.disabled = false;
@@ -1154,28 +1107,28 @@
             try {
                 btn.textContent = "Menyimpan...";
                 btn.disabled = true;
+
                 await addDoc(pathDocuments(), {
                     title, url,
                     timestamp: serverTimestamp()
                 });
+                
                 e.target.reset();
                 showToast("Dokumen berjaya ditambah.");
             } catch (err) {
                 console.error(err);
-                showToast("Ralat menyimpan. Sila cuba lagi.", "error");
+                showToast("Ralat. Pastikan Firebase Firestore Rules di set ke allow read, write: if true", "error");
             } finally {
                 btn.textContent = originalText;
                 btn.disabled = false;
             }
         });
 
-        // Delete Helper (Exposed to window so onclick inline handler can access)
+        // Delete Helper
         window.deleteDocItem = async function(colName, docId) {
             if(!isAdmin) return showToast("Akses ditolak. Sila log masuk admin.", "error");
-            // Use custom modal/confirm replacement (simple logical confirm for UI sake without alert)
-            // Ideally we build a custom dialog, but since we cannot use alert(), we will just delete with a toast undo or direct delete
             try {
-                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', colName, docId));
+                await deleteDoc(doc(db, colName, docId));
                 showToast("Rekod dipadam.");
             } catch(e) {
                 console.error(e);
@@ -1183,10 +1136,8 @@
             }
         };
 
-        // Initialize state (Check auth status on load to set up admin local bypass if already set)
-        if(localStorage.getItem('karnival_admin') === 'true'){
-            isAdmin = true;
-        }
+        // Start listening immediately
+        setupRealtimeListeners();
 
     </script>
 </body>
