@@ -858,8 +858,8 @@
                                     <input type="text" id="doc-title" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Cth: Kertas Kerja Induk">
                                 </div>
                                 <div>
-                                    <label class="block text-sm text-gray-600 mb-1">Pautan URL (GDrive/Cloud)</label>
-                                    <input type="url" id="doc-url" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="https://...">
+                                    <label class="block text-sm text-gray-600 mb-1">Pautan URL (Link Google Drive / Cloud)</label>
+                                    <input type="text" id="doc-url" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Masukkan pautan (Cth: https://...)">
                                 </div>
                             </div>
                             <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Tambah Pautan Dokumen</button>
@@ -1261,7 +1261,7 @@
         // Add Announcement
         document.getElementById('form-add-announcement').addEventListener('submit', async (e) => {
             e.preventDefault();
-            if(!currentUser) return showToast("Sila log masuk.", "error");
+            if(!isAdmin) return showToast("Sila log masuk sebagai admin.", "error");
             
             const title = document.getElementById('ann-title').value;
             const badge = document.getElementById('ann-badge').value;
@@ -1280,7 +1280,7 @@
                 showToast("Pengumuman berjaya ditambah.");
             } catch (err) {
                 console.error(err);
-                showToast("Ralat menyimpan.", "error");
+                showToast("Ralat menyimpan. Sila cuba lagi.", "error");
             } finally {
                 btn.textContent = originalText;
                 btn.disabled = false;
@@ -1290,7 +1290,7 @@
         // Add Document
         document.getElementById('form-add-document').addEventListener('submit', async (e) => {
             e.preventDefault();
-            if(!currentUser) return showToast("Sila log masuk.", "error");
+            if(!isAdmin) return showToast("Sila log masuk sebagai admin.", "error");
             
             const title = document.getElementById('doc-title').value;
             const url = document.getElementById('doc-url').value;
@@ -1308,7 +1308,7 @@
                 showToast("Dokumen berjaya ditambah.");
             } catch (err) {
                 console.error(err);
-                showToast("Ralat menyimpan.", "error");
+                showToast("Ralat menyimpan. Sila cuba lagi.", "error");
             } finally {
                 btn.textContent = originalText;
                 btn.disabled = false;
@@ -1317,7 +1317,7 @@
 
         // Delete Helper (Exposed to window so onclick inline handler can access)
         window.deleteDocItem = async function(colName, docId) {
-            if(!isAdmin || !currentUser) return;
+            if(!isAdmin) return showToast("Akses ditolak. Sila log masuk admin.", "error");
             // Use custom modal/confirm replacement (simple logical confirm for UI sake without alert)
             // Ideally we build a custom dialog, but since we cannot use alert(), we will just delete with a toast undo or direct delete
             try {
