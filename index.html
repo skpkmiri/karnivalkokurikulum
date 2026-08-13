@@ -121,9 +121,10 @@
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex items-center space-x-1">
                     <button onclick="navigate('home')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Home</button>
-                    <button onclick="scrollToSection('tentatif')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Tentatif</button>
-                    <button onclick="scrollToSection('pertandingan')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Pertandingan</button>
-                    <button onclick="navigate('home'); setTimeout(()=>scrollToSection('pengumuman'), 100)" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Pengumuman</button>
+                    <button onclick="navigate('tentatif')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Tentatif</button>
+                    <button onclick="navigate('pertandingan')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Pertandingan</button>
+                    <button onclick="navigate('pendaftaran')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Pendaftaran</button>
+                    <button onclick="navigate('pengumuman')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Pengumuman</button>
                     <button onclick="navigate('galeri')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Galeri</button>
                     <button onclick="scrollToSection('footer')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Hubungi</button>
                     
@@ -148,8 +149,10 @@
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <button onclick="navigate('home'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Home</button>
-                <button onclick="navigate('home'); setTimeout(()=>scrollToSection('tentatif'), 100); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Tentatif</button>
-                <button onclick="navigate('home'); setTimeout(()=>scrollToSection('pertandingan'), 100); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Pertandingan</button>
+                <button onclick="navigate('tentatif'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Tentatif</button>
+                <button onclick="navigate('pertandingan'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Pertandingan</button>
+                <button onclick="navigate('pendaftaran'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Pendaftaran</button>
+                <button onclick="navigate('pengumuman'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Pengumuman</button>
                 <button onclick="navigate('galeri'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Galeri</button>
                 <button onclick="navigate('admin-login'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 mt-4 rounded-md text-base font-semibold bg-gray-900 text-white"><i class="fas fa-lock mr-2"></i> Admin Portal</button>
             </div>
@@ -160,6 +163,22 @@
     <div id="toast" class="toast fixed bottom-4 right-4 z-[60] bg-gray-900 text-white px-6 py-3 rounded-xl shadow-xl flex items-center gap-3">
         <i id="toast-icon" class="fas fa-info-circle"></i>
         <span id="toast-message" class="font-medium">Message</span>
+    </div>
+
+    <!-- Floating Announcement Banner -->
+    <div id="floating-announcement" class="sticky top-20 z-40 bg-red-600 text-white shadow-md border-b border-red-700 w-full">
+        <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6 lg:px-8 flex items-center gap-3 md:gap-4">
+            <div class="flex-shrink-0 animate-pulse text-yellow-300 hidden sm:block">
+                <i class="fas fa-bullhorn text-lg"></i>
+            </div>
+            <span id="floating-badge" class="px-2 py-1 text-[10px] font-bold rounded whitespace-nowrap shadow-sm tracking-wider uppercase bg-white text-red-900">INFO</span>
+            <marquee scrollamount="5" class="text-sm md:text-base font-medium flex-grow" id="floating-text">
+                <span class="font-bold mr-2 text-yellow-200">Selamat Datang:</span> Ke Portal Rasmi Karnival Kokurikulum Pendidikan Khas Zon Borneo 2026.
+            </marquee>
+            <button onclick="document.getElementById('floating-announcement').classList.add('hidden')" class="text-white/70 hover:text-white flex-shrink-0 ml-2 bg-white/10 rounded-full w-8 h-8 flex items-center justify-center transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
     </div>
 
     <!-- MAIN CONTENT CONTAINER -->
@@ -214,76 +233,51 @@
 
                     <!-- CTAs -->
                     <div class="flex flex-col sm:flex-row gap-3">
-                        <button onclick="scrollToSection('pertandingan')" class="px-6 py-3 rounded-xl bg-yellow-400 text-gray-900 font-bold text-base hover:bg-yellow-300 shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-all transform hover:-translate-y-1">
+                        <button onclick="navigate('pertandingan')" class="px-6 py-3 rounded-xl bg-yellow-400 text-gray-900 font-bold text-base hover:bg-yellow-300 shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-all transform hover:-translate-y-1">
                             Lihat Pertandingan
                         </button>
-                        <button onclick="scrollToSection('tentatif')" class="px-6 py-3 rounded-xl bg-white/10 text-white font-bold text-base border border-white/30 hover:bg-white/20 transition-all transform hover:-translate-y-1">
+                        <button onclick="navigate('tentatif')" class="px-6 py-3 rounded-xl bg-white/10 text-white font-bold text-base border border-white/30 hover:bg-white/20 transition-all transform hover:-translate-y-1">
                             Tentatif Program
                         </button>
                     </div>
                 </div>
             </section>
 
-            <!-- Pilih Pertandingan -->
-            <section id="pertandingan" class="bg-white min-h-[calc(100vh-80px)] flex flex-col justify-center pt-20 pb-12 scroll-mt-20">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                    <div class="text-center mb-6">
-                        <h2 class="text-2xl md:text-3xl font-heading font-bold text-gray-900 mb-2">Pilih Pertandingan</h2>
-                        <div class="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
-                        <p class="mt-3 text-sm md:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                            Tiga acara utama yang dipertandingkan sepanjang karnival berlangsung, direka khusus untuk mencungkil bakat murid-murid Pendidikan Khas.
-                        </p>
+            <!-- Sekolah Terlibat -->
+            <section class="py-20 bg-white min-h-[calc(100vh-80px)] flex flex-col justify-center">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
+                    <h2 class="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">Sekolah Terlibat</h2>
+                    <div class="w-24 h-1.5 bg-blue-600 mx-auto rounded-full mb-12"></div>
+                    
+                    <h3 class="text-xl font-bold text-gray-700 mb-6 border-b pb-2 inline-block">Kategori SPK (Zon Borneo)</h3>
+                    <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-12">
+                        <!-- Loop Schools -->
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Miri</div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Sibu</div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Kota Samarahan</div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Kuching</div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Kota Kinabalu</div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Tuaran</div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <!-- Petanque Card -->
-                        <div class="group bg-petanque-50 rounded-3xl p-6 border border-petanque-100 shadow-soft hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer" onclick="navigate('petanque')">
-                            <div class="w-16 h-16 bg-petanque-100 text-petanque-600 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
-                                <i class="fas fa-bullseye"></i>
-                            </div>
-                            <h3 class="text-xl md:text-2xl font-heading font-bold text-petanque-900 mb-2">PÉTANQUE</h3>
-                            <p class="text-petanque-800 text-sm md:text-base font-medium mb-3 flex items-center gap-2"><i class="far fa-calendar-alt"></i> 19 November 2026</p>
-                            <p class="text-gray-600 text-sm mb-6 flex-grow">Pertandingan kemahiran Pétanque kategori Triple Campuran Murid dan Guru secara Double Elimination.</p>
-                            <button class="w-full py-2.5 rounded-xl bg-petanque-600 text-white font-bold hover:bg-petanque-800 transition-colors flex items-center justify-center gap-2 text-sm">
-                                Lihat Pertandingan <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
-
-                        <!-- English Carnival Card -->
-                        <div class="group bg-english-50 rounded-3xl p-6 border border-english-100 shadow-soft hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer" onclick="navigate('english')">
-                            <div class="w-16 h-16 bg-english-100 text-english-600 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
-                                <i class="fas fa-language"></i>
-                            </div>
-                            <h3 class="text-xl md:text-2xl font-heading font-bold text-english-900 mb-2">ENGLISH CARNIVAL</h3>
-                            <p class="text-english-800 text-sm md:text-base font-medium mb-1 flex items-center gap-2"><i class="far fa-calendar-alt"></i> 20 November 2026</p>
-                            <p class="text-english-600 text-xs font-semibold mb-3 italic">"Festival of Lights: Illuminating English Minds"</p>
-                            <p class="text-gray-600 text-sm mb-6 flex-grow">Tujuh aktiviti berbahasa Inggeris interaktif termasuk Spelling Bee, Action Song, dan Treasure Hunt.</p>
-                            <button class="w-full py-2.5 rounded-xl bg-english-600 text-white font-bold hover:bg-english-800 transition-colors flex items-center justify-center gap-2 text-sm">
-                                Explore Carnival <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
-
-                        <!-- Semarak Seni Card -->
-                        <div class="group bg-semarak-50 rounded-3xl p-6 border border-semarak-100 shadow-soft hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer" onclick="navigate('semarak')">
-                            <div class="w-16 h-16 bg-semarak-100 text-semarak-600 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
-                                <i class="fas fa-theater-masks"></i>
-                            </div>
-                            <h3 class="text-xl md:text-2xl font-heading font-bold text-semarak-900 mb-2">SEMARAK SENI 6</h3>
-                            <p class="text-semarak-800 text-sm md:text-base font-medium mb-3 flex items-center gap-2"><i class="far fa-calendar-alt"></i> 21 November 2026</p>
-                            <p class="text-gray-600 text-sm mb-6 flex-grow">Pertandingan Tarian Kolattam antara sekolah menampilkan kreativiti koreografi dan kebudayaan.</p>
-                            <button class="w-full py-2.5 rounded-xl bg-semarak-600 text-white font-bold hover:bg-semarak-800 transition-colors flex items-center justify-center gap-2 text-sm">
-                                Lihat Pertandingan <i class="fas fa-arrow-right"></i>
-                            </button>
-                        </div>
+                    <h3 class="text-xl font-bold text-gray-700 mb-6 border-b pb-2 inline-block">Kategori PPKI (Semarak Seni)</h3>
+                    <div class="flex flex-wrap justify-center gap-4 md:gap-6">
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">PPKI SMK Dato' Permaisuri</div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">PPKI SMK Luak</div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">PPKI SMK Lutong</div>
+                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">PPKI SMK St. Joseph</div>
                     </div>
                 </div>
             </section>
+        </div>
 
+        <!-- ================= PAGE: TENTATIF ================= -->
+        <div id="page-tentatif" class="page-section">
             <!-- Tentatif 3 Hari -->
-            <section id="tentatif" class="py-12 bg-gray-50 scroll-mt-20">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section class="bg-gray-50 min-h-[calc(100vh-80px)] flex flex-col justify-center py-12">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                     <div class="text-center mb-10">
-                        <h2 class="text-2xl md:text-3xl font-heading font-bold text-gray-900 mb-3">Tentatif Keseluruhan</h2>
+                        <h2 class="text-3xl font-heading font-bold text-gray-900 mb-3">Tentatif Keseluruhan</h2>
                         <div class="w-16 h-1 bg-blue-600 mx-auto rounded-full"></div>
                     </div>
 
@@ -329,37 +323,109 @@
                     </div>
                 </div>
             </section>
+        </div>
 
-            <!-- Sekolah Terlibat -->
-            <section class="py-20 bg-white">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 class="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">Sekolah Terlibat</h2>
-                    <div class="w-24 h-1.5 bg-blue-600 mx-auto rounded-full mb-12"></div>
-                    
-                    <h3 class="text-xl font-bold text-gray-700 mb-6 border-b pb-2 inline-block">Kategori SPK (Zon Borneo)</h3>
-                    <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-12">
-                        <!-- Loop Schools -->
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Miri</div>
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Sibu</div>
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Kota Samarahan</div>
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Kuching</div>
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Kota Kinabalu</div>
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Tuaran</div>
+        <!-- ================= PAGE: PERTANDINGAN ================= -->
+        <div id="page-pertandingan" class="page-section">
+            <!-- Pilih Pertandingan -->
+            <section class="bg-white min-h-[calc(100vh-80px)] flex flex-col justify-center py-12">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-heading font-bold text-gray-900 mb-2">Pilih Pertandingan</h2>
+                        <div class="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
+                        <p class="mt-4 text-gray-600 max-w-2xl mx-auto">
+                            Tiga acara utama yang dipertandingkan sepanjang karnival berlangsung,<br class="hidden md:block">
+                            direka khusus untuk mencungkil bakat murid-murid Pendidikan Khas.
+                        </p>
                     </div>
 
-                    <h3 class="text-xl font-bold text-gray-700 mb-6 border-b pb-2 inline-block">Kategori PPKI (Semarak Seni)</h3>
-                    <div class="flex flex-wrap justify-center gap-4 md:gap-6">
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">PPKI SMK Dato' Permaisuri</div>
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">PPKI SMK Luak</div>
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">PPKI SMK Lutong</div>
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">PPKI SMK St. Joseph</div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Petanque Card -->
+                        <div class="group bg-petanque-50 rounded-3xl p-6 border border-petanque-100 shadow-soft hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer" onclick="navigate('petanque')">
+                            <div class="w-16 h-16 bg-petanque-100 text-petanque-600 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h3 class="text-xl font-heading font-bold text-petanque-900 mb-2">PÉTANQUE</h3>
+                            <p class="text-petanque-800 text-sm font-medium mb-3 flex items-center gap-2"><i class="far fa-calendar-alt"></i> 19 November 2026</p>
+                            <p class="text-gray-600 text-sm mb-6 flex-grow">Pertandingan kemahiran Pétanque kategori Triple Campuran Murid dan Guru secara Double Elimination.</p>
+                            <button class="w-full py-2.5 rounded-xl bg-petanque-600 text-white font-bold hover:bg-petanque-800 transition-colors flex items-center justify-center gap-2 text-sm">
+                                Lihat Pertandingan <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <!-- English Carnival Card -->
+                        <div class="group bg-english-50 rounded-3xl p-6 border border-english-100 shadow-soft hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer" onclick="navigate('english')">
+                            <div class="w-16 h-16 bg-english-100 text-english-600 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <h3 class="text-xl font-heading font-bold text-english-900 mb-2">ENGLISH CARNIVAL</h3>
+                            <p class="text-english-800 text-sm font-medium mb-1 flex items-center gap-2"><i class="far fa-calendar-alt"></i> 20 November 2026</p>
+                            <p class="text-english-600 text-xs font-semibold mb-3 italic">"Festival of Lights: Illuminating English Minds"</p>
+                            <p class="text-gray-600 text-sm mb-6 flex-grow">Tujuh aktiviti berbahasa Inggeris interaktif termasuk Spelling Bee, Action Song, dan Treasure Hunt.</p>
+                            <button class="w-full py-2.5 rounded-xl bg-english-600 text-white font-bold hover:bg-english-800 transition-colors flex items-center justify-center gap-2 text-sm">
+                                Explore Carnival <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <!-- Semarak Seni Card -->
+                        <div class="group bg-semarak-50 rounded-3xl p-6 border border-semarak-100 shadow-soft hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer" onclick="navigate('semarak')">
+                            <div class="w-16 h-16 bg-semarak-100 text-semarak-600 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-theater-masks"></i>
+                            </div>
+                            <h3 class="text-xl font-heading font-bold text-semarak-900 mb-2">SEMARAK SENI 6</h3>
+                            <p class="text-semarak-800 text-sm font-medium mb-3 flex items-center gap-2"><i class="far fa-calendar-alt"></i> 21 November 2026</p>
+                            <p class="text-gray-600 text-sm mb-6 flex-grow">Pertandingan Tarian Kolattam antara sekolah menampilkan kreativiti koreografi dan kebudayaan.</p>
+                            <button class="w-full py-2.5 rounded-xl bg-semarak-600 text-white font-bold hover:bg-semarak-800 transition-colors flex items-center justify-center gap-2 text-sm">
+                                Lihat Pertandingan <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>
+        </div>
 
+        <!-- ================= PAGE: PENDAFTARAN ================= -->
+        <div id="page-pendaftaran" class="page-section">
+            <section class="bg-blue-50 min-h-[calc(100vh-80px)] flex flex-col justify-center py-12 px-4">
+                <div class="max-w-5xl mx-auto w-full">
+                    <div class="bg-white rounded-3xl shadow-xl border border-blue-100 p-8 md:p-12 flex flex-col md:flex-row gap-10 items-center">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-2xl">
+                                    <i class="fas fa-clipboard-list"></i>
+                                </div>
+                                <h2 class="text-3xl font-heading font-bold text-gray-900">Pendaftaran Pasukan</h2>
+                            </div>
+                            
+                            <h4 class="font-bold text-gray-800 mb-3 text-lg border-b pb-2">TATACARA PENDAFTARAN.</h4>
+                            <ol class="list-decimal list-inside text-gray-700 space-y-3 mb-8 text-base md:text-lg">
+                                <li>Sila daftar melalui Sistem Pengurusan Sukan & Kokurikulum (SMIS).</li>
+                                <li>Sila berhubung dengan Pn Hilwa Hayati binti Mohamad Ajalan (0189840948) untuk ID dan Kata Laluan.</li>
+                            </ol>
+                            
+                            <div class="flex flex-wrap gap-4">
+                                <a href="https://smis.events/" target="_blank" class="px-6 py-3.5 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 shadow-md transition flex items-center gap-2">
+                                    <i class="fas fa-external-link-alt"></i> Portal SMIS
+                                </a>
+                                <a href="https://wa.me/qr/6T7LHVRAKSYNE1" target="_blank" class="px-6 py-3.5 rounded-xl bg-green-500 text-white font-bold hover:bg-green-600 shadow-md transition flex items-center gap-2">
+                                    <i class="fab fa-whatsapp text-lg"></i> Hubungi Urusetia
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="w-64 h-64 flex-shrink-0 bg-gray-50 rounded-3xl p-4 border border-gray-200 shadow-inner flex items-center justify-center">
+                            <img src="ewaqr.png" alt="QR Code WhatsApp Urusetia" class="max-w-full max-h-full object-contain rounded-xl hover:scale-105 transition-transform duration-300">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE: PENGUMUMAN ================= -->
+        <div id="page-pengumuman" class="page-section">
             <!-- Pengumuman & Download Center -->
-            <section id="pengumuman" class="py-20 bg-gray-50 scroll-mt-20">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section class="bg-gray-50 min-h-[calc(100vh-80px)] flex flex-col justify-center py-12">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         
                         <!-- Pengumuman Column -->
@@ -657,17 +723,13 @@
                 
                 <form id="admin-login-form" class="space-y-6">
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Email Urusetia</label>
-                        <input type="email" id="login-email" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" placeholder="admin@skpk.edu.my">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Kata Laluan</label>
-                        <input type="password" id="login-password" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" placeholder="••••••••">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Kata Laluan Admin</label>
+                        <input type="password" id="login-password" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none" placeholder="Masukkan kata laluan">
                     </div>
                     <button type="submit" class="w-full py-3 rounded-xl bg-gray-900 text-white font-bold hover:bg-gray-800 transition shadow-md flex justify-center items-center gap-2">
                         <i class="fas fa-sign-in-alt"></i> Log Masuk
                     </button>
-                    <p class="text-xs text-center text-gray-500 mt-4">Peringatan: Jika ini kali pertama, sistem akan setup environment admin (Mockup).</p>
+                    <p class="text-xs text-center text-gray-500 mt-4">Sila masukkan kata laluan yang sah untuk mengakses papan pemuka.</p>
                 </form>
             </div>
         </div>
@@ -973,15 +1035,16 @@
         // Mock Login Handler
         document.getElementById('admin-login-form').addEventListener('submit', (e) => {
             e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            // Mock authentication for preview purposes
-            if(email.includes('admin')) {
+            const password = document.getElementById('login-password').value;
+            
+            if(password === 'skpkyba4112') {
                 isAdmin = true;
                 localStorage.setItem('karnival_admin', 'true');
+                document.getElementById('login-password').value = ''; // clear password input
                 navigate('admin-dashboard');
                 showToast("Log masuk berjaya!");
             } else {
-                showToast("Akses ditolak. Sila guna emel admin.", "error");
+                showToast("Kata laluan salah. Akses ditolak.", "error");
             }
         });
 
@@ -1012,15 +1075,39 @@
             onSnapshot(pathAnnouncements(), (snapshot) => {
                 let htmlPublic = '';
                 let htmlAdmin = '';
+                let latestAnn = null;
+                const floatingBanner = document.getElementById('floating-announcement');
                 
                 if(snapshot.empty) {
                     htmlPublic = `<p class="text-gray-500 text-center py-6">Tiada pengumuman setakat ini.</p>`;
                     htmlAdmin = `<p class="text-gray-500 text-sm">Tiada rekod.</p>`;
+                    
+                    // Tunjuk mesej lalai jika tiada pengumuman (jangan sembunyikan banner)
+                    if(floatingBanner) {
+                        floatingBanner.classList.remove('hidden');
+                        document.getElementById('floating-badge').className = 'px-2 py-1 text-[10px] font-bold rounded whitespace-nowrap shadow-sm tracking-wider uppercase bg-white text-red-900';
+                        document.getElementById('floating-badge').textContent = 'INFO';
+                        document.getElementById('floating-text').innerHTML = `<span class="font-bold mr-2 text-yellow-200">Selamat Datang:</span> Ke Portal Rasmi Karnival Kokurikulum Pendidikan Khas Zon Borneo 2026.`;
+                    }
                 } else {
                     // Manual sorting since complex queries might fail depending on canvas index setup
                     const docs = [];
                     snapshot.forEach(doc => docs.push({id: doc.id, ...doc.data()}));
                     docs.sort((a,b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+
+                    // Setup floating banner with the latest announcement
+                    latestAnn = docs[0];
+                    if (latestAnn && floatingBanner) {
+                        floatingBanner.classList.remove('hidden');
+                        const fBadge = document.getElementById('floating-badge');
+                        const fText = document.getElementById('floating-text');
+                        
+                        // Kemaskini warna badge supaya kontras dengan latar belakang merah
+                        let badgeColor = latestAnn.badge === 'PENTING' ? 'bg-yellow-400 text-red-900' : (latestAnn.badge === 'TERKINI' ? 'bg-green-400 text-green-900' : 'bg-gray-100 text-gray-900');
+                        fBadge.className = `px-2 py-1 text-[10px] font-bold rounded whitespace-nowrap shadow-sm tracking-wider uppercase ${badgeColor}`;
+                        fBadge.textContent = latestAnn.badge;
+                        fText.innerHTML = `<span class="font-bold mr-2 text-yellow-200">${latestAnn.title}:</span> ${latestAnn.content}`;
+                    }
 
                     docs.forEach(data => {
                         const dateStr = data.timestamp ? new Date(data.timestamp.seconds * 1000).toLocaleDateString('ms-MY') : 'Baru';
