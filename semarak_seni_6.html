@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semarak Seni 6 - Pertandingan Tarian Kolattam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Bebas+Neue&family=Samarkan:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* Latar belakang berwarna-warni bertemakan India */
+            background: 
+                linear-gradient(135deg, rgba(255, 230, 153, 0.9) 0%, rgba(255, 153, 51, 0.9) 100%),
+                url('1.png') center/cover fixed; /* Anda boleh gunakan gambar latar belakang sebenar di sini */
+            background-color: #FFB347; /* Warna sandaran jika gambar tidak dimuatkan */
+            min-height: 100vh;
+            color: #333;
+            position: relative;
+        }
+
+        /* Corak Mandala latar belakang (CSS pseudo-element) */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(circle at 50% 50%, transparent 60%, rgba(214, 40, 40, 0.1) 100%),
+                              repeating-radial-gradient(circle at 0 0, transparent 0, transparent 40px, rgba(232, 69, 24, 0.05) 40px, rgba(232, 69, 24, 0.05) 41px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .heading-font {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 3px;
+            /* Warna merah bata/oren gelap yang kaya */
+            color: #D62828; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2), -1px -1px 0 #FFF;
+        }
+
+        .indian-title {
+            color: #F77F00;
+            text-shadow: 3px 3px 0 #85182A, 4px 4px 5px rgba(0,0,0,0.3);
+        }
+
+        /* Kesan Kaca yang dipertingkatkan */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8); /* Ketelusan 80% */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(255, 214, 10, 0.2);
+            border-radius: 24px;
+            position: relative;
+        }
+
+        /* Border hiasan gaya India untuk panel utama */
+        .glass-panel::after {
+            content: '';
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px dashed rgba(214, 40, 40, 0.3);
+            border-radius: 16px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glass-panel > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .tab-btn {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-bottom: 4px solid transparent;
+            font-weight: 600;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 4px;
+            border-radius: 12px 12px 0 0;
+        }
+        .tab-btn:hover {
+            color: #D62828;
+            background-color: rgba(252, 191, 73, 0.4);
+            transform: translateY(-2px);
+        }
+        .tab-btn.active {
+            color: #FFF;
+            background: linear-gradient(135deg, #D62828 0%, #F77F00 100%);
+            border-bottom-color: #85182A;
+            box-shadow: 0 -4px 10px rgba(214, 40, 40, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+            animation: slideUpFade 0.6s ease-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Hiasan motif India */
+        .motif-border-top {
+            position: relative;
+        }
+        .motif-border-top::before {
+            content: '❖ ❖ ❖ ❖ ❖ ❖';
+            position: absolute;
+            top: -15px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: #F77F00;
+            font-size: 24px;
+            letter-spacing: 15px;
+            opacity: 0.7;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        ul.custom-list {
+            list-style: none;
+            padding-left: 2rem;
+        }
+        ul.custom-list li {
+            position: relative;
+            margin-bottom: 1rem;
+            padding-left: 0.5rem;
+        }
+        ul.custom-list li::before {
+            content: '🪔'; /* Ikon Diya/Lampu India */
+            position: absolute;
+            left: -2rem;
+            font-size: 1.2rem;
+            top: -0.1rem;
+            filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.2));
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border: 2px solid #F8EDEB;
+        }
+        th {
+            background: linear-gradient(to right, #D62828, #F77F00);
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px dashed #F5CAC3;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:nth-child(even) {
+            background-color: rgba(252, 191, 73, 0.05);
+        }
+        tr:hover td {
+            background-color: rgba(252, 191, 73, 0.15);
+            transition: background-color 0.3s;
+        }
+
+        /* Kad Hiasan */
+        .decor-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fff9e6 100%);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            border: 1px solid rgba(252, 191, 73, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .decor-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 6px;
+            background: linear-gradient(90deg, #003049, #D62828, #F77F00, #FCBF49);
+        }
+
+        .image-content {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* Gayakan latar belakang tajuk */
+        .header-bg {
+            background-image: url('Semarak.png');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            background-color: rgba(255, 255, 255, 0.8); /* Transparen 80% */
+        }
+
+        /* Gayakan latar belakang format dan masa */
+        .masa-bg {
+            background-image: url('masa.png');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            background-color: rgba(255, 255, 255, 0.8); /* Transparen 80% */
+        }
+
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-5xl mx-auto relative">
+        
+        <!-- Hiasan Penari Kiri (Perempuan) -->
+        <div class="hidden lg:block absolute -left-32 top-40 opacity-80 pointer-events-none">
+            <svg width="150" height="250" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Kepala & Rambut -->
+                <circle cx="50" cy="30" r="15" fill="#e8c39e"/>
+                <path d="M 35 30 Q 50 10 65 30 Q 70 50 50 50 Q 30 50 35 30" fill="#2d2d2d"/>
+                <circle cx="65" cy="40" r="8" fill="#2d2d2d"/> <!-- Sanggul -->
+                <circle cx="50" cy="25" r="2" fill="#D62828"/> <!-- Bindi -->
+                <!-- Badan / Baju -->
+                <path d="M 35 50 L 65 50 L 60 90 L 40 90 Z" fill="#003049"/>
+                <path d="M 35 50 L 20 70 L 25 75 L 40 55 Z" fill="#003049"/> <!-- Lengan Kiri -->
+                <path d="M 65 50 L 80 40 L 85 45 L 60 60 Z" fill="#003049"/> <!-- Lengan Kanan -->
+                <!-- Kain Sarung / Lehenga -->
+                <path d="M 40 90 L 60 90 L 80 180 L 20 180 Z" fill="#D62828"/>
+                <path d="M 30 180 Q 50 190 70 180 Q 60 170 40 170 Z" fill="#F77F00"/>
+                <!-- Selendang / Dupatta -->
+                <path d="M 35 50 Q 20 90 70 130 L 75 120 Q 30 80 45 50 Z" fill="#FCBF49" opacity="0.8"/>
+                <!-- Tangan & Kayu Kolattam -->
+                <path d="M 20 70 Q 15 85 25 95" fill="none" stroke="#e8c39e" stroke-width="4"/>
+                <path d="M 80 40 Q 90 35 85 20" fill="none" stroke="#e8c39e" stroke-width="4"/>
+                <line x1="10" y1="105" x2="35" y2="85" stroke="#F77F00" stroke-width="4" stroke-linecap="round"/>
+                <line x1="75" y1="10" x2="95" y2="30" stroke="#F77F00" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+        </div>
+
+        <!-- Hiasan Penari Kanan (Lelaki) -->
+        <div class="hidden lg:block absolute -right-32 top-80 opacity-80 pointer-events-none">
+            <svg width="150" height="250" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Kepala & Rambut -->
+                <circle cx="50" cy="30" r="15" fill="#e8c39e"/>
+                <path d="M 35 30 Q 50 15 65 30 Q 65 20 50 20 Q 35 20 35 30" fill="#2d2d2d"/>
+                <!-- Kurta (Baju) -->
+                <path d="M 35 45 L 65 45 L 70 110 L 30 110 Z" fill="#F77F00"/>
+                <path d="M 35 45 L 15 60 L 20 65 L 35 55 Z" fill="#F77F00"/> <!-- Lengan Kiri -->
+                <path d="M 65 45 L 85 60 L 80 65 L 65 55 Z" fill="#F77F00"/> <!-- Lengan Kanan -->
+                <!-- Seluar (Dhoti) -->
+                <path d="M 30 110 L 70 110 L 60 170 L 50 140 L 40 170 Z" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+                <path d="M 30 110 L 40 170" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+                <!-- Tangan & Kayu Kolattam -->
+                <path d="M 15 60 Q 10 75 25 85" fill="none" stroke="#e8c39e" stroke-width="4"/>
+                <path d="M 85 60 Q 90 75 75 85" fill="none" stroke="#e8c39e" stroke-width="4"/>
+                <line x1="10" y1="95" x2="35" y2="75" stroke="#D62828" stroke-width="4" stroke-linecap="round"/>
+                <line x1="90" y1="95" x2="65" y2="75" stroke="#D62828" stroke-width="4" stroke-linecap="round"/>
+                <line x1="10" y1="95" x2="15" y2="90" stroke="#FCBF49" stroke-width="4"/>
+                <line x1="90" y1="95" x2="85" y2="90" stroke="#FCBF49" stroke-width="4"/>
+            </svg>
+        </div>
+
+        <header class="text-center mb-10 glass-panel p-8 relative overflow-hidden header-bg">
+            <!-- Hiasan latar header (kekal untuk efek tambahan) -->
+            <div class="absolute top-0 left-0 w-32 h-32 bg-[#FCBF49] rounded-full mix-blend-multiply filter blur-2xl opacity-50 animate-blob"></div>
+            <div class="absolute top-0 right-0 w-32 h-32 bg-[#D62828] rounded-full mix-blend-multiply filter blur-2xl opacity-50 animate-blob animation-delay-2000"></div>
+            
+            <h1 class="heading-font indian-title text-6xl md:text-8xl mb-3">SEMARAK SENI 6</h1>
+            <p class="text-2xl md:text-3xl font-bold text-[#003049] tracking-wider uppercase inline-block border-b-4 border-[#F77F00] pb-2">Pertandingan Tarian Kolattam</p>
+        </header>
+
+        <nav class="glass-panel mb-8 overflow-hidden p-1 sm:p-2 header-bg w-full shadow-lg">
+            <div class="flex w-full mx-auto justify-between items-stretch">
+                <button class="tab-btn active flex-1 px-1 py-2 sm:py-3 text-[10px] sm:text-xs md:text-sm lg:text-base cursor-pointer mx-0 sm:mx-0.5 whitespace-normal sm:whitespace-nowrap leading-tight flex items-center justify-center text-center" onclick="openTab(event, 'pengenalan')">Pengenalan</button>
+                <button class="tab-btn flex-1 px-1 py-2 sm:py-3 text-[10px] sm:text-xs md:text-sm lg:text-base cursor-pointer mx-0 sm:mx-0.5 whitespace-normal sm:whitespace-nowrap leading-tight flex items-center justify-center text-center" onclick="openTab(event, 'mod')">Mod & Sasaran</button>
+                <button class="tab-btn flex-1 px-1 py-2 sm:py-3 text-[10px] sm:text-xs md:text-sm lg:text-base cursor-pointer mx-0 sm:mx-0.5 whitespace-normal sm:whitespace-nowrap leading-tight flex items-center justify-center text-center" onclick="openTab(event, 'format')">Format & Masa</button>
+                <button class="tab-btn flex-1 px-1 py-2 sm:py-3 text-[10px] sm:text-xs md:text-sm lg:text-base cursor-pointer mx-0 sm:mx-0.5 whitespace-normal sm:whitespace-nowrap leading-tight flex items-center justify-center text-center" onclick="openTab(event, 'muzik')">Muzik & Pakaian</button>
+                <button class="tab-btn flex-1 px-1 py-2 sm:py-3 text-[10px] sm:text-xs md:text-sm lg:text-base cursor-pointer mx-0 sm:mx-0.5 whitespace-normal sm:whitespace-nowrap leading-tight flex items-center justify-center text-center" onclick="openTab(event, 'markah')">Pemarkahan</button>
+                <button class="tab-btn flex-1 px-1 py-2 sm:py-3 text-[10px] sm:text-xs md:text-sm lg:text-base cursor-pointer mx-0 sm:mx-0.5 whitespace-normal sm:whitespace-nowrap leading-tight flex items-center justify-center text-center" onclick="openTab(event, 'hadiah')">Hadiah</button>
+            </div>
+        </nav>
+
+        <main class="glass-panel p-8 md:p-12 motif-border-top relative overflow-hidden header-bg">
+            
+            <!-- Elemen Hiasan Mandala di bucu -->
+            <div class="absolute top-0 right-0 opacity-15 pointer-events-none transform translate-x-1/4 -translate-y-1/4">
+                <svg width="250" height="250" viewBox="0 0 100 100" class="animate-spin-slow" style="animation: spin 30s linear infinite;">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="#D62828" stroke-width="2" stroke-dasharray="4 4"/>
+                    <circle cx="50" cy="50" r="35" fill="none" stroke="#F77F00" stroke-width="1"/>
+                    <path d="M50,10 L60,35 L90,40 L65,55 L75,85 L50,70 L25,85 L35,55 L10,40 L40,35 Z" fill="rgba(252, 191, 73, 0.4)" stroke="#F77F00"/>
+                    <circle cx="50" cy="50" r="15" fill="#D62828"/>
+                </svg>
+            </div>
+            
+            <style>
+                @keyframes spin { 100% { transform: rotate(360deg); } }
+            </style>
+
+            <div id="pengenalan" class="tab-content active relative z-10">
+                <h2 class="heading-font text-5xl mb-8 text-center text-[#D62828] hidden">PENGENALAN</h2>
+                <div class="flex justify-center w-full">
+                    <img src="pengenalan.png" alt="Pengenalan Semarak Seni 6" class="image-content" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'decor-card p-8 text-center text-red-500 font-bold\'>Sila pastikan fail pengenalan.png berada di dalam folder yang sama dengan fail HTML ini.</div>'">
+                </div>
+            </div>
+
+            <div id="mod" class="tab-content relative z-10">
+                <h2 class="heading-font text-5xl mb-8 text-center text-[#D62828] hidden">MOD PROGRAM & SASARAN</h2>
+                <div class="flex justify-center w-full">
+                    <img src="sasaran.png" alt="Mod Program & Kumpulan Sasaran" class="image-content" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'decor-card p-8 text-center text-red-500 font-bold\'>Sila pastikan fail sasaran.png berada di dalam folder yang sama dengan fail HTML ini.</div>'">
+                </div>
+            </div>
+
+            <div id="format" class="tab-content relative z-10">
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div class="decor-card p-8 masa-bg">
+                        <h2 class="heading-font text-4xl mb-6 text-[#D62828] border-b-2 border-red-200 pb-2 flex items-center gap-3">
+                            <span>🎭</span> FORMAT
+                        </h2>
+                        <ul class="custom-list text-lg bg-white/70 p-4 rounded-xl">
+                            <li>Jumlah peserta bagi setiap kumpulan adalah <span class="font-bold text-xl text-[#003049] bg-blue-100 px-2 py-1 rounded">4-6 ORANG</span> sahaja;</li>
+                            <li>Peserta boleh terdiri daripada pasangan lelaki dan perempuan atau sekumpulan murid lelaki atau perempuan sahaja;</li>
+                            <li>Setiap pasukan <span class="font-black text-[#D62828] underline decoration-[#FCBF49] decoration-4">WAJIB</span> mempersembahkan tarian Kolattam sahaja.</li>
+                            <li>Komposisi gerak tari <span class="font-bold text-emerald-600 bg-emerald-50 px-2 rounded">BOLEH</span> diolah dan dikembangkan mengikut kreativiti masing-masing namun masih berlandaskan tarian Kolattam.</li>
+                            <li><span class="font-bold text-red-600 bg-red-50 px-2 rounded uppercase border border-red-200">TIDAK DIBENARKAN</span> menyelit unsur spiritual, lucah, berbahaya dan menggugat sensitiviti kaum dan agama.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="decor-card p-8 masa-bg border-2 border-[#FCBF49]">
+                        <h2 class="heading-font text-4xl mb-6 text-[#D62828] border-b-2 border-orange-300 pb-2 flex items-center gap-3">
+                            <span>⏳</span> MASA
+                        </h2>
+                        <div class="flex flex-col items-center gap-6 mt-6">
+                            <div class="text-7xl animate-pulse drop-shadow-md">⏱️</div>
+                            <div class="bg-white/90 p-6 rounded-xl shadow-inner w-full text-center">
+                                <p class="text-lg font-medium text-gray-700 mb-4">Masa persembahan diperuntukkan selama:</p>
+                                <div class="font-black text-3xl text-[#D62828] bg-orange-100 py-3 px-6 rounded-lg shadow-sm border-2 border-orange-200 inline-block mb-4">
+                                    4 HINGGA 6 MINIT SAHAJA
+                                </div>
+                                <p class="text-sm text-gray-700 font-medium italic">Masa persembahan dikira pada permulaan lagu/muzik sehingga tamat lagu/muzik.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="muzik" class="tab-content relative z-10">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="decor-card p-8 relative overflow-hidden group">
+                        <div class="absolute right-0 top-0 text-9xl opacity-[0.03] pointer-events-none transform translate-x-8 -translate-y-8 group-hover:scale-110 transition-transform duration-700">🎵</div>
+                        <h2 class="heading-font text-3xl md:text-4xl mb-6 text-[#003049] flex items-center gap-3">
+                            <span class="text-[#D62828]">🎸</span> MUZIK IRINGAN
+                        </h2>
+                        <ul class="custom-list space-y-4 text-lg">
+                            <li>Lagu atau muzik iringan boleh berbentuk instrumental atau muzik yang mengandungi suara.</li>
+                            <li>Sebarang suntingan atau gubahan semula melalui apa-apa kaedah adalah <span class="font-bold text-emerald-600 bg-emerald-50 px-2 rounded">DIBENARKAN</span> mengikut kreativiti masing-masing namun hendaklah masih mengekalkan ciri-ciri muzik tarian Kolattam.</li>
+                            <li>Lagu/muzik iringan hendaklah diletakkan sekali dalam video visual.</li>
+                            <li class="bg-red-50 p-3 rounded-lg border-l-4 border-red-500">Pemilihan lagu dan lirik perlu menitikberatkan kesesuaian dan tidak menyentuh sensitiviti keagamaan, adat dan budaya kaum.</li>
+                        </ul>
+                    </div>
+
+                    <div class="decor-card p-8 relative overflow-hidden group">
+                        <div class="absolute right-0 top-0 text-9xl opacity-[0.03] pointer-events-none transform translate-x-8 -translate-y-8 group-hover:scale-110 transition-transform duration-700">👗</div>
+                        <h2 class="heading-font text-3xl md:text-4xl mb-6 text-[#003049] flex items-center gap-3">
+                            <span class="text-[#F77F00]">✨</span> PAKAIAN & PROPS
+                        </h2>
+                        <ul class="custom-list space-y-4 text-lg">
+                            <li>Pakaian dan aksesori penari hendaklah bersesuaian dengan konsep tarian dan sopan.</li>
+                            <li class="bg-orange-50 p-4 rounded-xl border-2 border-orange-200 shadow-inner">Props yang wajib digunakan dalam tarian Kolattam ialah <br><span class="font-black text-[#D62828] text-2xl block mt-2 text-center">2 BATANG KAYU UNTUK SETIAP PENARI</span></li>
+                            <li>Penggunaan props tajam, api, air dan buih adalah <span class="font-bold text-white bg-red-600 px-3 py-1 rounded-full text-sm ml-2">DILARANG</span>.</li>
+                            <li>Props tambahan/hiasan dibenarkan namun proses <i>set up</i> adalah di bawah seliaan sekolah masing-masing tanpa mengganggu kelancaran masa.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="markah" class="tab-content relative z-10">
+                <h2 class="heading-font text-5xl mb-8 text-center text-[#D62828]">KRITERIA PEMARKAHAN</h2>
+                
+                <div class="max-w-3xl mx-auto decor-card p-2 md:p-6">
+                    <table class="w-full text-lg shadow-xl">
+                        <thead>
+                            <tr>
+                                <th class="text-center w-3/4 text-2xl py-4 rounded-tl-lg">ASPEK PENILAIAN</th>
+                                <th class="text-center w-1/4 text-2xl py-4 rounded-tr-lg">MARKAH</th>
+                            </tr>
+                        </thead>
+                        <tbody class="font-medium text-gray-700">
+                            <tr>
+                                <td class="text-xl py-4"><span class="mr-3">🎨</span>Kreativiti koreografi</td>
+                                <td class="text-center font-black text-2xl text-[#D62828]">35</td>
+                            </tr>
+                            <tr>
+                                <td class="text-xl py-4"><span class="mr-3">🕺</span>Teknik tari (tarian Kolattam)</td>
+                                <td class="text-center font-black text-2xl text-[#D62828]">25</td>
+                            </tr>
+                            <tr>
+                                <td class="text-xl py-4"><span class="mr-3">🎼</span>Koordinasi muzik dan gerakan</td>
+                                <td class="text-center font-black text-2xl text-[#D62828]">15</td>
+                            </tr>
+                            <tr>
+                                <td class="text-xl py-4"><span class="mr-3">👥</span>Keseragaman dan keselarian</td>
+                                <td class="text-center font-black text-2xl text-[#D62828]">15</td>
+                            </tr>
+                            <tr>
+                                <td class="text-xl py-4"><span class="mr-3">🥻</span>Busana dan tatarias</td>
+                                <td class="text-center font-black text-2xl text-[#D62828]">10</td>
+                            </tr>
+                            <tr class="bg-gradient-to-r from-[#FCBF49] to-[#F77F00] font-bold text-2xl text-white">
+                                <td class="text-right pr-6 py-5 rounded-bl-lg">JUMLAH KESELURUHAN</td>
+                                <td class="text-center py-5 rounded-br-lg text-3xl text-white shadow-text">100</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="hadiah" class="tab-content relative z-10">
+                <h2 class="heading-font text-5xl mb-10 text-center text-[#D62828]">SENARAI HADIAH</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Hadiah Utama -->
+                    <div class="decor-card p-8 border-t-8 border-t-[#FCBF49] hover:shadow-2xl transition-shadow duration-300">
+                        <div class="flex items-center justify-center mb-6">
+                            <h3 class="heading-font text-4xl text-[#003049] bg-[#FCBF49] px-6 py-2 rounded-full inline-block shadow-md">HADIAH UTAMA</h3>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="bg-white/60 p-4 rounded-xl border border-gray-100 shadow-sm flex items-start gap-4">
+                                <div class="text-5xl">🥇</div>
+                                <div>
+                                    <h4 class="font-black text-2xl text-[#D62828]">JOHAN</h4>
+                                    <p class="text-gray-700 font-medium mt-1">Wang Tunai (Cek Cura) <br>& Sijil Penghargaan</p>
+                                </div>
+                            </div>
+                            <div class="bg-white/60 p-4 rounded-xl border border-gray-100 shadow-sm flex items-start gap-4">
+                                <div class="text-5xl">🥈</div>
+                                <div>
+                                    <h4 class="font-black text-2xl text-gray-600">NAIB JOHAN</h4>
+                                    <p class="text-gray-700 font-medium mt-1">Wang Tunai (Cek Cura) <br>& Sijil Penghargaan</p>
+                                </div>
+                            </div>
+                            <div class="bg-white/60 p-4 rounded-xl border border-gray-100 shadow-sm flex items-start gap-4">
+                                <div class="text-5xl">🥉</div>
+                                <div>
+                                    <h4 class="font-black text-2xl text-[#F77F00]">KETIGA</h4>
+                                    <p class="text-gray-700 font-medium mt-1">Wang Tunai (Cek Cura) <br>& Sijil Penghargaan</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hadiah Sampingan -->
+                    <div class="decor-card p-8 border-t-8 border-t-[#D62828] hover:shadow-2xl transition-shadow duration-300">
+                        <div class="flex items-center justify-center mb-6">
+                            <h3 class="heading-font text-4xl text-white bg-[#D62828] px-6 py-2 rounded-full inline-block shadow-md">HADIAH SAMPINGAN</h3>
+                        </div>
+                        <div class="space-y-5">
+                            <div class="border-b border-gray-200 pb-4">
+                                <h4 class="font-black text-xl text-[#003049] mb-2 flex items-center gap-2"><span class="text-xl">🌟</span> KOREOGRAFI TERBAIK</h4>
+                                <ul class="list-disc list-inside text-base text-gray-700 ml-6 font-medium">
+                                    <li>Markah Koreografi Tertinggi</li>
+                                    <li>Wang Tunai (Cek Cura) & Sijil</li>
+                                </ul>
+                            </div>
+                            <div class="border-b border-gray-200 pb-4">
+                                <h4 class="font-black text-xl text-[#003049] mb-2 flex items-center gap-2"><span class="text-xl">👗</span> BUSANA & TATARIAS TERBAIK</h4>
+                                <ul class="list-disc list-inside text-base text-gray-700 ml-6 font-medium">
+                                    <li>Markah Busana Tertinggi</li>
+                                    <li>Wang Tunai (Cek Cura) & Sijil</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-xl text-[#003049] mb-2 flex items-center gap-2"><span class="text-xl">❤️</span> KUMPULAN POPULAR</h4>
+                                <ul class="list-disc list-inside text-base text-gray-700 ml-6 font-medium">
+                                    <li>Tontonan tertinggi video promo di FB</li>
+                                    <li>Wang Tunai (Cek Cura) & Sijil</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Promo Info -->
+                <div class="mt-10 bg-gradient-to-r from-[#003049] to-[#00507a] text-white p-8 rounded-2xl shadow-xl relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 text-9xl opacity-20">📱</div>
+                    <h3 class="heading-font text-4xl text-[#FCBF49] mb-4 border-b border-white/20 pb-3 inline-block">📹 SYARAT VIDEO PROMO (KUMPULAN POPULAR)</h3>
+                    <ul class="list-none space-y-4 text-lg mt-2">
+                        <li class="flex items-start gap-3"><span class="text-[#FCBF49]">▶</span> Durasi tidak lebih dari 1 minit.</li>
+                        <li class="flex items-start gap-3"><span class="text-[#FCBF49]">▶</span> Pengisian video mengikut kreativiti sekolah masing-masing.</li>
+                        <li class="flex items-start gap-3"><span class="text-[#FCBF49]">▶</span> Semua video kumpulan akan dimuat naik (<i>schedule post</i>) di FB Page SKPK Miri.</li>
+                        <li class="flex items-start gap-3"><span class="text-[#FCBF49]">▶</span> Video yang mendapat <span class="font-bold text-[#FCBF49] bg-white/10 px-2 rounded">jumlah view tertinggi</span> akan meraih anugerah Kumpulan Popular.</li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </main>
+        
+        <footer class="text-center mt-8 mb-4 text-sm font-semibold text-gray-800 glass-panel py-4 rounded-full shadow-lg">
+            © 2026 SK Pendidikan Khas Miri. Semarak Seni 6.
+        </footer>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            // Get all elements with class="tab-content" and hide them
+            var tabcontent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+
+            // Get all elements with class="tab-btn" and remove the class "active"
+            var tablinks = document.getElementsByClassName("tab-btn");
+            for (var i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
