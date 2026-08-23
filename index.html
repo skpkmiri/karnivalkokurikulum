@@ -99,6 +99,13 @@
             transform: translateY(0);
             opacity: 1;
         }
+        /* Custom Dropdown Hover */
+        .group:hover .group-hover\:visible {
+            visibility: visible;
+        }
+        .group:hover .group-hover\:opacity-100 {
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
@@ -117,19 +124,32 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex items-center space-x-1">
-                    <button onclick="navigate('home')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Home</button>
-                    <button onclick="navigate('tentatif')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Tentatif</button>
-                    <button onclick="navigate('pertandingan')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Pertandingan</button>
-                    <button onclick="navigate('pendaftaran')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Pendaftaran</button>
-                    <button onclick="navigate('rujukan')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Bahan Rujukan</button>
-                    <button onclick="navigate('pemenang')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Senarai Pemenang</button>
-                    <button onclick="navigate('galeri')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Galeri</button>
-                    <button onclick="navigate('hubungi')" class="nav-link px-4 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors">Hubungi</button>
+                    <button onclick="navigate('home')" class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-sm lg:text-base">Home</button>
+                    <button onclick="navigate('tentatif')" class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-sm lg:text-base">Tentatif</button>
+                    <button onclick="navigate('pertandingan')" class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-sm lg:text-base">Pertandingan</button>
+                    <button onclick="navigate('pendaftaran')" class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-sm lg:text-base">Pendaftaran</button>
+                    <button onclick="navigate('rujukan')" class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-sm lg:text-base">Rujukan</button>
                     
-                    <div class="w-px h-6 bg-gray-300 mx-2"></div>
+                    <!-- Dropdown Penghantaran Bahan -->
+                    <div class="relative group">
+                        <button class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors flex items-center gap-1 text-sm lg:text-base">
+                            Penghantaran <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-56 bg-white border border-gray-100 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+                            <div class="px-4 py-2 bg-gray-50 border-b border-gray-100 text-xs font-bold text-gray-500 uppercase tracking-wider">Hantar Bahan (Akan Datang)</div>
+                            <a href="#" class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 border-b border-gray-50"><i class="fas fa-theater-masks w-5 text-center text-semarak-600"></i> Semarak Seni</a>
+                            <a href="#" class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-language w-5 text-center text-english-600"></i> English Carnival</a>
+                        </div>
+                    </div>
+
+                    <button onclick="navigate('pemenang')" class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-sm lg:text-base">Pemenang</button>
+                    <button onclick="navigate('galeri')" class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-sm lg:text-base">Galeri</button>
+                    <button onclick="navigate('hubungi')" class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-sm lg:text-base">Hubungi</button>
                     
-                    <button onclick="navigate('admin-login')" class="ml-2 flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors shadow-md" aria-label="Log Masuk Admin">
-                        <i class="fas fa-cog"></i> Admin
+                    <div class="w-px h-6 bg-gray-300 mx-1"></div>
+                    
+                    <button onclick="navigate('admin-login')" class="ml-1 flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors shadow-md text-sm lg:text-base" aria-label="Log Masuk Admin">
+                        <i class="fas fa-cog"></i>
                     </button>
                 </div>
 
@@ -144,12 +164,22 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg z-50">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 max-h-[80vh] overflow-y-auto">
                 <button onclick="navigate('home'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Home</button>
                 <button onclick="navigate('tentatif'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Tentatif</button>
                 <button onclick="navigate('pertandingan'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Pertandingan</button>
                 <button onclick="navigate('pendaftaran'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Pendaftaran</button>
+                
+                <!-- Mobile Dropdown Penghantaran -->
+                <div class="px-3 py-2 border-y border-gray-100 bg-gray-50 rounded-md">
+                    <div class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">Penghantaran Bahan</div>
+                    <div class="pl-2 space-y-2">
+                        <a href="#" class="block px-2 py-2 text-base font-medium text-gray-700 hover:text-blue-600"><i class="fas fa-theater-masks w-5 text-semarak-600"></i> Semarak Seni (Nanti)</a>
+                        <a href="#" class="block px-2 py-2 text-base font-medium text-gray-700 hover:text-blue-600"><i class="fas fa-language w-5 text-english-600"></i> English Carnival (Nanti)</a>
+                    </div>
+                </div>
+
                 <button onclick="navigate('rujukan'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Bahan Rujukan</button>
                 <button onclick="navigate('pemenang'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Senarai Pemenang</button>
                 <button onclick="navigate('galeri'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Galeri</button>
@@ -194,7 +224,7 @@
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col items-center text-center w-full">
                     <h1 class="text-3xl md:text-5xl lg:text-6xl font-heading font-extrabold tracking-tight mb-4 leading-tight">
                         KARNIVAL KOKURIKULUM <br/>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">SEKOLAH PENDIDIKAN KHAS</span><br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">SEKOLAH-SEKOLAH PENDIDIKAN KHAS</span><br/>
                         ZON BORNEO 2026
                     </h1>
                     <p class="text-lg md:text-xl text-blue-100 max-w-3xl mb-2 font-medium">19 – 21 November 2026</p>
@@ -262,36 +292,30 @@
                         <button onclick="navigate('pertandingan')" class="px-6 py-3 rounded-xl bg-yellow-400 text-gray-900 font-bold text-base hover:bg-yellow-300 shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-all transform hover:-translate-y-1">
                             Lihat Pertandingan
                         </button>
-                        <button onclick="navigate('tentatif')" class="px-6 py-3 rounded-xl bg-white/10 text-white font-bold text-base border border-white/30 hover:bg-white/20 transition-all transform hover:-translate-y-1">
-                            Tentatif Program
+                        <button onclick="navigate('pendaftaran')" class="px-6 py-3 rounded-xl bg-white/10 text-white font-bold text-base border border-white/30 hover:bg-white/20 transition-all transform hover:-translate-y-1">
+                            Status Pendaftaran
                         </button>
                     </div>
                 </div>
             </section>
 
-            <!-- Sekolah Terlibat -->
+            <!-- Jumlah Kontinjen Terkini -->
             <section class="py-20 bg-white min-h-[calc(100vh-80px)] flex flex-col justify-center">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
-                    <h2 class="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">Sekolah Terlibat</h2>
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
+                    <h2 class="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">Penyertaan Rasmi</h2>
                     <div class="w-24 h-1.5 bg-blue-600 mx-auto rounded-full mb-12"></div>
                     
-                    <h3 class="text-xl font-bold text-gray-700 mb-6 border-b pb-2 inline-block">Kategori SPK (Zon Borneo)</h3>
-                    <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-12">
-                        <!-- Loop Schools -->
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Miri</div>
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Sibu</div>
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Kota Samarahan</div>
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Kuching</div>
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Kota Kinabalu</div>
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">SKPK Tuaran</div>
-                    </div>
-
-                    <h3 class="text-xl font-bold text-gray-700 mb-6 border-b pb-2 inline-block">Kategori PPKI (Semarak Seni)</h3>
-                    <div class="flex flex-wrap justify-center gap-4 md:gap-6">
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">PPKI SMK Dato' Permaisuri</div>
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">PPKI SMK Luak</div>
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">PPKI SMK Lutong</div>
-                        <div class="bg-gray-50 border border-gray-200 rounded-xl px-6 py-4 font-semibold text-gray-800 hover:shadow-md transition">PPKI SMK St. Joseph</div>
+                    <div class="bg-gradient-to-b from-blue-50 to-white border border-blue-100 rounded-3xl p-10 md:p-16 shadow-lg hover:shadow-xl transition-shadow relative overflow-hidden">
+                        <i class="fas fa-users absolute -right-10 -bottom-10 text-[200px] text-blue-100 opacity-50 pointer-events-none"></i>
+                        <h3 class="text-2xl font-bold text-blue-900 mb-4 relative z-10">Jumlah Kontinjen Terkini</h3>
+                        <div class="text-7xl md:text-9xl font-heading font-extrabold text-blue-600 drop-shadow-sm mb-2 relative z-10" id="public-kontinjen-count">0</div>
+                        <p class="text-blue-700 text-lg md:text-xl font-semibold mt-4 relative z-10 uppercase tracking-widest">Sekolah Telah Mendaftar</p>
+                        
+                        <div class="mt-10 relative z-10">
+                            <button onclick="navigate('pendaftaran')" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold shadow-md transition-colors flex items-center gap-2 mx-auto">
+                                <i class="fas fa-list-ul"></i> Lihat Senarai Sekolah
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -380,7 +404,7 @@
                         </div>
 
                         <!-- English Carnival Card -->
-                        <div class="group bg-english-50 rounded-3xl p-6 border border-english-100 shadow-soft hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer" onclick="navigate('english')">
+                        <div class="group bg-english-50 rounded-3xl p-6 border border-english-100 shadow-soft hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer" onclick="window.location.href='english_carnival_app.html'">
                             <div class="w-16 h-16 bg-english-100 text-english-600 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
                                 <i class="fas fa-language"></i>
                             </div>
@@ -467,11 +491,33 @@
                             </div>
                         </div>
 
-                        <!-- Butang Panduan Pendaftaran (Turun Bawah + Link Baharu) -->
+                        <!-- Butang Panduan Pendaftaran -->
                         <div class="text-center">
                             <a href="https://drive.google.com/file/d/13QnCq8uglHYj8SX8MBEQ1Ef58XoX_J0i/view?usp=sharing" target="_blank" class="inline-flex px-8 py-4 rounded-xl bg-indigo-600 text-white font-bold hover:bg-indigo-700 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 items-center gap-3 text-lg">
                                 <i class="fas fa-file-pdf text-2xl"></i> Panduan Pendaftaran
                             </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Senarai Sekolah Yang Telah Mendaftar -->
+                    <div class="mt-16 pt-12 border-t border-blue-200">
+                        <div class="text-center mb-8">
+                            <h3 class="text-2xl font-heading font-bold text-gray-900">Senarai Sekolah Yang Telah Mendaftar</h3>
+                            <div class="w-16 h-1 bg-blue-600 mx-auto rounded-full mt-3"></div>
+                            <p class="text-gray-600 mt-3 text-sm">Jadual di bawah akan dikemas kini oleh pihak urusetia dari masa ke semasa.</p>
+                        </div>
+                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden max-w-3xl mx-auto">
+                            <table class="w-full text-left text-sm">
+                                <thead class="bg-gray-50 border-b border-gray-100">
+                                    <tr>
+                                        <th class="px-6 py-4 font-semibold text-gray-700 w-16">Bil</th>
+                                        <th class="px-6 py-4 font-semibold text-gray-700">Nama Sekolah</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="public-schools-list" class="divide-y divide-gray-100">
+                                    <tr><td colspan="2" class="px-6 py-8 text-center text-gray-500">Memuatkan senarai...</td></tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -636,6 +682,7 @@
                             <button onclick="switchAdminTab('dashboard')" id="tab-dashboard" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-blue-700 bg-blue-50 transition"><i class="fas fa-home w-5"></i> Utama</button>
                             <button onclick="switchAdminTab('pengumuman')" id="tab-pengumuman" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-bullhorn w-5"></i> Pengumuman</button>
                             <button onclick="switchAdminTab('dokumen')" id="tab-dokumen" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-file-pdf w-5"></i> Muat Turun</button>
+                            <button onclick="switchAdminTab('sekolah')" id="tab-sekolah" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-school w-5"></i> Senarai Sekolah</button>
                             <button onclick="adminLogout()" class="w-full flex items-center gap-3 px-4 py-3 mt-4 text-sm font-medium rounded-xl text-red-600 hover:bg-red-50 transition border border-transparent hover:border-red-100"><i class="fas fa-sign-out-alt w-5"></i> Log Keluar</button>
                         </nav>
                     </div>
@@ -650,18 +697,18 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                             <div class="bg-blue-50 rounded-xl p-6 border border-blue-100">
                                 <div class="text-blue-500 text-2xl mb-2"><i class="fas fa-school"></i></div>
-                                <div class="text-3xl font-bold text-gray-900 mb-1">10</div>
-                                <div class="text-sm font-semibold text-gray-600">Sekolah Terlibat</div>
+                                <div class="text-3xl font-bold text-gray-900 mb-1" id="dashboard-kontinjen-count">0</div>
+                                <div class="text-sm font-semibold text-gray-600">Sekolah Berdaftar</div>
                             </div>
                             <div class="bg-emerald-50 rounded-xl p-6 border border-emerald-100">
                                 <div class="text-emerald-500 text-2xl mb-2"><i class="fas fa-users"></i></div>
-                                <div class="text-3xl font-bold text-gray-900 mb-1">120+</div>
+                                <div class="text-3xl font-bold text-gray-900 mb-1">...</div>
                                 <div class="text-sm font-semibold text-gray-600">Peserta Berdaftar</div>
                             </div>
                             <div class="bg-purple-50 rounded-xl p-6 border border-purple-100">
                                 <div class="text-purple-500 text-2xl mb-2"><i class="fas fa-trophy"></i></div>
-                                <div class="text-3xl font-bold text-gray-900 mb-1">9</div>
-                                <div class="text-sm font-semibold text-gray-600">Acara Dipertandingkan</div>
+                                <div class="text-3xl font-bold text-gray-900 mb-1">3</div>
+                                <div class="text-sm font-semibold text-gray-600">Acara Utama</div>
                             </div>
                         </div>
                         <p class="text-gray-500 text-sm">Gunakan menu di sebelah kiri untuk mengurus kandungan portal rasmi.</p>
@@ -746,6 +793,43 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Tab: Sekolah -->
+                    <div id="admin-panel-sekolah" class="admin-panel hidden">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-2xl font-bold text-gray-900">Senarai Sekolah Mendaftar</h2>
+                        </div>
+                        
+                        <!-- Form Tambah Sekolah -->
+                        <form id="form-add-school" class="bg-gray-50 p-6 rounded-xl border border-gray-200 mb-8 space-y-4">
+                            <h3 class="font-bold text-gray-800 mb-2">Tambah Sekolah Baru</h3>
+                            <div class="flex gap-4">
+                                <div class="flex-grow">
+                                    <label class="block text-sm text-gray-600 mb-1">Nama Sekolah</label>
+                                    <input type="text" id="school-name" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Cth: SK Pendidikan Khas Miri">
+                                </div>
+                            </div>
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Tambah Sekolah</button>
+                        </form>
+
+                        <!-- Senarai Sekolah Admin -->
+                        <div>
+                            <h3 class="font-bold text-gray-800 mb-4">Sekolah Berdaftar (Terkini)</h3>
+                            <div class="border rounded-xl overflow-hidden">
+                                <table class="w-full text-left text-sm text-gray-600">
+                                    <thead class="bg-gray-50 border-b">
+                                        <tr>
+                                            <th class="px-4 py-3 font-semibold text-gray-900">Nama Sekolah</th>
+                                            <th class="px-4 py-3 font-semibold text-gray-900 w-24">Tindakan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="admin-schools-list" class="divide-y">
+                                        <!-- Populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -807,7 +891,7 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="#" onclick="navigate('home'); event.preventDefault()" class="hover:text-blue-400 transition">Halaman Utama</a></li>
                         <li><a href="#" onclick="navigate('petanque'); event.preventDefault()" class="hover:text-blue-400 transition">Pertandingan Pétanque</a></li>
-                        <li><a href="#" onclick="navigate('english'); event.preventDefault()" class="hover:text-blue-400 transition">English Carnival</a></li>
+                        <li><a href="english_carnival_app.html" class="hover:text-blue-400 transition">English Carnival</a></li>
                         <li><a href="semarak_seni_6.html" class="hover:text-blue-400 transition">Semarak Seni 6</a></li>
                         <li><a href="#" onclick="navigate('rujukan'); event.preventDefault()" class="hover:text-blue-400 transition">Bahan Rujukan</a></li>
                     </ul>
@@ -988,6 +1072,7 @@
         
         const pathAnnouncements = () => collection(db, 'announcements');
         const pathDocuments = () => collection(db, 'documents');
+        const pathSchools = () => collection(db, 'schools'); // Collection for registered schools
 
         function renderAnnouncements(docs) {
             let htmlAdmin = '';
@@ -1091,6 +1176,45 @@
             const aList = document.getElementById('admin-documents-list');
             if(aList) aList.innerHTML = htmlAdmin;
         }
+        
+        function renderSchools(docs) {
+            let htmlPublic = '';
+            let htmlAdmin = '';
+            const pList = document.getElementById('public-schools-list');
+            const aList = document.getElementById('admin-schools-list');
+            const countEl = document.getElementById('public-kontinjen-count');
+            const dashCountEl = document.getElementById('dashboard-kontinjen-count');
+
+            // Kemaskini jumlah di Homepage dan Dashboard Admin
+            if(countEl) countEl.textContent = docs.length;
+            if(dashCountEl) dashCountEl.textContent = docs.length;
+
+            if(docs.length === 0) {
+                htmlPublic = `<tr><td colspan="2" class="px-6 py-8 text-center text-gray-500">Tiada sekolah yang mendaftar setakat ini.</td></tr>`;
+                htmlAdmin = `<tr><td colspan="2" class="px-4 py-4 text-center text-gray-500">Tiada rekod</td></tr>`;
+            } else {
+                // Susun ikut tarikh daftar (terawal ke terbaru)
+                docs.sort((a,b) => (a.timestamp?.seconds || 0) - (b.timestamp?.seconds || 0));
+
+                docs.forEach((data, index) => {
+                    htmlPublic += `
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-6 py-4 font-medium text-gray-500 w-16">${index + 1}</td>
+                        <td class="px-6 py-4 font-semibold text-gray-800">${data.name}</td>
+                    </tr>`;
+
+                    htmlAdmin += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3 font-medium text-gray-800">${data.name}</td>
+                        <td class="px-4 py-3">
+                            <button onclick="deleteDocItem('schools', '${data.id}')" class="text-red-500 hover:text-red-700 bg-red-50 p-2 rounded transition"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>`;
+                });
+            }
+            if(pList) pList.innerHTML = htmlPublic;
+            if(aList) aList.innerHTML = htmlAdmin;
+        }
 
         function setupRealtimeListeners() {
             if(!db) return;
@@ -1108,6 +1232,13 @@
                 snapshot.forEach(doc => docs.push({id: doc.id, ...doc.data()}));
                 renderDocuments(docs);
             }, (error) => console.error("Error fetching documents:", error));
+            
+            // Listen to Schools
+            onSnapshot(pathSchools(), (snapshot) => {
+                const docs = [];
+                snapshot.forEach(doc => docs.push({id: doc.id, ...doc.data()}));
+                renderSchools(docs);
+            }, (error) => console.error("Error fetching schools:", error));
         }
 
         // Add Announcement
@@ -1170,16 +1301,48 @@
                 btn.disabled = false;
             }
         });
+        
+        // Add School
+        document.getElementById('form-add-school').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(!isAdmin) return showToast("Sila log masuk sebagai admin.", "error");
+            
+            const name = document.getElementById('school-name').value;
+            const btn = e.target.querySelector('button');
+            const originalText = btn.textContent;
+
+            try {
+                btn.textContent = "Menyimpan...";
+                btn.disabled = true;
+
+                await addDoc(pathSchools(), {
+                    name: name,
+                    timestamp: serverTimestamp()
+                });
+                
+                e.target.reset();
+                showToast("Sekolah berjaya ditambah ke senarai.");
+            } catch (err) {
+                console.error(err);
+                showToast("Ralat. Sila semak pangkalan data Firebase.", "error");
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        });
 
         // Delete Helper
         window.deleteDocItem = async function(colName, docId) {
             if(!isAdmin) return showToast("Akses ditolak. Sila log masuk admin.", "error");
-            try {
-                await deleteDoc(doc(db, colName, docId));
-                showToast("Rekod dipadam.");
-            } catch(e) {
-                console.error(e);
-                showToast("Gagal memadam rekod.", "error");
+            
+            if(confirm("Adakah anda pasti untuk memadam rekod ini?")) {
+                try {
+                    await deleteDoc(doc(db, colName, docId));
+                    showToast("Rekod berjaya dipadam.");
+                } catch(e) {
+                    console.error(e);
+                    showToast("Gagal memadam rekod.", "error");
+                }
             }
         };
 
