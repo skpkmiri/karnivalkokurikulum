@@ -124,16 +124,17 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex items-center space-x-1">
-                    <button onclick="navigate('home')" class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-sm lg:text-base">Home</button>
-                    <button onclick="navigate('tentatif')" class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-sm lg:text-base">Tentatif</button>
-                    <button onclick="navigate('pertandingan')" class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-sm lg:text-base">Pertandingan</button>
-                    <button onclick="navigate('pendaftaran')" class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-sm lg:text-base">Pendaftaran</button>
-                    <button onclick="navigate('rujukan')" class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-sm lg:text-base">Rujukan</button>
+                    <button onclick="navigate('home')" class="nav-link px-2 lg:px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-xs lg:text-sm">Home</button>
+                    <button onclick="navigate('tentatif')" class="nav-link px-2 lg:px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-xs lg:text-sm">Tentatif</button>
+                    <button onclick="navigate('pertandingan')" class="nav-link px-2 lg:px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-xs lg:text-sm">Pertandingan</button>
+                    <button onclick="navigate('pendaftaran')" class="nav-link px-2 lg:px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-xs lg:text-sm">Pendaftaran</button>
+                    <button onclick="navigate('penyertaan')" class="nav-link px-2 lg:px-3 py-2 rounded-lg text-blue-600 font-bold hover:bg-blue-50 transition-colors text-xs lg:text-sm border border-transparent hover:border-blue-100">Penyertaan</button>
+                    <button onclick="navigate('rujukan')" class="nav-link px-2 lg:px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-xs lg:text-sm">Rujukan</button>
                     
                     <!-- Dropdown Penghantaran Bahan -->
                     <div class="relative group">
-                        <button class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors flex items-center gap-1 text-sm lg:text-base">
-                            Penghantaran <i class="fas fa-chevron-down text-xs"></i>
+                        <button class="nav-link px-2 lg:px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors flex items-center gap-1 text-xs lg:text-sm">
+                            Penghantaran <i class="fas fa-chevron-down text-[10px]"></i>
                         </button>
                         <div class="absolute left-0 mt-2 w-56 bg-white border border-gray-100 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
                             <div class="px-4 py-2 bg-gray-50 border-b border-gray-100 text-xs font-bold text-gray-500 uppercase tracking-wider">Hantar Bahan (Akan Datang)</div>
@@ -142,13 +143,13 @@
                         </div>
                     </div>
 
-                    <button onclick="navigate('pemenang')" class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-sm lg:text-base">Pemenang</button>
-                    <button onclick="navigate('galeri')" class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-sm lg:text-base">Galeri</button>
-                    <button onclick="navigate('hubungi')" class="nav-link px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-sm lg:text-base">Hubungi</button>
+                    <button onclick="navigate('pemenang')" class="nav-link px-2 lg:px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-xs lg:text-sm">Pemenang</button>
+                    <button onclick="navigate('galeri')" class="nav-link px-2 lg:px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-xs lg:text-sm">Galeri</button>
+                    <button onclick="navigate('hubungi')" class="nav-link px-2 lg:px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-xs lg:text-sm">Hubungi</button>
                     
                     <div class="w-px h-6 bg-gray-300 mx-1"></div>
                     
-                    <button onclick="navigate('admin-login')" class="ml-1 flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors shadow-md text-sm lg:text-base" aria-label="Log Masuk Admin">
+                    <button onclick="navigate('admin-login')" class="ml-1 flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors shadow-md text-xs lg:text-sm" aria-label="Log Masuk Admin">
                         <i class="fas fa-cog"></i>
                     </button>
                 </div>
@@ -170,6 +171,7 @@
                 <button onclick="navigate('tentatif'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Tentatif</button>
                 <button onclick="navigate('pertandingan'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Pertandingan</button>
                 <button onclick="navigate('pendaftaran'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Pendaftaran</button>
+                <button onclick="navigate('penyertaan'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-bold text-blue-600 bg-blue-50">Penyertaan</button>
                 
                 <!-- Mobile Dropdown Penghantaran -->
                 <div class="px-3 py-2 border-y border-gray-100 bg-gray-50 rounded-md">
@@ -292,8 +294,8 @@
                         <button onclick="navigate('pertandingan')" class="px-6 py-3 rounded-xl bg-yellow-400 text-gray-900 font-bold text-base hover:bg-yellow-300 shadow-[0_0_20px_rgba(250,204,21,0.4)] transition-all transform hover:-translate-y-1">
                             Lihat Pertandingan
                         </button>
-                        <button onclick="navigate('pendaftaran')" class="px-6 py-3 rounded-xl bg-white/10 text-white font-bold text-base border border-white/30 hover:bg-white/20 transition-all transform hover:-translate-y-1">
-                            Status Pendaftaran
+                        <button onclick="navigate('penyertaan')" class="px-6 py-3 rounded-xl bg-white/10 text-white font-bold text-base border border-white/30 hover:bg-white/20 transition-all transform hover:-translate-y-1">
+                            Status Penyertaan
                         </button>
                     </div>
                 </div>
@@ -312,7 +314,7 @@
                         <p class="text-blue-700 text-lg md:text-xl font-semibold mt-4 relative z-10 uppercase tracking-widest">Sekolah Telah Mendaftar</p>
                         
                         <div class="mt-10 relative z-10">
-                            <button onclick="navigate('pendaftaran')" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold shadow-md transition-colors flex items-center gap-2 mx-auto">
+                            <button onclick="navigate('penyertaan')" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-bold shadow-md transition-colors flex items-center gap-2 mx-auto">
                                 <i class="fas fa-list-ul"></i> Lihat Senarai Sekolah
                             </button>
                         </div>
@@ -481,7 +483,7 @@
                             <h3 class="text-2xl font-heading font-bold text-gray-900">Maklumat & Panduan Lanjut</h3>
                         </div>
                         
-                        <!-- Gambar Tarikh & Senarai Semak (Naik Atas) -->
+                        <!-- Gambar Tarikh & Senarai Semak -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
                             <div class="bg-white p-3 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
                                 <img src="Screenshot 2026-08-13 134926.jpg" class="w-full h-auto rounded-2xl object-contain" alt="Tarikh Penting Pendaftaran">
@@ -498,26 +500,74 @@
                             </a>
                         </div>
                     </div>
-                    
-                    <!-- Senarai Sekolah Yang Telah Mendaftar -->
-                    <div class="mt-16 pt-12 border-t border-blue-200">
-                        <div class="text-center mb-8">
-                            <h3 class="text-2xl font-heading font-bold text-gray-900">Senarai Sekolah Yang Telah Mendaftar</h3>
-                            <div class="w-16 h-1 bg-blue-600 mx-auto rounded-full mt-3"></div>
-                            <p class="text-gray-600 mt-3 text-sm">Jadual di bawah akan dikemas kini oleh pihak urusetia dari masa ke semasa.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE: PENYERTAAN ================= -->
+        <div id="page-penyertaan" class="page-section">
+            <section class="bg-blue-50 min-h-[calc(100vh-80px)] flex flex-col justify-start py-12 px-4">
+                <div class="max-w-6xl mx-auto w-full">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">Senarai Penyertaan</h2>
+                        <div class="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
+                        <p class="text-gray-600 max-w-2xl mx-auto font-medium">Sebarang kemas kini daripada pihak urusetia tentang sekolah yang telah berjaya mendaftar akan dipaparkan di bahagian ini mengikut kategori pertandingan.</p>
+                        <p class="text-red-500 mt-2 text-sm italic">*Nota: Senarai yang disediakan di bawah adalah sekolah yang telah selesai mendaftar.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Petanque List -->
+                        <div class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden flex flex-col">
+                            <div class="bg-petanque-600 text-white py-4 px-6 text-center">
+                                <i class="fas fa-bullseye text-2xl mb-1"></i>
+                                <h3 class="font-bold text-lg">Pétanque</h3>
+                            </div>
+                            <div class="p-4 flex-grow">
+                                <table class="w-full text-left text-sm">
+                                    <tbody id="public-petanque-list" class="divide-y divide-gray-100">
+                                        <tr><td class="px-4 py-6 text-center text-gray-400">Memuatkan senarai...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="bg-petanque-50 border-t border-petanque-100 p-3 text-center text-sm font-semibold text-petanque-800">
+                                Jumlah Penyertaan: <span id="count-petanque-display" class="font-bold text-petanque-600 text-base">0</span>
+                            </div>
                         </div>
-                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden max-w-3xl mx-auto">
-                            <table class="w-full text-left text-sm">
-                                <thead class="bg-gray-50 border-b border-gray-100">
-                                    <tr>
-                                        <th class="px-6 py-4 font-semibold text-gray-700 w-16">Bil</th>
-                                        <th class="px-6 py-4 font-semibold text-gray-700">Nama Sekolah</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="public-schools-list" class="divide-y divide-gray-100">
-                                    <tr><td colspan="2" class="px-6 py-8 text-center text-gray-500">Memuatkan senarai...</td></tr>
-                                </tbody>
-                            </table>
+
+                        <!-- English Carnival List -->
+                        <div class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden flex flex-col">
+                            <div class="bg-english-600 text-white py-4 px-6 text-center">
+                                <i class="fas fa-language text-2xl mb-1"></i>
+                                <h3 class="font-bold text-lg">English Carnival</h3>
+                            </div>
+                            <div class="p-4 flex-grow">
+                                <table class="w-full text-left text-sm">
+                                    <tbody id="public-english-list" class="divide-y divide-gray-100">
+                                        <tr><td class="px-4 py-6 text-center text-gray-400">Memuatkan senarai...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="bg-english-50 border-t border-english-100 p-3 text-center text-sm font-semibold text-english-800">
+                                Jumlah Penyertaan: <span id="count-english-display" class="font-bold text-english-600 text-base">0</span>
+                            </div>
+                        </div>
+
+                        <!-- Semarak Seni List -->
+                        <div class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden flex flex-col">
+                            <div class="bg-semarak-600 text-white py-4 px-6 text-center">
+                                <i class="fas fa-theater-masks text-2xl mb-1"></i>
+                                <h3 class="font-bold text-lg">Semarak Seni</h3>
+                            </div>
+                            <div class="p-4 flex-grow">
+                                <table class="w-full text-left text-sm">
+                                    <tbody id="public-semarak-list" class="divide-y divide-gray-100">
+                                        <tr><td class="px-4 py-6 text-center text-gray-400">Memuatkan senarai...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="bg-semarak-50 border-t border-semarak-100 p-3 text-center text-sm font-semibold text-semarak-800">
+                                Jumlah Penyertaan: <span id="count-semarak-display" class="font-bold text-semarak-600 text-base">0</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -802,24 +852,52 @@
                         
                         <!-- Form Tambah Sekolah -->
                         <form id="form-add-school" class="bg-gray-50 p-6 rounded-xl border border-gray-200 mb-8 space-y-4">
-                            <h3 class="font-bold text-gray-800 mb-2">Tambah Sekolah Baru</h3>
-                            <div class="flex gap-4">
-                                <div class="flex-grow">
+                            <h3 class="font-bold text-gray-800 mb-2">Tambah Rekod Penyertaan</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Kategori Pertandingan</label>
+                                    <select id="school-category" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none">
+                                        <option value="" disabled selected>-- Pilih Acara --</option>
+                                        <option value="Pétanque">Pétanque</option>
+                                        <option value="English Carnival">English Carnival</option>
+                                        <option value="Semarak Seni">Semarak Seni</option>
+                                    </select>
+                                </div>
+                                <div>
                                     <label class="block text-sm text-gray-600 mb-1">Nama Sekolah</label>
-                                    <input type="text" id="school-name" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Cth: SK Pendidikan Khas Miri">
+                                    <select id="school-name" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none">
+                                        <option value="" disabled selected>-- Pilih Sekolah --</option>
+                                        <optgroup label="Sarawak">
+                                            <option value="SKPK Miri">SKPK Miri</option>
+                                            <option value="SKPK Sibu">SKPK Sibu</option>
+                                            <option value="SKPK Kota Samarahan">SKPK Kota Samarahan</option>
+                                            <option value="SKPK Kuching">SKPK Kuching</option>
+                                        </optgroup>
+                                        <optgroup label="Sabah">
+                                            <option value="SKPK Kota Kinabalu">SKPK Kota Kinabalu</option>
+                                            <option value="SKPK Tuaran">SKPK Tuaran</option>
+                                        </optgroup>
+                                        <optgroup label="Jemputan Khas (PPKI Miri)">
+                                            <option value="SMK Dato Permaisuri">SMK Dato Permaisuri</option>
+                                            <option value="SMK Luak">SMK Luak</option>
+                                            <option value="SMK Lutong">SMK Lutong</option>
+                                            <option value="SMK St. Joseph Miri">SMK St. Joseph Miri</option>
+                                        </optgroup>
+                                    </select>
                                 </div>
                             </div>
-                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Tambah Sekolah</button>
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Tambah Rekod</button>
                         </form>
 
                         <!-- Senarai Sekolah Admin -->
                         <div>
-                            <h3 class="font-bold text-gray-800 mb-4">Sekolah Berdaftar (Terkini)</h3>
+                            <h3 class="font-bold text-gray-800 mb-4">Sekolah Berdaftar (Keseluruhan)</h3>
                             <div class="border rounded-xl overflow-hidden">
                                 <table class="w-full text-left text-sm text-gray-600">
                                     <thead class="bg-gray-50 border-b">
                                         <tr>
                                             <th class="px-4 py-3 font-semibold text-gray-900">Nama Sekolah</th>
+                                            <th class="px-4 py-3 font-semibold text-gray-900">Kategori</th>
                                             <th class="px-4 py-3 font-semibold text-gray-900 w-24">Tindakan</th>
                                         </tr>
                                     </thead>
@@ -1178,42 +1256,74 @@
         }
         
         function renderSchools(docs) {
-            let htmlPublic = '';
+            let htmlPetanque = '';
+            let htmlEnglish = '';
+            let htmlSemarak = '';
             let htmlAdmin = '';
-            const pList = document.getElementById('public-schools-list');
+            
+            let countPetanque = 0;
+            let countEnglish = 0;
+            let countSemarak = 0;
+
+            const uniqueSchools = new Set();
+
+            // Susun ikut tarikh daftar (terawal ke terbaru)
+            docs.sort((a,b) => (a.timestamp?.seconds || 0) - (b.timestamp?.seconds || 0));
+
+            docs.forEach((data) => {
+                // Ensure name is standardized to calculate true unique contingents
+                if(data.name) {
+                    uniqueSchools.add(data.name.trim().toUpperCase());
+                }
+
+                let row = `
+                <tr class="hover:bg-gray-50 transition-colors">
+                    <td class="px-6 py-4 font-semibold text-gray-700">${data.name}</td>
+                </tr>`;
+
+                if(data.category === 'Pétanque') { htmlPetanque += row; countPetanque++; }
+                else if(data.category === 'English Carnival') { htmlEnglish += row; countEnglish++; }
+                else if(data.category === 'Semarak Seni') { htmlSemarak += row; countSemarak++; }
+
+                htmlAdmin += `
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-3 font-medium text-gray-800">${data.name}</td>
+                    <td class="px-4 py-3 text-gray-500 text-xs">${data.category || '-'}</td>
+                    <td class="px-4 py-3">
+                        <button onclick="deleteDocItem('schools', '${data.id}')" class="text-red-500 hover:text-red-700 bg-red-50 p-2 rounded transition"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>`;
+            });
+
+            if(countPetanque === 0) htmlPetanque = `<tr><td class="px-6 py-8 text-center text-gray-400">Tiada penyertaan setakat ini</td></tr>`;
+            if(countEnglish === 0) htmlEnglish = `<tr><td class="px-6 py-8 text-center text-gray-400">Tiada penyertaan setakat ini</td></tr>`;
+            if(countSemarak === 0) htmlSemarak = `<tr><td class="px-6 py-8 text-center text-gray-400">Tiada penyertaan setakat ini</td></tr>`;
+            if(docs.length === 0) htmlAdmin = `<tr><td colspan="3" class="px-4 py-4 text-center text-gray-500">Tiada rekod</td></tr>`;
+
+            const listPetanque = document.getElementById('public-petanque-list');
+            const listEnglish = document.getElementById('public-english-list');
+            const listSemarak = document.getElementById('public-semarak-list');
             const aList = document.getElementById('admin-schools-list');
+            
+            if(listPetanque) listPetanque.innerHTML = htmlPetanque;
+            if(listEnglish) listEnglish.innerHTML = htmlEnglish;
+            if(listSemarak) listSemarak.innerHTML = htmlSemarak;
+            if(aList) aList.innerHTML = htmlAdmin;
+
+            // Kemaskini paparan footer "Jumlah Penyertaan" di dalam kad Penyertaan
+            const countPetanqueEl = document.getElementById('count-petanque-display');
+            const countEnglishEl = document.getElementById('count-english-display');
+            const countSemarakEl = document.getElementById('count-semarak-display');
+            
+            if(countPetanqueEl) countPetanqueEl.textContent = countPetanque;
+            if(countEnglishEl) countEnglishEl.textContent = countEnglish;
+            if(countSemarakEl) countSemarakEl.textContent = countSemarak;
+
+            // Kemaskini jumlah kontinjen (sekolah unik) di Homepage dan Dashboard Admin
             const countEl = document.getElementById('public-kontinjen-count');
             const dashCountEl = document.getElementById('dashboard-kontinjen-count');
-
-            // Kemaskini jumlah di Homepage dan Dashboard Admin
-            if(countEl) countEl.textContent = docs.length;
-            if(dashCountEl) dashCountEl.textContent = docs.length;
-
-            if(docs.length === 0) {
-                htmlPublic = `<tr><td colspan="2" class="px-6 py-8 text-center text-gray-500">Tiada sekolah yang mendaftar setakat ini.</td></tr>`;
-                htmlAdmin = `<tr><td colspan="2" class="px-4 py-4 text-center text-gray-500">Tiada rekod</td></tr>`;
-            } else {
-                // Susun ikut tarikh daftar (terawal ke terbaru)
-                docs.sort((a,b) => (a.timestamp?.seconds || 0) - (b.timestamp?.seconds || 0));
-
-                docs.forEach((data, index) => {
-                    htmlPublic += `
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4 font-medium text-gray-500 w-16">${index + 1}</td>
-                        <td class="px-6 py-4 font-semibold text-gray-800">${data.name}</td>
-                    </tr>`;
-
-                    htmlAdmin += `
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-4 py-3 font-medium text-gray-800">${data.name}</td>
-                        <td class="px-4 py-3">
-                            <button onclick="deleteDocItem('schools', '${data.id}')" class="text-red-500 hover:text-red-700 bg-red-50 p-2 rounded transition"><i class="fas fa-trash"></i></button>
-                        </td>
-                    </tr>`;
-                });
-            }
-            if(pList) pList.innerHTML = htmlPublic;
-            if(aList) aList.innerHTML = htmlAdmin;
+            if(countEl) countEl.textContent = uniqueSchools.size;
+            if(dashCountEl) dashCountEl.textContent = uniqueSchools.size;
         }
 
         function setupRealtimeListeners() {
@@ -1307,6 +1417,7 @@
             e.preventDefault();
             if(!isAdmin) return showToast("Sila log masuk sebagai admin.", "error");
             
+            const category = document.getElementById('school-category').value;
             const name = document.getElementById('school-name').value;
             const btn = e.target.querySelector('button');
             const originalText = btn.textContent;
@@ -1317,6 +1428,7 @@
 
                 await addDoc(pathSchools(), {
                     name: name,
+                    category: category,
                     timestamp: serverTimestamp()
                 });
                 
