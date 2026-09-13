@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Carnival 2026 - Teacher's Guide</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Cinzel', 'serif'],
+                    },
+                    colors: {
+                        deepavali: {
+                            dark: '#0f172a',    // Deep night
+                            card: '#1e293b',    // Card background
+                            gold: '#fbbf24',    // Bright gold
+                            orange: '#f97316',  // Vivid orange
+                            pink: '#ec4899',    // Vibrant pink
+                            glow: 'rgba(251, 191, 36, 0.15)'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- React & Babel -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(249, 115, 22, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.08), transparent 25%);
+            background-attachment: fixed;
+        }
+        
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(to right, #fbbf24, #f59e0b, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #fbbf24; 
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const APP_DATA = {
+            schools: [
+                "SK Pendidikan Khas Miri (Host)",
+                "SK Pendidikan Khas Sibu",
+                "SK Pendidikan Khas Kuching",
+                "SK Pendidikan Khas Kota Samarahan",
+                "SK Pendidikan Khas Tuaran",
+                "SK Pendidikan Khas Kota Kinabalu"
+            ],
+            coreValues: [
+                {
+                    title: "Practical Mastery",
+                    desc: "Elevating English vocabulary and grammar through interactive play.",
+                    icon: "fa-book-sparkles",
+                    color: "text-amber-400"
+                },
+                {
+                    title: "Inclusive Expression",
+                    desc: "Fostering creativity and confidence regardless of physical or cognitive barriers.",
+                    icon: "fa-hands-holding-circle",
+                    color: "text-pink-400"
+                },
+                {
+                    title: "Pan-Borneo Connection",
+                    desc: "Building lasting relationships between special education schools across regions.",
+                    icon: "fa-network-wired",
+                    color: "text-cyan-400"
+                }
+            ],
+            schedule: [
+                { time: "07:30", event: "Registration & Briefing", type: "admin" },
+                { time: "08:00", event: "Academic & Art Kickoff (Spelling Bee & English Kolam)", type: "academic" },
+                { time: "08:45", event: "English Quiz", type: "academic" },
+                { time: "09:45", event: "Preschool Showcase (Action Song Performance)", type: "performance" },
+                { time: "10:00", event: "Jazz Chants Performance", type: "performance" },
+                { time: "10:45", event: "Best Costumes Parade", type: "cultural" },
+                { time: "11:30", event: "Rest & Lunch", type: "break" },
+                { time: "14:00", event: "The Treasure Hunt", type: "game" },
+                { time: "16:00", event: "Closing & Dismissal", type: "admin" }
+            ],
+            activities: {
+                "Spelling Bee": {
+                    icon: "fa-spell-check",
+                    target: "Hearing Impaired",
+                    type: "Tailored Academic Challenge",
+                    mechanics: "Spin the Choice Wheel → Facilitator Prompt (Sign Language) → 60 Seconds to Spell.",
+                    rules: "3 rounds, distinct themes, 1 attempt per round. Tie-breaker rounds if needed.",
+                    note: "All content anchored to CEFR Year 1-6 Textbooks.",
+                    matrix: { hi: true, ld: false, vi: false, md: false }
+                },
+                "English Quiz": {
+                    icon: "fa-clipboard-question",
+                    target: "Learning Disabilities",
+                    type: "Tailored Academic Challenge",
+                    mechanics: "Spin the Choice Wheel → Read Multiple-Choice Question → 30 Seconds to Answer.",
+                    rules: "Focus: Grammar and Vocabulary (Nouns, Pronouns, Verbs, Adjectives, Prepositions).",
+                    note: "All content anchored to CEFR Year 1-6 Textbooks.",
+                    matrix: { hi: false, ld: true, vi: false, md: false }
+                },
+                "Jazz Chants": {
+                    icon: "fa-music",
+                    target: "Mixed Abilities, Groups of 3-5",
+                    type: "Collaborative Expression",
+                    mechanics: "2 to 5 minutes of live performance.",
+                    rules: "Innovation: AI-generated background audio is permitted, but vocals must be live.",
+                    scoring: "100 Total Marks (Participation 20, Rhythm 20, Expression 20, Pronunciation 20, Creativity 20).",
+                    matrix: { hi: true, ld: true, vi: true, md: true }
+                },
+                "Treasure Hunt": {
+                    icon: "fa-map-location-dot",
+                    target: "Mixed Abilities, Groups of 3-5",
+                    type: "Problem Solving",
+                    mechanics: "Navigating sequential checkpoints using literacy and numeracy clues.",
+                    rules: "Rule of Independence: Verbal guidance from teachers is allowed, but physical assistance is strictly prohibited. Fastest time breaks ties.",
+                    matrix: { hi: true, ld: true, vi: true, md: true }
+                },
+                "Best Costumes": {
+                    icon: "fa-masks-theater",
+                    target: "All Categories",
+                    type: "Cultural Creativity",
+                    mechanics: "2 Minutes per student presentation.",
+                    rules: "Theme: Festival of Lights: Illuminating English Minds.",
+                    scoring: "Creativity (30%), Theme Interpretation (25%), Confidence & Presentation (25%), Suitability & Safety (20%).",
+                    matrix: { hi: true, ld: true, vi: true, md: true }
+                },
+                "English Kolam": {
+                    icon: "fa-palette",
+                    target: "Low-Functioning SKPK Miri Students (Host Only)",
+                    type: "Visual Storytelling",
+                    mechanics: "A sensory, hands-on creation of an English-themed Kolam (2 Hours).",
+                    rules: "Judged by a school-wide staff WhatsApp poll.",
+                    matrix: { hi: false, ld: true, vi: false, md: false, special: "(Low-Functioning, Host Only)" }
+                }
+            },
+            pillars: [
+                {
+                    title: "Academic Foundation",
+                    desc: "All test materials and prompts strictly adhere to the Malaysian CEFR Textbooks (Year 1 to Year 6), ensuring age-and-level appropriate difficulty.",
+                    icon: "fa-book-open"
+                },
+                {
+                    title: "Guided Independence",
+                    desc: "Dedicated facilitators manage every checkpoint and wheel-spin. Teachers may guide verbally, ensuring students rely on their own cognitive abilities.",
+                    icon: "fa-hands-holding-child"
+                },
+                {
+                    title: "Absolute Adjudication",
+                    desc: "Panels of 2 to 3 appointed juries oversee every event. All scoring is finalized based on transparent criteria, with strict pre-event briefings at 07:30.",
+                    icon: "fa-scale-balanced"
+                }
+            ],
+            organizers: {
+                core: "Panitia Bahasa Inggeris, SK Pendidikan Khas Miri",
+                leaders: [
+                    { role: "Patron", name: "Encik Jumari bin Hashim", title: "(PPD Miri)" },
+                    { role: "Chair", name: "Encik Aziz bin Tahir", title: "(Guru Besar)" }
+                ],
+                committees: [
+                    "Sign Language Facilitation",
+                    "Technical & Jury Appointments",
+                    "Welfare, Food & Student Control",
+                    "Stage, Multimedia & Decor"
+                ]
+            },
+            budget: {
+                total: "RM 4,500",
+                note: "Backed by PIBG and the English Panel, a modest RM4,500 investment fully funds a premier, pan-Borneo special education milestone.",
+                breakdown: [
+                    { title: "Student Rewards", amount: "RM 2,750", percentage: "61%", desc: "High-quality hampers and prizes for 9 Champions, 9 Runner-ups, 9 Third-places, and 59 Consolation winners.", color: "text-amber-500", bg: "bg-amber-500", border: "border-amber-500" },
+                    { title: "Hospitality", amount: "RM 1,200", percentage: "27%", desc: "Breakfast (Kudapan) and Lunch (Merarau) for 60 VIPs, Juries, and Secretariat members.", color: "text-pink-500", bg: "bg-pink-500", border: "border-pink-500" },
+                    { title: "Materials & Atmosphere", amount: "RM 550", percentage: "12%", desc: "Stage decor, activity materials, and tokens of appreciation.", color: "text-teal-400", bg: "bg-teal-400", border: "border-teal-400" }
+                ]
+            },
+            rewards: [
+                { title: "Tangible Prizes", desc: "Over 85 distinct hampers awarded across all events.", icon: "fa-gift" },
+                { title: "Universal Recognition", desc: "100% of participants receive a Certificate of Participation to validate their courage and effort.", icon: "fa-certificate" },
+                { title: "The Intangible Glow", desc: "Beyond the medals, students leave with practical language skills, a sense of pan-Borneo community, and the undeniable proof of their own capabilities.", icon: "fa-brain" }
+            ]
+        };
+
+        const SectionHeader = ({ title, subtitle, icon }) => (
+            <div className="text-center mb-10">
+                <div className="inline-block p-4 rounded-full glass-panel mb-4">
+                    <i className={`fas ${icon} text-3xl text-deepavali-gold`}></i>
+                </div>
+                <h2 className="font-serif text-3xl md:text-4xl font-bold gold-gradient-text mb-2">{title}</h2>
+                {subtitle && <p className="text-slate-400 max-w-2xl mx-auto">{subtitle}</p>}
+            </div>
+        );
+
+        const Card = ({ children, className = "" }) => (
+            <div className={`glass-panel rounded-xl p-6 shadow-lg shadow-deepavali-glow transition-all duration-300 hover:border-deepavali-gold/50 ${className}`}>
+                {children}
+            </div>
+        );
+
+        const Modal = ({ isOpen, onClose, activityName }) => {
+            if (!isOpen || !activityName) return null;
+            const data = APP_DATA.activities[activityName];
+
+            return (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm" onClick={onClose}>
+                    <div className="glass-panel rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-deepavali-gold/40 relative" onClick={e => e.stopPropagation()}>
+                        <button onClick={onClose} className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
+                            <i className="fas fa-times text-2xl"></i>
+                        </button>
+                        
+                        <div className="p-8">
+                            <div className="flex items-center gap-4 mb-6 border-b border-slate-700 pb-4">
+                                <div className="p-3 bg-slate-800 rounded-lg text-deepavali-gold">
+                                    <i className={`fas ${data.icon} text-3xl`}></i>
+                                </div>
+                                <div>
+                                    <h3 className="font-serif text-2xl md:text-3xl text-white font-bold">{activityName}</h3>
+                                    <span className="text-deepavali-orange text-sm font-semibold tracking-wide uppercase">{data.type}</span>
+                                </div>
+                            </div>
+
+                            <div className="space-y-6">
+                                <div>
+                                    <h4 className="text-deepavali-gold font-semibold mb-2 flex items-center gap-2">
+                                        <i className="fas fa-users"></i> Target Audience
+                                    </h4>
+                                    <p className="text-slate-300">{data.target}</p>
+                                </div>
+                                
+                                <div>
+                                    <h4 className="text-deepavali-gold font-semibold mb-2 flex items-center gap-2">
+                                        <i className="fas fa-cogs"></i> Mechanics
+                                    </h4>
+                                    <p className="text-slate-300 leading-relaxed bg-slate-800/50 p-4 rounded-lg border-l-4 border-deepavali-pink">{data.mechanics}</p>
+                                </div>
+
+                                <div>
+                                    <h4 className="text-deepavali-gold font-semibold mb-2 flex items-center gap-2">
+                                        <i className="fas fa-scroll"></i> Rules & Focus
+                                    </h4>
+                                    <p className="text-slate-300">{data.rules}</p>
+                                </div>
+
+                                {data.scoring && (
+                                    <div>
+                                        <h4 className="text-deepavali-gold font-semibold mb-2 flex items-center gap-2">
+                                            <i className="fas fa-star"></i> Scoring
+                                        </h4>
+                                        <p className="text-slate-300">{data.scoring}</p>
+                                    </div>
+                                )}
+
+                                {data.note && (
+                                    <div className="mt-6 p-4 bg-deepavali-gold/10 border border-deepavali-gold/30 rounded-lg text-amber-200 text-sm flex items-start gap-3">
+                                        <i className="fas fa-info-circle mt-1"></i>
+                                        <p>{data.note}</p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const HomeView = () => (
+            <div className="space-y-12 animate-fade-in">
+                {}
+                <div className="text-center py-12 relative overflow-hidden rounded-3xl glass-panel border border-deepavali-gold/30 shadow-[0_0_30px_rgba(251,191,36,0.15)]">
+                    <div className="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCI+PGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iMzkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZiYmYyNCIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48Y2lyY2xlIGN4PSI0MCIgY3k9IjQwIiByPSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmJiZjI0IiBzdHJva2Utd2lkdGg9IjAuNSIvPjwvc3ZnPg==')] bg-center bg-repeat mix-blend-screen animate-pulse-slow"></div>
+                    <div className="relative z-10 px-4">
+                        <span className="text-deepavali-orange font-bold tracking-widest uppercase text-sm mb-4 block">20 November 2026</span>
+                        <h1 className="font-serif text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                            Festival of Lights:<br/>
+                            <span className="gold-gradient-text">Illuminating English Minds</span>
+                        </h1>
+                        <p className="text-xl md:text-2xl text-slate-300 font-light max-w-3xl mx-auto italic mb-6">
+                            "Every child deserves a stage to shine."
+                        </p>
+                    </div>
+                </div>
+
+                {}
+                <div className="grid md:grid-cols-3 gap-6">
+                    {APP_DATA.coreValues.map((value, idx) => (
+                        <div key={idx} className="glass-panel p-6 rounded-2xl border-t-2 border-t-deepavali-gold hover:-translate-y-2 transition-transform duration-300 text-center shadow-lg bg-slate-800/40">
+                            <i className={`fas ${value.icon} text-4xl mb-4 ${value.color} drop-shadow-[0_0_10px_currentColor]`}></i>
+                            <h3 className="font-serif text-xl font-bold text-white mb-3">{value.title}</h3>
+                            <p className="text-slate-400 text-sm leading-relaxed">{value.desc}</p>
+                        </div>
+                    ))}
+                </div>
+
+                {}
+                <div className="grid md:grid-cols-2 gap-8">
+                    <Card className="border border-slate-700/50">
+                        <h3 className="text-xl font-bold text-deepavali-gold mb-4 flex items-center gap-2">
+                            <i className="fas fa-bullseye"></i> Our Purpose
+                        </h3>
+                        <p className="text-slate-300 leading-relaxed mb-4">
+                            The English Carnival 2026 provides a fully inclusive platform designed exclusively for special needs students, transforming language learning from a classroom theory into practical, joyful self-expression.
+                        </p>
+                        <p className="text-slate-300 leading-relaxed">
+                            Inspired by Deepavali, we use light as a symbol of hope and wisdom. Just as a prism breaks light into a spectrum, our carnival refracts English learning into highly tailored activities designed to accommodate and celebrate specific disabilities.
+                        </p>
+                    </Card>
+
+                    <Card className="border border-slate-700/50">
+                        <h3 className="text-xl font-bold text-deepavali-gold mb-4 flex items-center gap-2">
+                            <i className="fas fa-map-location-dot"></i> Uniting Borneo
+                        </h3>
+                        <p className="text-slate-300 mb-4">Uniting six specialized schools across Borneo for a single purpose:</p>
+                        <ul className="space-y-3">
+                            {APP_DATA.schools.map((school, idx) => (
+                                <li key={idx} className="flex items-center gap-3 text-sm text-slate-300 bg-slate-800/50 p-2 rounded-lg">
+                                    <i className={`fas fa-location-dot ${idx === 0 ? 'text-deepavali-pink shadow-[0_0_8px_#ec4899]' : 'text-deepavali-gold'}`}></i>
+                                    <span className={idx === 0 ? 'font-bold text-white' : ''}>{school}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </Card>
+                </div>
+                
+                {}
+                <div className="text-center p-8 border border-deepavali-gold/30 rounded-2xl bg-gradient-to-b from-slate-800/80 to-slate-900/90 shadow-[0_0_20px_rgba(251,191,36,0.1)] relative overflow-hidden">
+                    <div className="absolute -top-10 -left-10 w-32 h-32 bg-deepavali-pink/20 rounded-full blur-3xl"></div>
+                    <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-deepavali-gold/20 rounded-full blur-3xl"></div>
+                    
+                    <h2 className="font-serif text-2xl text-white mb-6">Let us illuminate English minds, together.</h2>
+                    <div className="space-y-4 max-w-2xl mx-auto text-slate-300 text-sm">
+                        <p className="flex flex-col md:flex-row items-center justify-center gap-2">
+                            <strong className="text-deepavali-gold uppercase tracking-wider bg-slate-800 px-3 py-1 rounded">Schools</strong> 
+                            <span>Submit Official Participation Forms strictly 1 month prior to the event.</span>
+                        </p>
+                        <p className="flex flex-col md:flex-row items-center justify-center gap-2">
+                            <strong className="text-deepavali-gold uppercase tracking-wider bg-slate-800 px-3 py-1 rounded">Sponsors</strong> 
+                            <span>Join the SKPK Miri PIBG in funding this vital platform.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const ScheduleView = () => (
+            <div className="animate-fade-in max-w-4xl mx-auto">
+                <SectionHeader title="A Day of Light" subtitle="Timeline of events for November 20, 2026" icon="fa-clock" />
+                
+                <div className="relative border-l-2 border-deepavali-gold/30 ml-4 md:ml-10 space-y-8 py-4">
+                    {APP_DATA.schedule.map((item, idx) => {
+                        let dotColor = "bg-slate-500";
+                        if (item.type === 'academic') dotColor = "bg-blue-500 shadow-[0_0_10px_#3b82f6]";
+                        if (item.type === 'performance') dotColor = "bg-deepavali-pink shadow-[0_0_10px_#ec4899]";
+                        if (item.type === 'cultural') dotColor = "bg-deepavali-orange shadow-[0_0_10px_#f97316]";
+                        if (item.type === 'game') dotColor = "bg-green-500 shadow-[0_0_10px_#22c55e]";
+                        if (item.type === 'admin') dotColor = "bg-slate-400";
+
+                        return (
+                            <div key={idx} className="relative pl-8 md:pl-12">
+                                <div className={`absolute -left-[9px] top-1.5 w-4 h-4 rounded-full ${dotColor} border-2 border-[#0f172a]`}></div>
+                                <div className="glass-panel rounded-lg p-4 md:p-6 hover:-translate-y-1 transition-transform duration-300">
+                                    <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                                        <div className="font-serif text-xl md:text-2xl font-bold text-deepavali-gold whitespace-nowrap">
+                                            {item.time}
+                                        </div>
+                                        <div className="text-lg text-white font-medium">
+                                            {item.event}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+        );
+
+        const ActivitiesView = () => {
+            const [selectedActivity, setSelectedActivity] = useState(null);
+
+            const getCardStyle = (name) => {
+                const styles = {
+                    "Spelling Bee": { bg: "bg-gradient-to-br from-orange-600 to-red-700", shadow: "shadow-[0_10px_30px_-10px_rgba(234,88,12,0.6)]" },
+                    "English Quiz": { bg: "bg-gradient-to-br from-blue-600 to-cyan-700", shadow: "shadow-[0_10px_30px_-10px_rgba(37,99,235,0.6)]" },
+                    "Jazz Chants": { bg: "bg-gradient-to-br from-pink-600 to-purple-700", shadow: "shadow-[0_10px_30px_-10px_rgba(219,39,119,0.6)]" },
+                    "Treasure Hunt": { bg: "bg-gradient-to-br from-emerald-600 to-teal-700", shadow: "shadow-[0_10px_30px_-10px_rgba(5,150,105,0.6)]" },
+                    "Best Costumes": { bg: "bg-gradient-to-br from-yellow-500 to-amber-700", shadow: "shadow-[0_10px_30px_-10px_rgba(217,119,6,0.6)]" },
+                    "English Kolam": { bg: "bg-gradient-to-br from-indigo-600 to-violet-800", shadow: "shadow-[0_10px_30px_-10px_rgba(79,70,229,0.6)]" }
+                };
+                return styles[name] || { bg: "bg-slate-700", shadow: "shadow-lg" };
+            };
+
+            const InclusionTag = ({ label, active, tooltip }) => {
+                if (!active) return null;
+                return (
+                    <div title={tooltip} className="flex items-center gap-1.5 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-xs font-bold text-white border border-white/30 shadow-sm">
+                        <i className="fas fa-check-circle text-white/90"></i>
+                        {label}
+                    </div>
+                );
+            };
+
+            return (
+                <div className="animate-fade-in space-y-12">
+                    <SectionHeader title="Inclusive Activities" subtitle="A meticulously engineered matrix ensures no child is left behind. Explore our colorful tailored challenges." icon="fa-shapes" />
+                    
+                    {/* Grid Layout for Activities */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {Object.entries(APP_DATA.activities).map(([name, data]) => {
+                            const style = getCardStyle(name);
+                            return (
+                                <div 
+                                    key={name} 
+                                    onClick={() => setSelectedActivity(name)}
+                                    className={`${style.bg} ${style.shadow} rounded-2xl p-1 cursor-pointer transform hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 group`}
+                                >
+                                    <div className="bg-slate-900/40 backdrop-blur-sm h-full w-full rounded-xl p-6 flex flex-col relative overflow-hidden">
+                                        {/* Decorative Background Icon */}
+                                        <i className={`fas ${data.icon} absolute -bottom-6 -right-6 text-8xl text-white/10 group-hover:text-white/20 transition-colors transform -rotate-12`}></i>
+                                        
+                                        <div className="flex justify-between items-start mb-6 relative z-10">
+                                            <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center border border-white/30 backdrop-blur-md shadow-inner">
+                                                <i className={`fas ${data.icon} text-2xl text-white`}></i>
+                                            </div>
+                                            <span className="bg-white/90 text-slate-900 text-[10px] font-black uppercase px-3 py-1 rounded-full shadow-sm tracking-widest">
+                                                {data.type.split(' ')[0]}
+                                            </span>
+                                        </div>
+                                        
+                                        <h3 className="font-serif text-2xl font-bold text-white mb-2 relative z-10">{name}</h3>
+                                        <p className="text-white/80 text-sm mb-6 line-clamp-2 relative z-10">
+                                            {data.mechanics}
+                                        </p>
+                                        
+                                        <div className="mt-auto relative z-10">
+                                            <div className="text-white/60 text-xs font-semibold mb-2 uppercase tracking-wide">Target Categories:</div>
+                                            <div className="flex flex-wrap gap-2">
+                                                <InclusionTag label="HI" active={data.matrix.hi} tooltip="Hearing Impaired" />
+                                                <InclusionTag label="LD" active={data.matrix.ld} tooltip="Learning Disabled" />
+                                                <InclusionTag label="VI" active={data.matrix.vi} tooltip="Visually Impaired" />
+                                                <InclusionTag label="MD" active={data.matrix.md} tooltip="Multiple Disabilities" />
+                                                {data.matrix.special && (
+                                                    <div className="px-3 py-1.5 bg-black/30 rounded-full text-xs font-bold text-white/90 border border-white/10">
+                                                        {data.matrix.special}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+
+                    <div className="glass-panel p-6 rounded-2xl border border-blue-500/30 bg-blue-900/20 text-center shadow-[0_0_20px_rgba(59,130,246,0.1)] mt-8">
+                        <div className="flex items-center justify-center gap-3 mb-2">
+                            <i className="fas fa-lightbulb text-amber-400 text-xl animate-pulse"></i>
+                            <h4 className="text-white font-bold text-lg">Inclusivity Matrix Insight</h4>
+                        </div>
+                        <p className="text-sm text-blue-200/90 max-w-3xl mx-auto">
+                            Group events (Jazz Chants, Treasure Hunt, Costumes) deliberately integrate diverse capabilities across ages 7-13. Academic challenges (Spelling Bee, Quiz) are highly specialized to specific categories to level the playing field.
+                        </p>
+                    </div>
+
+                    <Modal 
+                        isOpen={!!selectedActivity} 
+                        onClose={() => setSelectedActivity(null)} 
+                        activityName={selectedActivity} 
+                    />
+                </div>
+            );
+        };
+
+        const GuidelinesView = () => (
+            <div className="animate-fade-in max-w-5xl mx-auto">
+                <SectionHeader title="The Framework of Fairness" subtitle="Ensuring a just and structured environment for all participants." icon="fa-scale-balanced" />
+                
+                <div className="grid md:grid-cols-3 gap-6 relative">
+                    {/* Decorative architectural background lines for desktop */}
+                    <div className="hidden md:block absolute top-12 left-10 right-10 h-1 border-t-2 border-dashed border-deepavali-gold/20 z-0"></div>
+                    
+                    {APP_DATA.pillars.map((pillar, idx) => (
+                        <div key={idx} className="relative z-10 flex flex-col items-center">
+                            <div className="w-20 h-20 rounded-full glass-panel flex items-center justify-center border border-deepavali-gold/50 mb-6 shadow-[0_0_15px_rgba(251,191,36,0.2)]">
+                                <i className={`fas ${pillar.icon} text-3xl text-deepavali-gold`}></i>
+                            </div>
+                            <Card className="flex-1 w-full text-center p-8 border-t-4 border-t-deepavali-gold">
+                                <h3 className="text-deepavali-orange font-bold uppercase tracking-wider text-sm mb-2">Pillar {idx + 1}</h3>
+                                <h4 className="font-serif text-xl font-bold text-white mb-4">{pillar.title}</h4>
+                                <p className="text-slate-300 text-sm leading-relaxed">{pillar.desc}</p>
+                            </Card>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+
+        const OrganizationView = () => (
+            <div className="animate-fade-in max-w-5xl mx-auto space-y-12">
+                <SectionHeader title="The Organizing Force" subtitle="The dedicated team making the English Carnival a reality." icon="fa-sitemap" />
+
+                <div className="flex flex-col items-center relative py-10 overflow-hidden">
+                    {/* Connecting line behind */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-2xl hidden md:block z-0">
+                        <div className="w-full h-full border border-deepavali-gold/20 rounded-full animate-pulse-slow"></div>
+                        <div className="absolute inset-12 border border-deepavali-pink/20 rounded-full animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
+                    </div>
+
+                    {/* Leaders Section */}
+                    <div className="flex flex-col md:flex-row gap-6 mb-16 relative z-10">
+                        {APP_DATA.organizers.leaders.map((leader, i) => (
+                            <div key={i} className="glass-panel p-6 rounded-2xl border-t-2 border-deepavali-orange text-center min-w-[250px] shadow-lg shadow-deepavali-glow/50 bg-slate-900/80">
+                                <p className="text-deepavali-gold text-xs font-bold uppercase tracking-wider mb-3">{leader.role}</p>
+                                <h4 className="text-white font-serif text-lg font-bold">{leader.name}</h4>
+                                <p className="text-slate-400 text-sm mt-1">{leader.title}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Core Section */}
+                    <div className="w-56 h-56 md:w-64 md:h-64 rounded-full bg-gradient-to-br from-amber-500 to-orange-700 p-[2px] shadow-[0_0_50px_rgba(249,115,22,0.4)] relative z-10 mb-16 group hover:scale-105 transition-transform duration-500">
+                        <div className="bg-slate-900 w-full h-full rounded-full flex flex-col items-center justify-center p-6 text-center border-4 border-slate-900 backdrop-blur-md bg-opacity-90">
+                            <h3 className="font-serif text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-orange-400 leading-snug">
+                                {APP_DATA.organizers.core}
+                            </h3>
+                        </div>
+                    </div>
+
+                    {/* Committees Section */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10 w-full">
+                        {APP_DATA.organizers.committees.map((committee, i) => (
+                            <div key={i} className="glass-panel p-5 rounded-2xl border border-deepavali-gold/30 text-center hover:-translate-y-2 hover:shadow-deepavali-glow transition-all duration-300 flex items-center justify-center min-h-[100px] bg-slate-800/80">
+                                <p className="text-slate-200 font-medium text-sm leading-relaxed">{committee}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        );
+
+        const BudgetView = () => (
+            <div className="animate-fade-in max-w-5xl mx-auto space-y-12">
+                <SectionHeader title="High Impact, Efficient Investment" subtitle="A transparent look at how resources are allocated." icon="fa-chart-pie" />
+
+                <div className="flex flex-col md:flex-row items-center gap-12 glass-panel p-8 md:p-12 rounded-3xl border border-slate-700/50 shadow-xl relative overflow-hidden">
+                    {/* Decorative Light */}
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-deepavali-orange/10 rounded-full blur-3xl"></div>
+                    
+                    {/* Chart */}
+                    <div className="relative w-64 h-64 shrink-0 hover:scale-105 transition-transform duration-500">
+                        <div
+                            className="absolute inset-0 rounded-full shadow-[0_0_40px_rgba(251,191,36,0.3)] animate-pulse-slow"
+                            style={{ background: 'conic-gradient(#f59e0b 0% 61%, #ec4899 61% 88%, #2dd4bf 88% 100%)' }}
+                        ></div>
+                        <div className="absolute inset-3 bg-slate-900 rounded-full flex flex-col items-center justify-center text-center border border-slate-800 shadow-inner">
+                            <span className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Total Budget</span>
+                            <span className="text-3xl font-serif font-bold text-white">{APP_DATA.budget.total}</span>
+                        </div>
+                    </div>
+
+                    {/* Breakdown List */}
+                    <div className="flex-1 space-y-5 relative z-10 w-full">
+                        {APP_DATA.budget.breakdown.map((item, i) => (
+                            <div key={i} className={`p-5 rounded-2xl bg-slate-800/50 backdrop-blur-sm border-l-4 ${item.border} hover:bg-slate-800 transition-colors duration-300`}>
+                                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-3">
+                                    <h4 className="text-lg font-bold text-white flex items-center gap-3">
+                                        <span className={`w-3 h-3 rounded-full ${item.bg} shadow-[0_0_10px_currentColor]`}></span>
+                                        {item.title}
+                                    </h4>
+                                    <span className={`font-bold text-sm px-3 py-1 rounded-full bg-slate-900 border border-slate-700 ${item.color}`}>
+                                        {item.amount} <span className="opacity-75">({item.percentage})</span>
+                                    </span>
+                                </div>
+                                <p className="text-slate-300 text-sm leading-relaxed">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Note */}
+                <div className="text-center p-6 border border-deepavali-gold/30 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 shadow-[0_0_20px_rgba(251,191,36,0.1)] max-w-3xl mx-auto flex items-center gap-4">
+                    <i className="fas fa-handshake text-2xl text-deepavali-gold hidden sm:block"></i>
+                    <p className="text-slate-300 font-medium text-sm leading-relaxed">{APP_DATA.budget.note}</p>
+                </div>
+            </div>
+        );
+
+        const RewardsView = () => (
+            <div className="animate-fade-in max-w-5xl mx-auto space-y-12">
+                <SectionHeader title="The Rewards of Participation" subtitle="Celebrating courage, effort, and practical language skills." icon="fa-award" />
+
+                <div className="grid md:grid-cols-3 gap-8">
+                    {APP_DATA.rewards.map((reward, i) => (
+                        <div key={i} className="glass-panel p-8 rounded-3xl border border-deepavali-gold/20 hover:-translate-y-2 transition-all duration-300 group flex flex-col items-center text-center shadow-lg hover:shadow-[0_0_30px_rgba(251,191,36,0.2)] bg-gradient-to-b from-slate-800/40 to-slate-900/80">
+                            <div className="w-24 h-24 bg-slate-900 rounded-full flex items-center justify-center border-2 border-deepavali-gold mb-6 group-hover:scale-110 transition-transform duration-500 shadow-inner">
+                                <i className={`fas ${reward.icon} text-4xl text-deepavali-gold group-hover:text-white transition-colors duration-300 drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]`}></i>
+                            </div>
+                            <h3 className="font-serif text-xl font-bold text-white mb-4">{reward.title}</h3>
+                            <p className="text-slate-400 text-sm leading-relaxed">{reward.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+
+        const App = () => {
+            const [activeTab, setActiveTab] = useState('home');
+
+            const navItems = [
+                { id: 'home', label: 'Overview', icon: 'fa-home' },
+                { id: 'matrix', label: 'Activities & Rules', icon: 'fa-table-cells-large' },
+                { id: 'schedule', label: 'Schedule', icon: 'fa-calendar-day' },
+                { id: 'guidelines', label: 'Fairness Framework', icon: 'fa-scale-balanced' },
+                { id: 'organization', label: 'Organizers', icon: 'fa-sitemap' },
+                { id: 'budget', label: 'Budget', icon: 'fa-chart-pie' },
+                { id: 'rewards', label: 'Rewards', icon: 'fa-award' }
+            ];
+
+            return (
+                <div className="min-h-screen flex flex-col font-sans">
+                    {/* Navigation Bar */}
+                    <nav className="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+                        <div className="max-w-7xl mx-auto px-4">
+                            <div className="flex flex-col md:flex-row justify-between items-center py-4 gap-4">
+                                <div className="flex items-center gap-3">
+                                    <i className="fas fa-lightbulb text-deepavali-gold text-2xl animate-pulse"></i>
+                                    <span className="font-serif font-bold text-xl text-white tracking-wide">SPECCO <span className="text-deepavali-orange">2026</span></span>
+                                </div>
+                                <div className="flex overflow-x-auto w-full md:w-auto hide-scrollbar gap-2 pb-2 md:pb-0">
+                                    {navItems.map(item => (
+                                        <button
+                                            key={item.id}
+                                            onClick={() => setActiveTab(item.id)}
+                                            className={`flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-all duration-300 text-sm font-medium ${
+                                                activeTab === item.id 
+                                                ? 'bg-deepavali-gold/20 text-deepavali-gold border border-deepavali-gold/50 shadow-[0_0_10px_rgba(251,191,36,0.2)]' 
+                                                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                                            }`}
+                                        >
+                                            <i className={`fas ${item.icon}`}></i>
+                                            {item.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+
+                    {}
+                    {/* Main Content Area */}
+                    <main className="flex-grow p-4 md:p-8 lg:p-12 max-w-7xl mx-auto w-full">
+                        {activeTab === 'home' && <HomeView />}
+                        {activeTab === 'matrix' && <ActivitiesView />}
+                        {activeTab === 'schedule' && <ScheduleView />}
+                        {activeTab === 'guidelines' && <GuidelinesView />}
+                        {activeTab === 'organization' && <OrganizationView />}
+                        {activeTab === 'budget' && <BudgetView />}
+                        {activeTab === 'rewards' && <RewardsView />}
+                    </main>
+
+                    {/* Footer */}
+                    <footer className="bg-slate-950 border-t border-slate-800 py-8 text-center text-sm text-slate-500 mt-auto">
+                        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                            <p>Panitia Bahasa Inggeris, SK Pendidikan Khas Miri</p>
+                            <p><i className="fas fa-envelope mr-2"></i>[Email Placeholder] &nbsp;|&nbsp; <i className="fas fa-phone mr-2"></i>[Phone Placeholder]</p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

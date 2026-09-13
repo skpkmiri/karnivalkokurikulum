@@ -128,7 +128,7 @@
                     <button onclick="navigate('tentatif')" class="nav-link px-2 lg:px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-xs lg:text-sm">Tentatif</button>
                     <button onclick="navigate('pertandingan')" class="nav-link px-2 lg:px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-xs lg:text-sm">Pertandingan</button>
                     <button onclick="navigate('pendaftaran')" class="nav-link px-2 lg:px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-xs lg:text-sm">Pendaftaran</button>
-                    <button onclick="navigate('penyertaan')" class="nav-link px-2 lg:px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-xs lg:text-sm border border-transparent hover:border-blue-100">Penyertaan</button>
+                    <button onclick="navigate('penyertaan')" class="nav-link px-2 lg:px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-xs lg:text-sm">Penyertaan</button>
                     
                     <!-- Dropdown Penghantaran Bahan -->
                     <div class="relative group">
@@ -238,7 +238,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-4xl mb-8">
                         <!-- Pendaftaran -->
                         <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 md:p-6 shadow-2xl">
-                            <p class="text-xs font-bold text-red-300 uppercase tracking-widest mb-3">Tutup Pendaftaran (11 Sept)</p>
+                            <p class="text-xs font-bold text-red-300 uppercase tracking-widest mb-3">Tutup Pendaftaran <span id="label-tarikh-tutup">(18 Sept)</span></p>
                             <div class="flex gap-2 md:gap-4 justify-center">
                                 <div class="flex flex-col items-center">
                                     <span id="cd-daftar-days" class="text-2xl md:text-4xl font-heading font-bold">00</span>
@@ -406,7 +406,7 @@
                         </div>
 
                         <!-- English Carnival Card -->
-                        <div class="group bg-english-50 rounded-3xl p-6 border border-english-100 shadow-soft hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer" onclick="window.location.href='english_carnival_app.html'">
+                        <div class="group bg-english-50 rounded-3xl p-6 border border-english-100 shadow-soft hover:shadow-xl transition-all duration-300 flex flex-col h-full cursor-pointer" onclick="window.location.href='englishcarnival.html'">
                             <div class="w-16 h-16 bg-english-100 text-english-600 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
                                 <i class="fas fa-language"></i>
                             </div>
@@ -733,6 +733,7 @@
                             <button onclick="switchAdminTab('pengumuman')" id="tab-pengumuman" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-bullhorn w-5"></i> Pengumuman</button>
                             <button onclick="switchAdminTab('dokumen')" id="tab-dokumen" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-file-pdf w-5"></i> Muat Turun</button>
                             <button onclick="switchAdminTab('sekolah')" id="tab-sekolah" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-school w-5"></i> Senarai Sekolah</button>
+                            <button onclick="switchAdminTab('tetapan')" id="tab-tetapan" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-cogs w-5"></i> Tetapan</button>
                             <button onclick="adminLogout()" class="w-full flex items-center gap-3 px-4 py-3 mt-4 text-sm font-medium rounded-xl text-red-600 hover:bg-red-50 transition border border-transparent hover:border-red-100"><i class="fas fa-sign-out-alt w-5"></i> Log Keluar</button>
                         </nav>
                     </div>
@@ -909,6 +910,24 @@
                         </div>
                     </div>
 
+                    <!-- Tab: Tetapan -->
+                    <div id="admin-panel-tetapan" class="admin-panel hidden">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-2xl font-bold text-gray-900">Tetapan Sistem</h2>
+                        </div>
+                        
+                        <form id="form-update-date" class="bg-gray-50 p-6 rounded-xl border border-gray-200 mb-8 space-y-4">
+                            <h3 class="font-bold text-gray-800 mb-2">Kemaskini Tarikh Tutup Pendaftaran</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Tarikh & Masa Baru (Format 24 Jam)</label>
+                                    <input type="datetime-local" id="reg-date-input" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none">
+                                </div>
+                            </div>
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Simpan Tarikh Baru</button>
+                        </form>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -969,7 +988,7 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="#" onclick="navigate('home'); event.preventDefault()" class="hover:text-blue-400 transition">Halaman Utama</a></li>
                         <li><a href="#" onclick="navigate('petanque'); event.preventDefault()" class="hover:text-blue-400 transition">Pertandingan Pétanque</a></li>
-                        <li><a href="english_carnival_app.html" class="hover:text-blue-400 transition">English Carnival</a></li>
+                        <li><a href="englishcarnival.html" class="hover:text-blue-400 transition">English Carnival</a></li>
                         <li><a href="semarak_seni_6.html" class="hover:text-blue-400 transition">Semarak Seni 6</a></li>
                         <li><a href="#" onclick="navigate('rujukan'); event.preventDefault()" class="hover:text-blue-400 transition">Bahan Rujukan</a></li>
                     </ul>
@@ -986,7 +1005,7 @@
     <!-- FIREBASE & JAVASCRIPT LOGIC -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getFirestore, doc, collection, addDoc, onSnapshot, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, collection, addDoc, onSnapshot, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Konfigurasi Firebase Rasmi SKPK Miri
         const firebaseConfig = {
@@ -1120,7 +1139,7 @@
         });
 
         // Countdown Logic
-        const dateDaftar = new Date('2026-09-11T23:59:59').getTime();
+        let dateDaftar = new Date('2026-09-18T23:59:59').getTime();
         const dateKarnival = new Date('2026-11-19T08:00:00').getTime();
 
         function updateCountdown(targetDate, prefix) {
@@ -1329,6 +1348,29 @@
         function setupRealtimeListeners() {
             if(!db) return;
 
+            // Listen to Config/Settings (Tarikh Pendaftaran)
+            onSnapshot(doc(db, 'settings', 'karnival_config'), (docSnap) => {
+                if(docSnap.exists()) {
+                    const data = docSnap.data();
+                    if(data.regCloseDate) {
+                        const d = new Date(data.regCloseDate);
+                        dateDaftar = d.getTime();
+                        
+                        // Format tarikh ke cth: (18 Sept)
+                        const months = ['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogo','Sept','Okt','Nov','Dis'];
+                        const labelEl = document.getElementById('label-tarikh-tutup');
+                        if(labelEl) labelEl.textContent = `(${d.getDate()} ${months[d.getMonth()]})`;
+
+                        // Set nilai default pada form admin
+                        const dateInput = document.getElementById('reg-date-input');
+                        if(dateInput) {
+                            const pad = n => n < 10 ? '0'+n : n;
+                            dateInput.value = `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+                        }
+                    }
+                }
+            });
+
             // Listen to Announcements
             onSnapshot(pathAnnouncements(), (snapshot) => {
                 const docs = [];
@@ -1437,6 +1479,34 @@
             } catch (err) {
                 console.error(err);
                 showToast("Ralat. Sila semak pangkalan data Firebase.", "error");
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // Update Date Form
+        document.getElementById('form-update-date').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(!isAdmin) return showToast("Sila log masuk sebagai admin.", "error");
+            
+            const newDate = document.getElementById('reg-date-input').value;
+            const btn = e.target.querySelector('button');
+            const originalText = btn.textContent;
+
+            try {
+                btn.textContent = "Menyimpan...";
+                btn.disabled = true;
+
+                await setDoc(doc(db, 'settings', 'karnival_config'), {
+                    regCloseDate: newDate,
+                    updatedAt: serverTimestamp()
+                }, { merge: true });
+                
+                showToast("Tarikh tutup pendaftaran berjaya dikemaskini.");
+            } catch (err) {
+                console.error(err);
+                showToast("Ralat kemaskini tarikh. Pastikan rules Firebase dibenarkan.", "error");
             } finally {
                 btn.textContent = originalText;
                 btn.disabled = false;
