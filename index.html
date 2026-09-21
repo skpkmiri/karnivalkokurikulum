@@ -136,9 +136,9 @@
                             Penghantaran <i class="fas fa-chevron-down text-[10px]"></i>
                         </button>
                         <div class="absolute left-0 mt-2 w-56 bg-white border border-gray-100 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
-                            <div class="px-4 py-2 bg-gray-50 border-b border-gray-100 text-xs font-bold text-gray-500 uppercase tracking-wider">Hantar Bahan (Akan Datang)</div>
-                            <a href="#" class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 border-b border-gray-50"><i class="fas fa-theater-masks w-5 text-center text-semarak-600"></i> Semarak Seni</a>
-                            <a href="#" class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-language w-5 text-center text-english-600"></i> English Carnival</a>
+                            <div class="px-4 py-2 bg-gray-50 border-b border-gray-100 text-xs font-bold text-gray-500 uppercase tracking-wider">Hantar Bahan</div>
+                            <a href="#" onclick="navigate('penghantaran'); event.preventDefault()" class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 border-b border-gray-50"><i class="fas fa-theater-masks w-5 text-center text-semarak-600"></i> Semarak Seni</a>
+                            <a href="#" onclick="navigate('penghantaran'); event.preventDefault()" class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-language w-5 text-center text-english-600"></i> English Carnival</a>
                         </div>
                     </div>
 
@@ -177,8 +177,8 @@
                 <div class="px-3 py-2 border-y border-gray-100 bg-gray-50 rounded-md">
                     <div class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">Penghantaran Bahan</div>
                     <div class="pl-2 space-y-2">
-                        <a href="#" class="block px-2 py-2 text-base font-medium text-gray-700 hover:text-blue-600"><i class="fas fa-theater-masks w-5 text-semarak-600"></i> Semarak Seni (Nanti)</a>
-                        <a href="#" class="block px-2 py-2 text-base font-medium text-gray-700 hover:text-blue-600"><i class="fas fa-language w-5 text-english-600"></i> English Carnival (Nanti)</a>
+                        <a href="#" onclick="navigate('penghantaran'); toggleMobileMenu(); event.preventDefault()" class="block px-2 py-2 text-base font-medium text-gray-700 hover:text-blue-600"><i class="fas fa-theater-masks w-5 text-semarak-600"></i> Semarak Seni</a>
+                        <a href="#" onclick="navigate('penghantaran'); toggleMobileMenu(); event.preventDefault()" class="block px-2 py-2 text-base font-medium text-gray-700 hover:text-blue-600"><i class="fas fa-language w-5 text-english-600"></i> English Carnival</a>
                     </div>
                 </div>
 
@@ -574,6 +574,48 @@
             </section>
         </div>
 
+        <!-- ================= PAGE: PENGHANTARAN BAHAN (NEW) ================= -->
+        <div id="page-penghantaran" class="page-section">
+            <section class="bg-gray-50 min-h-[calc(100vh-80px)] flex flex-col justify-start py-12 px-4">
+                <div class="max-w-6xl mx-auto w-full">
+                    <div class="text-center mb-10">
+                        <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 shadow-sm">
+                            <i class="fas fa-check-square"></i>
+                        </div>
+                        <h2 class="text-3xl font-heading font-bold text-gray-900 mb-2">Status Penghantaran Bahan</h2>
+                        <div class="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
+                        <p class="text-gray-600 max-w-2xl mx-auto font-medium">Senarai semak peserta yang telah berjaya menghantar bahan mengikut acara. Status ini dikemas kini oleh pihak urusetia.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- English Carnival -->
+                        <div class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden flex flex-col">
+                            <div class="bg-english-600 text-white py-4 px-6 flex justify-between items-center">
+                                <h3 class="font-bold text-lg"><i class="fas fa-language mr-2"></i> English Carnival</h3>
+                            </div>
+                            <div class="p-0 flex-grow">
+                                <ul id="public-checklist-english" class="divide-y divide-gray-100 text-sm">
+                                    <li class="px-6 py-8 text-center text-gray-400">Memuatkan senarai...</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Semarak Seni -->
+                        <div class="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden flex flex-col">
+                            <div class="bg-semarak-600 text-white py-4 px-6 flex justify-between items-center">
+                                <h3 class="font-bold text-lg"><i class="fas fa-theater-masks mr-2"></i> Semarak Seni</h3>
+                            </div>
+                            <div class="p-0 flex-grow">
+                                <ul id="public-checklist-semarak" class="divide-y divide-gray-100 text-sm">
+                                    <li class="px-6 py-8 text-center text-gray-400">Memuatkan senarai...</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
         <!-- ================= PAGE: BAHAN RUJUKAN ================= -->
         <div id="page-rujukan" class="page-section">
             <section class="bg-gray-50 min-h-[calc(100vh-80px)] flex flex-col justify-start py-12 px-4">
@@ -733,6 +775,7 @@
                             <button onclick="switchAdminTab('pengumuman')" id="tab-pengumuman" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-bullhorn w-5"></i> Pengumuman</button>
                             <button onclick="switchAdminTab('dokumen')" id="tab-dokumen" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-file-pdf w-5"></i> Muat Turun</button>
                             <button onclick="switchAdminTab('sekolah')" id="tab-sekolah" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-school w-5"></i> Senarai Sekolah</button>
+                            <button onclick="switchAdminTab('penghantaran')" id="tab-penghantaran" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-check-square w-5"></i> Penghantaran Bahan</button>
                             <button onclick="switchAdminTab('tetapan')" id="tab-tetapan" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-cogs w-5"></i> Tetapan</button>
                             <button onclick="adminLogout()" class="w-full flex items-center gap-3 px-4 py-3 mt-4 text-sm font-medium rounded-xl text-red-600 hover:bg-red-50 transition border border-transparent hover:border-red-100"><i class="fas fa-sign-out-alt w-5"></i> Log Keluar</button>
                         </nav>
@@ -910,6 +953,51 @@
                         </div>
                     </div>
 
+                    <!-- Tab: Penghantaran Bahan (NEW) -->
+                    <div id="admin-panel-penghantaran" class="admin-panel hidden">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-2xl font-bold text-gray-900">Senarai Semak Penghantaran Bahan</h2>
+                        </div>
+                        <p class="text-gray-600 mb-6 text-sm">Tandakan pada kotak suis di bawah untuk mengesahkan penerimaan bahan daripada sekolah peserta. Status akan dikemas kini serta-merta pada halaman umum.</p>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Admin English Carnival -->
+                            <div>
+                                <h3 class="font-bold text-gray-800 mb-3"><i class="fas fa-language text-english-600"></i> English Carnival</h3>
+                                <div class="border rounded-xl overflow-hidden bg-white">
+                                    <table class="w-full text-left text-sm text-gray-600">
+                                        <thead class="bg-gray-50 border-b">
+                                            <tr>
+                                                <th class="px-4 py-3 font-semibold text-gray-900">Nama Sekolah</th>
+                                                <th class="px-4 py-3 font-semibold text-gray-900 text-center w-24">Jazz Chants</th>
+                                                <th class="px-4 py-3 font-semibold text-gray-900 text-center w-24">Best Costumes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="admin-checklist-english" class="divide-y">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Admin Semarak Seni -->
+                            <div>
+                                <h3 class="font-bold text-gray-800 mb-3"><i class="fas fa-theater-masks text-semarak-600"></i> Semarak Seni</h3>
+                                <div class="border rounded-xl overflow-hidden bg-white">
+                                    <table class="w-full text-left text-sm text-gray-600">
+                                        <thead class="bg-gray-50 border-b">
+                                            <tr>
+                                                <th class="px-4 py-3 font-semibold text-gray-900">Nama Sekolah</th>
+                                                <th class="px-4 py-3 font-semibold text-gray-900 text-center w-24">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="admin-checklist-semarak" class="divide-y">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Tab: Tetapan -->
                     <div id="admin-panel-tetapan" class="admin-panel hidden">
                         <div class="flex justify-between items-center mb-6">
@@ -1005,7 +1093,7 @@
     <!-- FIREBASE & JAVASCRIPT LOGIC -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getFirestore, doc, setDoc, collection, addDoc, onSnapshot, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, collection, addDoc, onSnapshot, deleteDoc, serverTimestamp, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Konfigurasi Firebase Rasmi SKPK Miri
         const firebaseConfig = {
@@ -1345,6 +1433,135 @@
             if(dashCountEl) dashCountEl.textContent = uniqueSchools.size;
         }
 
+        function renderPenghantaranChecklists(docs) {
+            let pubEng = '', pubSem = '';
+            let admEng = '', admSem = '';
+            let countPubEng = 0, countPubSem = 0;
+            let countAdmEng = 0, countAdmSem = 0;
+
+            docs.sort((a,b) => (a.timestamp?.seconds || 0) - (b.timestamp?.seconds || 0));
+
+            docs.forEach(data => {
+                if (data.category === 'English Carnival') {
+                    const isJazz = data.bahanJazzChants || false;
+                    const isCostume = data.bahanBestCostumes || false;
+
+                    const iconJazz = isJazz ? `<i class="fas fa-check-circle text-green-500"></i>` : `<i class="fas fa-times-circle text-red-400"></i>`;
+                    const textJazz = isJazz ? `<span class="text-xs font-semibold text-green-600">Telah Menghantar</span>` : `<span class="text-xs font-medium text-red-500">Belum</span>`;
+                    
+                    const iconCostume = isCostume ? `<i class="fas fa-check-circle text-green-500"></i>` : `<i class="fas fa-times-circle text-red-400"></i>`;
+                    const textCostume = isCostume ? `<span class="text-xs font-semibold text-green-600">Telah Menghantar</span>` : `<span class="text-xs font-medium text-red-500">Belum</span>`;
+
+                    const publicLi = `
+                        <li class="px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-gray-50 transition">
+                            <div class="flex items-center gap-3 w-full sm:w-1/3">
+                                <i class="fas fa-school text-gray-400"></i>
+                                <span class="font-semibold text-gray-700">${data.name}</span>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-2/3 sm:justify-end">
+                                <div class="flex items-center justify-between sm:justify-start gap-2 bg-white px-3 py-2 rounded-lg border border-gray-100 shadow-sm">
+                                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Jazz Chants</span>
+                                    <div class="flex items-center gap-1.5 ml-2">
+                                        ${iconJazz} ${textJazz}
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between sm:justify-start gap-2 bg-white px-3 py-2 rounded-lg border border-gray-100 shadow-sm">
+                                    <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Best Costumes</span>
+                                    <div class="flex items-center gap-1.5 ml-2">
+                                        ${iconCostume} ${textCostume}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    `;
+
+                    // Toggle Checkboxes for Admin English Carnival
+                    const adminCheckJazz = `
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer" ${isJazz ? 'checked' : ''} onchange="toggleBahanStatus(this, '${data.id}', 'bahanJazzChants')">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
+                        </label>
+                    `;
+                    
+                    const adminCheckCostume = `
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer" ${isCostume ? 'checked' : ''} onchange="toggleBahanStatus(this, '${data.id}', 'bahanBestCostumes')">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
+                        </label>
+                    `;
+
+                    const adminTr = `
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-4 py-3 font-medium text-gray-800">${data.name}</td>
+                            <td class="px-4 py-3 text-center">${adminCheckJazz}</td>
+                            <td class="px-4 py-3 text-center">${adminCheckCostume}</td>
+                        </tr>
+                    `;
+
+                    pubEng += publicLi;
+                    admEng += adminTr;
+                    countPubEng++;
+                    countAdmEng++;
+                } 
+                else if (data.category === 'Semarak Seni') {
+                    const isSubmitted = data.bahanSubmitted || false;
+                    
+                    const publicIcon = isSubmitted 
+                        ? `<i class="fas fa-check-circle text-green-500 text-xl"></i>` 
+                        : `<i class="fas fa-times-circle text-red-400 text-xl"></i>`;
+                    
+                    const publicStatusText = isSubmitted
+                        ? `<span class="text-sm font-semibold text-green-600">Telah Menghantar</span>`
+                        : `<span class="text-sm font-medium text-red-500">Belum Menghantar</span>`;
+
+                    const publicLi = `
+                        <li class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition">
+                            <div class="flex items-center gap-3">
+                                ${publicIcon}
+                                <span class="font-semibold text-gray-700">${data.name}</span>
+                            </div>
+                            ${publicStatusText}
+                        </li>
+                    `;
+
+                    // Toggle Checkbox for Admin Semarak Seni
+                    const adminCheckbox = `
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only peer" ${isSubmitted ? 'checked' : ''} onchange="toggleBahanStatus(this, '${data.id}', 'bahanSubmitted')">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
+                        </label>
+                    `;
+
+                    const adminTr = `
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-4 py-3 font-medium text-gray-800">${data.name}</td>
+                            <td class="px-4 py-3 text-center">${adminCheckbox}</td>
+                        </tr>
+                    `;
+
+                    pubSem += publicLi;
+                    admSem += adminTr;
+                    countPubSem++;
+                    countAdmSem++;
+                }
+            });
+
+            if (countPubEng === 0) pubEng = `<li class="px-6 py-8 text-center text-gray-400">Tiada penyertaan setakat ini</li>`;
+            if (countPubSem === 0) pubSem = `<li class="px-6 py-8 text-center text-gray-400">Tiada penyertaan setakat ini</li>`;
+            if (countAdmEng === 0) admEng = `<tr><td colspan="3" class="px-4 py-4 text-center text-gray-500">Tiada rekod</td></tr>`;
+            if (countAdmSem === 0) admSem = `<tr><td colspan="2" class="px-4 py-4 text-center text-gray-500">Tiada rekod</td></tr>`;
+
+            const pEngList = document.getElementById('public-checklist-english');
+            const pSemList = document.getElementById('public-checklist-semarak');
+            const aEngList = document.getElementById('admin-checklist-english');
+            const aSemList = document.getElementById('admin-checklist-semarak');
+
+            if(pEngList) pEngList.innerHTML = pubEng;
+            if(pSemList) pSemList.innerHTML = pubSem;
+            if(aEngList) aEngList.innerHTML = admEng;
+            if(aSemList) aSemList.innerHTML = admSem;
+        }
+
         function setupRealtimeListeners() {
             if(!db) return;
 
@@ -1390,6 +1607,7 @@
                 const docs = [];
                 snapshot.forEach(doc => docs.push({id: doc.id, ...doc.data()}));
                 renderSchools(docs);
+                renderPenghantaranChecklists(docs); // Render checklist baharu
             }, (error) => console.error("Error fetching schools:", error));
         }
 
@@ -1471,6 +1689,9 @@
                 await addDoc(pathSchools(), {
                     name: name,
                     category: category,
+                    bahanSubmitted: false, // Rekod baharu bermula sebagai belum menghantar (Semarak)
+                    bahanJazzChants: false, // Rekod baharu bermula sebagai belum menghantar (English)
+                    bahanBestCostumes: false, // Rekod baharu bermula sebagai belum menghantar (English)
                     timestamp: serverTimestamp()
                 });
                 
@@ -1512,6 +1733,25 @@
                 btn.disabled = false;
             }
         });
+
+        // Global Helper: Toggle Bahan Status (Admin)
+        window.toggleBahanStatus = async function(checkbox, docId, fieldName = 'bahanSubmitted') {
+            if(!isAdmin) {
+                checkbox.checked = !checkbox.checked; // Revert UI visually
+                return showToast("Akses ditolak. Sila log masuk admin.", "error");
+            }
+            try {
+                let updateData = {};
+                updateData[fieldName] = checkbox.checked;
+
+                await updateDoc(doc(db, 'schools', docId), updateData);
+                showToast("Status penghantaran berjaya dikemaskini.");
+            } catch(e) {
+                console.error(e);
+                checkbox.checked = !checkbox.checked; // Revert UI visually on failure
+                showToast("Gagal mengemaskini status.", "error");
+            }
+        };
 
         // Delete Helper
         window.deleteDocItem = async function(colName, docId) {
