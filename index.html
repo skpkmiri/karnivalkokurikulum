@@ -136,9 +136,7 @@
                             Penghantaran <i class="fas fa-chevron-down text-[10px]"></i>
                         </button>
                         <div class="absolute left-0 mt-2 w-60 bg-white border border-gray-100 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
-                            <div class="px-4 py-2 bg-gray-50 border-b border-gray-100 text-xs font-bold text-gray-500 uppercase tracking-wider">Hantar Bahan</div>
-                            <a href="https://bahanspecco.sekolah-8943-cm1.workers.dev/" target="_blank" class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 border-b border-gray-50"><i class="fas fa-theater-masks w-5 text-center text-semarak-600"></i> Semarak Seni</a>
-                            <a href="https://bahanspecco.sekolah-8943-cm1.workers.dev/" target="_blank" class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 border-b border-gray-100"><i class="fas fa-language w-5 text-center text-english-600"></i> English Carnival</a>
+                            <a href="https://bahanspecco.sekolah-8943-cm1.workers.dev/" target="_blank" class="block px-4 py-3 text-sm font-bold text-gray-700 hover:bg-blue-50 hover:text-blue-600 border-b border-gray-100 uppercase tracking-wider"><i class="fas fa-cloud-upload-alt w-5 text-center text-blue-600"></i> Hantar Bahan</a>
                             <div class="px-4 py-2 bg-gray-50 border-b border-gray-100 text-xs font-bold text-gray-500 uppercase tracking-wider">Semakan</div>
                             <a href="#" onclick="navigate('penghantaran'); event.preventDefault()" class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-check-square w-5 text-center text-blue-600"></i> Status Penghantaran</a>
                         </div>
@@ -182,8 +180,7 @@
                 <div class="px-3 py-2 border-y border-gray-100 bg-gray-50 rounded-md">
                     <div class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">Penghantaran Bahan</div>
                     <div class="pl-2 space-y-2">
-                        <a href="https://bahanspecco.sekolah-8943-cm1.workers.dev/" target="_blank" onclick="toggleMobileMenu()" class="block px-2 py-2 text-base font-medium text-gray-700 hover:text-blue-600"><i class="fas fa-theater-masks w-5 text-semarak-600"></i> Semarak Seni</a>
-                        <a href="https://bahanspecco.sekolah-8943-cm1.workers.dev/" target="_blank" onclick="toggleMobileMenu()" class="block px-2 py-2 text-base font-medium text-gray-700 hover:text-blue-600"><i class="fas fa-language w-5 text-english-600"></i> English Carnival</a>
+                        <a href="https://bahanspecco.sekolah-8943-cm1.workers.dev/" target="_blank" onclick="toggleMobileMenu()" class="block px-2 py-2 text-base font-bold text-gray-700 hover:text-blue-600 uppercase tracking-wider"><i class="fas fa-cloud-upload-alt w-5 text-blue-600"></i> Hantar Bahan</a>
                         <a href="#" onclick="navigate('penghantaran'); toggleMobileMenu(); event.preventDefault()" class="block px-2 py-2 text-base font-medium text-gray-700 hover:text-blue-600"><i class="fas fa-check-square w-5 text-blue-600"></i> Status Penghantaran</a>
                     </div>
                 </div>
@@ -1238,9 +1235,34 @@
                 </div>
             </div>
             
-            <div class="pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
-                <p>&copy; 2026 SK Pendidikan Khas Miri. All Rights Reserved.</p>
-                <p class="mt-1 text-xs">Developed for SPK Zon Borneo 2026.</p>
+            <div class="mt-8 pt-8 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-6">
+                <!-- Visitor Counter -->
+                <div class="flex items-center gap-6 text-sm text-gray-400">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-blue-400 shadow-inner">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-0.5">Pelawat Hari Ini</p>
+                            <p id="visitor-today" class="font-bold text-white text-xl leading-none">...</p>
+                        </div>
+                    </div>
+                    <div class="w-px h-10 bg-gray-700"></div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-emerald-400 shadow-inner">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-[10px] uppercase tracking-wider font-bold text-gray-500 mb-0.5">Jumlah Keseluruhan</p>
+                            <p id="visitor-total" class="font-bold text-white text-xl leading-none">...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center md:text-right text-sm text-gray-500">
+                    <p>&copy; 2026 SK Pendidikan Khas Miri. All Rights Reserved.</p>
+                    <p class="mt-1 text-xs">Developed for SPK Zon Borneo 2026.</p>
+                </div>
             </div>
         </div>
     </footer>
@@ -1248,7 +1270,7 @@
     <!-- FIREBASE & JAVASCRIPT LOGIC -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getFirestore, doc, setDoc, collection, addDoc, onSnapshot, deleteDoc, serverTimestamp, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, addDoc, onSnapshot, deleteDoc, serverTimestamp, updateDoc, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Konfigurasi Firebase Rasmi SKPK Miri
         const firebaseConfig = {
@@ -2253,6 +2275,78 @@
 
         // Start listening immediately
         setupRealtimeListeners();
+
+        // Visitor Counter Logic
+        async function initVisitorCounter() {
+            if(!db) return;
+            const visitorDocRef = doc(db, 'settings', 'visitor_stats');
+            
+            // Format tarikh ke YYYY-MM-DD menggunakan masa tempatan pengguna
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const todayStr = `${year}-${month}-${day}`;
+            
+            const visitKey = `specco_visited_${todayStr}`;
+
+            try {
+                // Realtime Listener
+                onSnapshot(visitorDocRef, (docSnap) => {
+                    const todayEl = document.getElementById('visitor-today');
+                    const totalEl = document.getElementById('visitor-total');
+                    if(todayEl && totalEl) {
+                        if (docSnap.exists()) {
+                            const data = docSnap.data();
+                            if (data.date !== todayStr) {
+                                todayEl.textContent = '0';
+                            } else {
+                                todayEl.textContent = (data.today || 0).toLocaleString();
+                            }
+                            totalEl.textContent = (data.total || 0).toLocaleString();
+                        } else {
+                            todayEl.textContent = '0';
+                            totalEl.textContent = '0';
+                        }
+                    }
+                });
+
+                // Update jika pengguna belum visit hari ini
+                if (!localStorage.getItem(visitKey)) {
+                    const snap = await getDoc(visitorDocRef);
+                    if (snap.exists()) {
+                        const data = snap.data();
+                        if (data.date === todayStr) {
+                            await updateDoc(visitorDocRef, {
+                                today: increment(1),
+                                total: increment(1)
+                            });
+                        } else {
+                            await updateDoc(visitorDocRef, {
+                                date: todayStr,
+                                today: 1,
+                                total: increment(1)
+                            });
+                        }
+                    } else {
+                        await setDoc(visitorDocRef, {
+                            date: todayStr,
+                            today: 1,
+                            total: 1
+                        });
+                    }
+                    localStorage.setItem(visitKey, 'true');
+                }
+            } catch (error) {
+                console.error("Gagal mengemaskini rekod pelawat:", error);
+                const todayEl = document.getElementById('visitor-today');
+                const totalEl = document.getElementById('visitor-total');
+                if(todayEl) todayEl.textContent = '-';
+                if(totalEl) totalEl.textContent = '-';
+            }
+        }
+
+        initVisitorCounter();
 
     </script>
 </body>
