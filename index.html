@@ -135,10 +135,12 @@
                         <button class="nav-link px-2 lg:px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors flex items-center gap-1 text-xs lg:text-sm">
                             Penghantaran <i class="fas fa-chevron-down text-[10px]"></i>
                         </button>
-                        <div class="absolute left-0 mt-2 w-56 bg-white border border-gray-100 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+                        <div class="absolute left-0 mt-2 w-60 bg-white border border-gray-100 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
                             <div class="px-4 py-2 bg-gray-50 border-b border-gray-100 text-xs font-bold text-gray-500 uppercase tracking-wider">Hantar Bahan</div>
-                            <a href="#" onclick="navigate('penghantaran'); event.preventDefault()" class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 border-b border-gray-50"><i class="fas fa-theater-masks w-5 text-center text-semarak-600"></i> Semarak Seni</a>
-                            <a href="#" onclick="navigate('penghantaran'); event.preventDefault()" class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-language w-5 text-center text-english-600"></i> English Carnival</a>
+                            <a href="https://bahanspecco.sekolah-8943-cm1.workers.dev/" target="_blank" class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 border-b border-gray-50"><i class="fas fa-theater-masks w-5 text-center text-semarak-600"></i> Semarak Seni</a>
+                            <a href="https://bahanspecco.sekolah-8943-cm1.workers.dev/" target="_blank" class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600 border-b border-gray-100"><i class="fas fa-language w-5 text-center text-english-600"></i> English Carnival</a>
+                            <div class="px-4 py-2 bg-gray-50 border-b border-gray-100 text-xs font-bold text-gray-500 uppercase tracking-wider">Semakan</div>
+                            <a href="#" onclick="navigate('penghantaran'); event.preventDefault()" class="block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-check-square w-5 text-center text-blue-600"></i> Status Penghantaran</a>
                         </div>
                     </div>
 
@@ -147,6 +149,9 @@
                     <button onclick="navigate('galeri')" class="nav-link px-2 lg:px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-xs lg:text-sm">Galeri</button>
                     <button onclick="navigate('hubungi')" class="nav-link px-2 lg:px-3 py-2 rounded-lg text-gray-700 font-semibold hover:bg-gray-100 hover:text-blue-600 transition-colors text-xs lg:text-sm">Hubungi</button>
                     
+                    <!-- Dynamic Custom Menus (Desktop) -->
+                    <div id="custom-desktop-menus" class="flex items-center space-x-1"></div>
+
                     <div class="w-px h-6 bg-gray-300 mx-1"></div>
                     
                     <button onclick="navigate('admin-login')" class="ml-1 flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors shadow-md text-xs lg:text-sm" aria-label="Log Masuk Admin">
@@ -177,8 +182,9 @@
                 <div class="px-3 py-2 border-y border-gray-100 bg-gray-50 rounded-md">
                     <div class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">Penghantaran Bahan</div>
                     <div class="pl-2 space-y-2">
-                        <a href="#" onclick="navigate('penghantaran'); toggleMobileMenu(); event.preventDefault()" class="block px-2 py-2 text-base font-medium text-gray-700 hover:text-blue-600"><i class="fas fa-theater-masks w-5 text-semarak-600"></i> Semarak Seni</a>
-                        <a href="#" onclick="navigate('penghantaran'); toggleMobileMenu(); event.preventDefault()" class="block px-2 py-2 text-base font-medium text-gray-700 hover:text-blue-600"><i class="fas fa-language w-5 text-english-600"></i> English Carnival</a>
+                        <a href="https://bahanspecco.sekolah-8943-cm1.workers.dev/" target="_blank" onclick="toggleMobileMenu()" class="block px-2 py-2 text-base font-medium text-gray-700 hover:text-blue-600"><i class="fas fa-theater-masks w-5 text-semarak-600"></i> Semarak Seni</a>
+                        <a href="https://bahanspecco.sekolah-8943-cm1.workers.dev/" target="_blank" onclick="toggleMobileMenu()" class="block px-2 py-2 text-base font-medium text-gray-700 hover:text-blue-600"><i class="fas fa-language w-5 text-english-600"></i> English Carnival</a>
+                        <a href="#" onclick="navigate('penghantaran'); toggleMobileMenu(); event.preventDefault()" class="block px-2 py-2 text-base font-medium text-gray-700 hover:text-blue-600"><i class="fas fa-check-square w-5 text-blue-600"></i> Status Penghantaran</a>
                     </div>
                 </div>
 
@@ -186,6 +192,10 @@
                 <button onclick="navigate('pemenang'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Senarai Pemenang</button>
                 <button onclick="navigate('galeri'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Galeri</button>
                 <button onclick="navigate('hubungi'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-gray-900 hover:bg-gray-50">Hubungi</button>
+                
+                <!-- Dynamic Custom Menus (Mobile) -->
+                <div id="custom-mobile-menus" class="space-y-1"></div>
+
                 <button onclick="navigate('admin-login'); toggleMobileMenu()" class="block w-full text-left px-3 py-3 mt-4 rounded-md text-base font-semibold bg-gray-900 text-white"><i class="fas fa-lock mr-2"></i> Admin Portal</button>
             </div>
         </div>
@@ -584,7 +594,11 @@
                         </div>
                         <h2 class="text-3xl font-heading font-bold text-gray-900 mb-2">Status Penghantaran Bahan</h2>
                         <div class="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
-                        <p class="text-gray-600 max-w-2xl mx-auto font-medium">Senarai semak peserta yang telah berjaya menghantar bahan mengikut acara. Status ini dikemas kini oleh pihak urusetia.</p>
+                        <p class="text-gray-600 max-w-2xl mx-auto font-medium mb-6">Senarai semak peserta yang telah berjaya menghantar bahan mengikut acara. Status ini dikemas kini oleh pihak urusetia.</p>
+                        
+                        <a href="https://bahanspecco.sekolah-8943-cm1.workers.dev/" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 text-base">
+                            <i class="fas fa-cloud-upload-alt text-xl"></i> Pautan Rasmi Penghantaran Bahan
+                        </a>
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -641,20 +655,22 @@
         <!-- ================= PAGE: SENARAI PEMENANG ================= -->
         <div id="page-pemenang" class="page-section">
             <section class="bg-gradient-to-b from-yellow-50 to-white min-h-[calc(100vh-80px)] flex flex-col justify-center py-12 px-4">
-                <div class="max-w-4xl mx-auto w-full text-center">
+                <div class="max-w-6xl mx-auto w-full text-center">
                     <div class="w-20 h-20 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-4xl mx-auto mb-6 shadow-md border-4 border-white">
                         <i class="fas fa-trophy"></i>
                     </div>
                     <h2 class="text-3xl md:text-5xl font-heading font-bold text-gray-900 mb-4">Senarai Pemenang</h2>
                     <div class="w-24 h-1 bg-yellow-500 mx-auto rounded-full mb-8"></div>
                     
-                    <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-12">
-                        <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-4">Keputusan Rasmi Belum Diumumkan</h3>
-                        <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                            Senarai penuh pemenang bagi setiap kategori (Pétanque, English Carnival & Semarak Seni 6) akan dikemas kini di sini sejurus selepas majlis penyampaian hadiah tamat.
-                        </p>
-                        <div class="mt-8 flex justify-center gap-4">
-                            <span class="px-4 py-2 bg-gray-100 text-gray-500 rounded-lg text-sm font-semibold"><i class="fas fa-clock mr-2"></i>Nantikan Kemaskini</span>
+                    <div id="public-winners-container">
+                        <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-12 max-w-4xl mx-auto">
+                            <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-4">Keputusan Rasmi Belum Diumumkan</h3>
+                            <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                                Senarai penuh pemenang bagi setiap kategori (Pétanque, English Carnival & Semarak Seni 6) akan dikemas kini di sini sejurus selepas majlis penyampaian hadiah tamat.
+                            </p>
+                            <div class="mt-8 flex justify-center gap-4">
+                                <span class="px-4 py-2 bg-gray-100 text-gray-500 rounded-lg text-sm font-semibold"><i class="fas fa-clock mr-2"></i>Nantikan Kemaskini</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -673,7 +689,7 @@
                     </div>
                     
                     <!-- Grid Gallery (Fit to page configuration) -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4 max-h-[60vh] overflow-y-auto md:max-h-none md:overflow-visible">
+                    <div id="public-gallery-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4 max-h-[60vh] overflow-y-auto md:max-h-none md:overflow-visible">
                         <div class="col-span-2 row-span-2 rounded-2xl overflow-hidden shadow-soft bg-gray-800">
                             <img src="https://placehold.co/600x400/059669/ffffff?text=Pertandingan+Petanque" class="w-full h-full object-cover aspect-video hover:scale-105 transition-transform duration-500" alt="Galeri 1">
                         </div>
@@ -776,6 +792,9 @@
                             <button onclick="switchAdminTab('dokumen')" id="tab-dokumen" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-file-pdf w-5"></i> Muat Turun</button>
                             <button onclick="switchAdminTab('sekolah')" id="tab-sekolah" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-school w-5"></i> Senarai Sekolah</button>
                             <button onclick="switchAdminTab('penghantaran')" id="tab-penghantaran" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-check-square w-5"></i> Penghantaran Bahan</button>
+                            <button onclick="switchAdminTab('menu')" id="tab-menu" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-link w-5"></i> Tambah Menu (Link)</button>
+                            <button onclick="switchAdminTab('pemenang')" id="tab-pemenang" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-trophy w-5"></i> Senarai Pemenang</button>
+                            <button onclick="switchAdminTab('galeri')" id="tab-galeri" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-images w-5"></i> Galeri Gambar</button>
                             <button onclick="switchAdminTab('tetapan')" id="tab-tetapan" class="admin-tab w-full flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl text-gray-600 hover:bg-gray-50 transition"><i class="fas fa-cogs w-5"></i> Tetapan</button>
                             <button onclick="adminLogout()" class="w-full flex items-center gap-3 px-4 py-3 mt-4 text-sm font-medium rounded-xl text-red-600 hover:bg-red-50 transition border border-transparent hover:border-red-100"><i class="fas fa-sign-out-alt w-5"></i> Log Keluar</button>
                         </nav>
@@ -953,7 +972,7 @@
                         </div>
                     </div>
 
-                    <!-- Tab: Penghantaran Bahan (NEW) -->
+                    <!-- Tab: Penghantaran Bahan -->
                     <div id="admin-panel-penghantaran" class="admin-panel hidden">
                         <div class="flex justify-between items-center mb-6">
                             <h2 class="text-2xl font-bold text-gray-900">Senarai Semak Penghantaran Bahan</h2>
@@ -994,6 +1013,133 @@
                                         </tbody>
                                     </table>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Tambah Menu (Link) (NEW) -->
+                    <div id="admin-panel-menu" class="admin-panel hidden">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-2xl font-bold text-gray-900">Urus Menu Tambahan (Pautan)</h2>
+                        </div>
+                        <p class="text-gray-600 mb-6 text-sm">Sekiranya terdapat penambahan menu pautan luar (seperti Keputusan Langsung, Buku Program, dll), sila tambah di sini untuk dipaparkan terus pada bar navigasi utama.</p>
+                        
+                        <form id="form-add-menu" class="bg-gray-50 p-6 rounded-xl border border-gray-200 mb-8 space-y-4">
+                            <h3 class="font-bold text-gray-800 mb-2">Tambah Pautan Menu Baru</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Nama Menu</label>
+                                    <input type="text" id="menu-title" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Cth: Buku Program">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Pautan URL (Link)</label>
+                                    <input type="text" id="menu-url" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Cth: https://...">
+                                </div>
+                            </div>
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Tambah Menu</button>
+                        </form>
+
+                        <div>
+                            <h3 class="font-bold text-gray-800 mb-4">Senarai Menu Tambahan</h3>
+                            <div class="border rounded-xl overflow-hidden">
+                                <table class="w-full text-left text-sm text-gray-600">
+                                    <thead class="bg-gray-50 border-b">
+                                        <tr>
+                                            <th class="px-4 py-3 font-semibold text-gray-900">Nama Menu</th>
+                                            <th class="px-4 py-3 font-semibold text-gray-900">Pautan (URL)</th>
+                                            <th class="px-4 py-3 font-semibold text-gray-900 w-24">Tindakan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="admin-menus-list" class="divide-y">
+                                        <!-- Populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Senarai Pemenang (Gambar) (NEW) -->
+                    <div id="admin-panel-pemenang" class="admin-panel hidden">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-2xl font-bold text-gray-900">Muat Naik Senarai Pemenang (Gambar)</h2>
+                        </div>
+                        <p class="text-gray-600 mb-6 text-sm">Muat naik poster atau gambar senarai pemenang mengikut kategori atau masukkan pautan gambar untuk dipaparkan di halaman Senarai Pemenang.</p>
+                        
+                        <form id="form-add-winner" class="bg-gray-50 p-6 rounded-xl border border-gray-200 mb-8 space-y-4">
+                            <h3 class="font-bold text-gray-800 mb-2">Tambah Gambar Keputusan / Pemenang</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Tajuk / Kategori Pertandingan</label>
+                                    <input type="text" id="winner-title" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Cth: Keputusan Rasmi Pétanque">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Pilih Fail Gambar (Muat Naik Terus)</label>
+                                    <input type="file" id="winner-file" accept="image/*" class="w-full px-3 py-1.5 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-500 outline-none text-sm">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm text-gray-600 mb-1">Atau Masukkan Pautan URL Gambar (Pilihan jika tiada fail)</label>
+                                    <input type="text" id="winner-url" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Masukkan pautan gambar atau Google Drive (Cth: https://...)">
+                                </div>
+                            </div>
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Muat Naik & Simpan</button>
+                        </form>
+
+                        <div>
+                            <h3 class="font-bold text-gray-800 mb-4">Senarai Gambar Pemenang Semasa</h3>
+                            <div class="border rounded-xl overflow-hidden">
+                                <table class="w-full text-left text-sm text-gray-600">
+                                    <thead class="bg-gray-50 border-b">
+                                        <tr>
+                                            <th class="px-4 py-3 font-semibold text-gray-900 w-24">Pratonton</th>
+                                            <th class="px-4 py-3 font-semibold text-gray-900">Tajuk / Kategori</th>
+                                            <th class="px-4 py-3 font-semibold text-gray-900 w-24">Tindakan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="admin-winners-list" class="divide-y">
+                                        <!-- Populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Galeri Gambar (NEW) -->
+                    <div id="admin-panel-galeri" class="admin-panel hidden">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-2xl font-bold text-gray-900">Urus Galeri Gambar (Thumbnail)</h2>
+                        </div>
+                        <p class="text-gray-600 mb-6 text-sm">Masukkan pautan gambar (URL terus atau pautan Google Drive) untuk dipaparkan secara thumbnail di bahagian Galeri Memori.</p>
+                        
+                        <form id="form-add-gallery" class="bg-gray-50 p-6 rounded-xl border border-gray-200 mb-8 space-y-4">
+                            <h3 class="font-bold text-gray-800 mb-2">Tambah Pautan Gambar Galeri</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Kapsyen / Tajuk Gambar</label>
+                                    <input type="text" id="gallery-title" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Cth: Sekitar Pertandingan Pétanque">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Pautan Gambar (URL / Google Drive)</label>
+                                    <input type="text" id="gallery-url" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Masukkan pautan gambar (Cth: https://...)">
+                                </div>
+                            </div>
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Tambah ke Galeri</button>
+                        </form>
+
+                        <div>
+                            <h3 class="font-bold text-gray-800 mb-4">Senarai Gambar Galeri</h3>
+                            <div class="border rounded-xl overflow-hidden">
+                                <table class="w-full text-left text-sm text-gray-600">
+                                    <thead class="bg-gray-50 border-b">
+                                        <tr>
+                                            <th class="px-4 py-3 font-semibold text-gray-900 w-24">Thumbnail</th>
+                                            <th class="px-4 py-3 font-semibold text-gray-900">Kapsyen / Tajuk</th>
+                                            <th class="px-4 py-3 font-semibold text-gray-900 w-24">Tindakan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="admin-gallery-list" class="divide-y">
+                                        <!-- Populated by JS -->
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -1040,6 +1186,15 @@
                         <i class="fab fa-whatsapp text-lg"></i> Hantar Mesej
                     </a>
                 </div>
+            </div>
+        </div>
+
+        <!-- Modal Paparan Gambar Penuh (Lightbox) -->
+        <div id="image-lightbox-modal" class="fixed inset-0 z-[110] hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" onclick="closeImageModal()">
+            <div class="relative max-w-4xl w-full max-h-[90vh] flex flex-col items-center" onclick="event.stopPropagation()">
+                <button onclick="closeImageModal()" class="absolute -top-10 right-0 text-white hover:text-red-400 text-2xl"><i class="fas fa-times"></i></button>
+                <img id="lightbox-img" src="" alt="Paparan Penuh" class="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl">
+                <p id="lightbox-caption" class="text-white font-semibold mt-3 text-center"></p>
             </div>
         </div>
 
@@ -1117,6 +1272,49 @@
             if(document.getElementById('page-admin-login').classList.contains('active')){
                 navigate('admin-dashboard');
             }
+        }
+
+        // Helper: Convert Google Drive link to direct thumbnail/image URL if applicable
+        function resolveImageUrl(url, size = 'w1000') {
+            if (!url) return '';
+            if (url.startsWith('data:image')) return url;
+            let cleanUrl = url.trim();
+            if (!cleanUrl.match(/^https?:\/\//i)) {
+                cleanUrl = 'https://' + cleanUrl;
+            }
+            const driveMatch = cleanUrl.match(/\/d\/([a-zA-Z0-9_-]+)/) || cleanUrl.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+            if (driveMatch && cleanUrl.includes('drive.google.com')) {
+                return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=${size}`;
+            }
+            return cleanUrl;
+        }
+
+        // Helper: Compress uploaded image file into Base64 for Firestore storage
+        function compressImageFile(file, maxWidth = 1200, quality = 0.8) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+                        if (width > maxWidth) {
+                            height = Math.round((height * maxWidth) / width);
+                            width = maxWidth;
+                        }
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        resolve(canvas.toDataURL('image/jpeg', quality));
+                    };
+                    img.onerror = (err) => reject(err);
+                };
+                reader.onerror = (err) => reject(err);
+            });
         }
 
         // Global functions accessible outside module
@@ -1206,6 +1404,17 @@
             }, 300);
         };
 
+        window.openImageModal = function(src, caption) {
+            const modal = document.getElementById('image-lightbox-modal');
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox-caption').textContent = caption || '';
+            modal.classList.remove('hidden');
+        };
+
+        window.closeImageModal = function() {
+            document.getElementById('image-lightbox-modal').classList.add('hidden');
+        };
+
         // Mock Login Handler
         document.getElementById('admin-login-form').addEventListener('submit', (e) => {
             e.preventDefault();
@@ -1257,7 +1466,10 @@
         
         const pathAnnouncements = () => collection(db, 'announcements');
         const pathDocuments = () => collection(db, 'documents');
-        const pathSchools = () => collection(db, 'schools'); // Collection for registered schools
+        const pathSchools = () => collection(db, 'schools');
+        const pathMenus = () => collection(db, 'custom_menus');
+        const pathWinners = () => collection(db, 'winners');
+        const pathGallery = () => collection(db, 'gallery');
 
         function renderAnnouncements(docs) {
             let htmlAdmin = '';
@@ -1309,7 +1521,6 @@
             let htmlAdmin = '';
             const pList = document.getElementById('public-documents-list');
             
-            // Extract File ID from Google Drive URL to fetch official thumbnail
             function getDriveId(url) {
                 const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
                 return match ? match[1] : null;
@@ -1328,7 +1539,6 @@
                     }
                     
                     const driveId = getDriveId(fileUrl);
-                    // Native Google Drive thumbnail endpoint
                     const thumbUrl = driveId ? `https://drive.google.com/thumbnail?id=${driveId}&sz=w600` : 'https://placehold.co/600x800/f3f4f6/9ca3af?text=PDF+Document';
 
                     htmlPublic += `
@@ -1374,11 +1584,9 @@
 
             const uniqueSchools = new Set();
 
-            // Susun ikut tarikh daftar (terawal ke terbaru)
             docs.sort((a,b) => (a.timestamp?.seconds || 0) - (b.timestamp?.seconds || 0));
 
             docs.forEach((data) => {
-                // Ensure name is standardized to calculate true unique contingents
                 if(data.name) {
                     uniqueSchools.add(data.name.trim().toUpperCase());
                 }
@@ -1417,7 +1625,6 @@
             if(listSemarak) listSemarak.innerHTML = htmlSemarak;
             if(aList) aList.innerHTML = htmlAdmin;
 
-            // Kemaskini paparan footer "Jumlah Penyertaan" di dalam kad Penyertaan
             const countPetanqueEl = document.getElementById('count-petanque-display');
             const countEnglishEl = document.getElementById('count-english-display');
             const countSemarakEl = document.getElementById('count-semarak-display');
@@ -1426,7 +1633,6 @@
             if(countEnglishEl) countEnglishEl.textContent = countEnglish;
             if(countSemarakEl) countSemarakEl.textContent = countSemarak;
 
-            // Kemaskini jumlah kontinjen (sekolah unik) di Homepage dan Dashboard Admin
             const countEl = document.getElementById('public-kontinjen-count');
             const dashCountEl = document.getElementById('dashboard-kontinjen-count');
             if(countEl) countEl.textContent = uniqueSchools.size;
@@ -1475,7 +1681,6 @@
                         </li>
                     `;
 
-                    // Toggle Checkboxes for Admin English Carnival
                     const adminCheckJazz = `
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" class="sr-only peer" ${isJazz ? 'checked' : ''} onchange="toggleBahanStatus(this, '${data.id}', 'bahanJazzChants')">
@@ -1524,7 +1729,6 @@
                         </li>
                     `;
 
-                    // Toggle Checkbox for Admin Semarak Seni
                     const adminCheckbox = `
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" class="sr-only peer" ${isSubmitted ? 'checked' : ''} onchange="toggleBahanStatus(this, '${data.id}', 'bahanSubmitted')">
@@ -1562,6 +1766,165 @@
             if(aSemList) aSemList.innerHTML = admSem;
         }
 
+        // Render Custom Menus (Link)
+        function renderCustomMenus(docs) {
+            let desktopHtml = '';
+            let mobileHtml = '';
+            let adminHtml = '';
+
+            docs.sort((a,b) => (a.timestamp?.seconds || 0) - (b.timestamp?.seconds || 0));
+
+            if (docs.length === 0) {
+                adminHtml = `<tr><td colspan="3" class="px-4 py-4 text-center text-gray-500">Tiada menu tambahan</td></tr>`;
+            } else {
+                docs.forEach(data => {
+                    let linkUrl = data.url;
+                    if (!linkUrl.match(/^https?:\/\//i)) {
+                        linkUrl = 'https://' + linkUrl;
+                    }
+
+                    desktopHtml += `<a href="${linkUrl}" target="_blank" class="nav-link px-2 lg:px-3 py-2 rounded-lg text-blue-700 bg-blue-50 font-semibold hover:bg-blue-100 transition-colors text-xs lg:text-sm flex items-center gap-1"><i class="fas fa-external-link-alt text-[10px]"></i> ${data.title}</a>`;
+                    mobileHtml += `<a href="${linkUrl}" target="_blank" onclick="toggleMobileMenu()" class="block w-full text-left px-3 py-3 rounded-md text-base font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100"><i class="fas fa-external-link-alt mr-2 text-sm"></i> ${data.title}</a>`;
+
+                    adminHtml += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3 font-medium text-gray-800">${data.title}</td>
+                        <td class="px-4 py-3 text-blue-600 truncate max-w-xs"><a href="${linkUrl}" target="_blank" class="hover:underline">${linkUrl}</a></td>
+                        <td class="px-4 py-3">
+                            <button onclick="deleteDocItem('custom_menus', '${data.id}')" class="text-red-500 hover:text-red-700 bg-red-50 p-2 rounded transition"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>`;
+                });
+            }
+
+            const dMenu = document.getElementById('custom-desktop-menus');
+            const mMenu = document.getElementById('custom-mobile-menus');
+            const aMenu = document.getElementById('admin-menus-list');
+
+            if(dMenu) dMenu.innerHTML = desktopHtml;
+            if(mMenu) mMenu.innerHTML = mobileHtml;
+            if(aMenu) aMenu.innerHTML = adminHtml;
+        }
+
+        // Render Senarai Pemenang (Gambar)
+        function renderWinners(docs) {
+            const pubContainer = document.getElementById('public-winners-container');
+            const admList = document.getElementById('admin-winners-list');
+            let adminHtml = '';
+
+            docs.sort((a,b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+
+            if (docs.length === 0) {
+                if (pubContainer) {
+                    pubContainer.innerHTML = `
+                        <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-12 max-w-4xl mx-auto">
+                            <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-4">Keputusan Rasmi Belum Diumumkan</h3>
+                            <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                                Senarai penuh pemenang bagi setiap kategori (Pétanque, English Carnival & Semarak Seni 6) akan dikemas kini di sini sejurus selepas majlis penyampaian hadiah tamat.
+                            </p>
+                            <div class="mt-8 flex justify-center gap-4">
+                                <span class="px-4 py-2 bg-gray-100 text-gray-500 rounded-lg text-sm font-semibold"><i class="fas fa-clock mr-2"></i>Nantikan Kemaskini</span>
+                            </div>
+                        </div>`;
+                }
+                adminHtml = `<tr><td colspan="3" class="px-4 py-4 text-center text-gray-500">Tiada rekod pemenang</td></tr>`;
+            } else {
+                let pubHtml = `<div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">`;
+                docs.forEach(data => {
+                    const imgSrc = resolveImageUrl(data.imageUrl, 'w1200');
+                    const safeTitle = (data.title || 'Senarai Pemenang').replace(/'/g, "\\'");
+
+                    pubHtml += `
+                    <div class="bg-white rounded-3xl shadow-xl border border-yellow-200 overflow-hidden flex flex-col hover:shadow-2xl transition">
+                        <div class="bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 py-4 flex items-center justify-between">
+                            <h3 class="font-bold text-lg"><i class="fas fa-medal mr-2"></i> ${data.title}</h3>
+                        </div>
+                        <div class="p-4 bg-gray-50 flex-grow flex items-center justify-center cursor-pointer" onclick="openImageModal('${imgSrc}', '${safeTitle}')">
+                            <img src="${imgSrc}" onerror="this.src='https://placehold.co/800x600/fef3c7/d97706?text=Gambar+Pemenang'" alt="${data.title}" class="w-full h-auto max-h-[500px] object-contain rounded-xl shadow-sm hover:scale-[1.02] transition-transform">
+                        </div>
+                    </div>`;
+
+                    adminHtml += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3">
+                            <img src="${imgSrc}" onerror="this.src='https://placehold.co/100x100/f3f4f6/9ca3af?text=Img'" class="w-16 h-12 object-cover rounded border">
+                        </td>
+                        <td class="px-4 py-3 font-medium text-gray-800">${data.title}</td>
+                        <td class="px-4 py-3">
+                            <button onclick="deleteDocItem('winners', '${data.id}')" class="text-red-500 hover:text-red-700 bg-red-50 p-2 rounded transition"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>`;
+                });
+                pubHtml += `</div>`;
+                if (pubContainer) pubContainer.innerHTML = pubHtml;
+            }
+
+            if (admList) admList.innerHTML = adminHtml;
+        }
+
+        // Render Galeri Gambar (Thumbnail)
+        const defaultGalleryHTML = `
+            <div class="col-span-2 row-span-2 rounded-2xl overflow-hidden shadow-soft bg-gray-800">
+                <img src="https://placehold.co/600x400/059669/ffffff?text=Pertandingan+Petanque" class="w-full h-full object-cover aspect-video hover:scale-105 transition-transform duration-500" alt="Galeri 1">
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-soft bg-gray-800">
+                <img src="https://placehold.co/400x400/7c3aed/ffffff?text=English+Carnival" class="w-full h-full object-cover aspect-square hover:scale-105 transition-transform duration-500" alt="Galeri 2">
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-soft bg-gray-800">
+                <img src="https://placehold.co/400x400/ea580c/ffffff?text=Tarian+Kolattam" class="w-full h-full object-cover aspect-square hover:scale-105 transition-transform duration-500" alt="Galeri 3">
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-soft bg-gray-800">
+                <img src="https://placehold.co/400x400/2563eb/ffffff?text=Sekitar+Karnival" class="w-full h-full object-cover aspect-square hover:scale-105 transition-transform duration-500" alt="Galeri 4">
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-soft bg-gray-800">
+                <img src="https://placehold.co/400x400/9f1239/ffffff?text=Penyampaian+Hadiah" class="w-full h-full object-cover aspect-square hover:scale-105 transition-transform duration-500" alt="Galeri 5">
+            </div>
+            <div class="col-span-2 md:col-span-1 lg:col-span-2 rounded-2xl overflow-hidden shadow-soft bg-gray-800">
+                <img src="https://placehold.co/800x400/4c1d95/ffffff?text=Majlis+Penutupan" class="w-full h-full object-cover aspect-[2/1] md:aspect-auto hover:scale-105 transition-transform duration-500" alt="Galeri 6">
+            </div>`;
+
+        function renderGallery(docs) {
+            const pubGrid = document.getElementById('public-gallery-grid');
+            const admList = document.getElementById('admin-gallery-list');
+            let adminHtml = '';
+
+            docs.sort((a,b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+
+            if (docs.length === 0) {
+                if (pubGrid) pubGrid.innerHTML = defaultGalleryHTML;
+                adminHtml = `<tr><td colspan="3" class="px-4 py-4 text-center text-gray-500">Tiada pautan gambar ditambah</td></tr>`;
+            } else {
+                let pubHtml = '';
+                docs.forEach(data => {
+                    const thumbSrc = resolveImageUrl(data.url, 'w600');
+                    const fullSrc = resolveImageUrl(data.url, 'w1200');
+                    const safeTitle = (data.title || 'Galeri Karnival').replace(/'/g, "\\'");
+
+                    pubHtml += `
+                    <div class="group relative rounded-2xl overflow-hidden shadow-soft bg-gray-800 cursor-pointer" onclick="openImageModal('${fullSrc}', '${safeTitle}')">
+                        <img src="${thumbSrc}" onerror="this.src='https://placehold.co/400x400/1f2937/ffffff?text=Gambar+Galeri'" class="w-full h-full object-cover aspect-square group-hover:scale-110 transition-transform duration-500" alt="${data.title}">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                            <span class="text-xs font-semibold text-white line-clamp-2">${data.title}</span>
+                        </div>
+                    </div>`;
+
+                    adminHtml += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3">
+                            <img src="${thumbSrc}" onerror="this.src='https://placehold.co/100x100/f3f4f6/9ca3af?text=Img'" class="w-14 h-14 object-cover rounded-lg border">
+                        </td>
+                        <td class="px-4 py-3 font-medium text-gray-800">${data.title}</td>
+                        <td class="px-4 py-3">
+                            <button onclick="deleteDocItem('gallery', '${data.id}')" class="text-red-500 hover:text-red-700 bg-red-50 p-2 rounded transition"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>`;
+                });
+                if (pubGrid) pubGrid.innerHTML = pubHtml;
+            }
+
+            if (admList) admList.innerHTML = adminHtml;
+        }
+
         function setupRealtimeListeners() {
             if(!db) return;
 
@@ -1573,12 +1936,10 @@
                         const d = new Date(data.regCloseDate);
                         dateDaftar = d.getTime();
                         
-                        // Format tarikh ke cth: (18 Sept)
                         const months = ['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogo','Sept','Okt','Nov','Dis'];
                         const labelEl = document.getElementById('label-tarikh-tutup');
                         if(labelEl) labelEl.textContent = `(${d.getDate()} ${months[d.getMonth()]})`;
 
-                        // Set nilai default pada form admin
                         const dateInput = document.getElementById('reg-date-input');
                         if(dateInput) {
                             const pad = n => n < 10 ? '0'+n : n;
@@ -1607,8 +1968,29 @@
                 const docs = [];
                 snapshot.forEach(doc => docs.push({id: doc.id, ...doc.data()}));
                 renderSchools(docs);
-                renderPenghantaranChecklists(docs); // Render checklist baharu
+                renderPenghantaranChecklists(docs);
             }, (error) => console.error("Error fetching schools:", error));
+
+            // Listen to Custom Menus
+            onSnapshot(pathMenus(), (snapshot) => {
+                const docs = [];
+                snapshot.forEach(doc => docs.push({id: doc.id, ...doc.data()}));
+                renderCustomMenus(docs);
+            }, (error) => console.error("Error fetching custom menus:", error));
+
+            // Listen to Winners
+            onSnapshot(pathWinners(), (snapshot) => {
+                const docs = [];
+                snapshot.forEach(doc => docs.push({id: doc.id, ...doc.data()}));
+                renderWinners(docs);
+            }, (error) => console.error("Error fetching winners:", error));
+
+            // Listen to Gallery
+            onSnapshot(pathGallery(), (snapshot) => {
+                const docs = [];
+                snapshot.forEach(doc => docs.push({id: doc.id, ...doc.data()}));
+                renderGallery(docs);
+            }, (error) => console.error("Error fetching gallery:", error));
         }
 
         // Add Announcement
@@ -1689,9 +2071,9 @@
                 await addDoc(pathSchools(), {
                     name: name,
                     category: category,
-                    bahanSubmitted: false, // Rekod baharu bermula sebagai belum menghantar (Semarak)
-                    bahanJazzChants: false, // Rekod baharu bermula sebagai belum menghantar (English)
-                    bahanBestCostumes: false, // Rekod baharu bermula sebagai belum menghantar (English)
+                    bahanSubmitted: false,
+                    bahanJazzChants: false,
+                    bahanBestCostumes: false,
                     timestamp: serverTimestamp()
                 });
                 
@@ -1700,6 +2082,107 @@
             } catch (err) {
                 console.error(err);
                 showToast("Ralat. Sila semak pangkalan data Firebase.", "error");
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // Add Custom Menu (Link)
+        document.getElementById('form-add-menu').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(!isAdmin) return showToast("Sila log masuk sebagai admin.", "error");
+
+            const title = document.getElementById('menu-title').value;
+            const url = document.getElementById('menu-url').value;
+            const btn = e.target.querySelector('button');
+            const originalText = btn.textContent;
+
+            try {
+                btn.textContent = "Menyimpan...";
+                btn.disabled = true;
+
+                await addDoc(pathMenus(), {
+                    title, url,
+                    timestamp: serverTimestamp()
+                });
+
+                e.target.reset();
+                showToast("Menu pautan berjaya ditambah.");
+            } catch (err) {
+                console.error(err);
+                showToast("Gagal menambah menu.", "error");
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // Add Winner (Image File or Image Link)
+        document.getElementById('form-add-winner').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(!isAdmin) return showToast("Sila log masuk sebagai admin.", "error");
+
+            const title = document.getElementById('winner-title').value;
+            const fileInput = document.getElementById('winner-file');
+            const urlInput = document.getElementById('winner-url').value.trim();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.textContent;
+
+            if (!fileInput.files[0] && !urlInput) {
+                return showToast("Sila pilih fail gambar atau masukkan pautan gambar.", "error");
+            }
+
+            try {
+                btn.textContent = "Memuat naik...";
+                btn.disabled = true;
+
+                let imageUrl = urlInput;
+                if (fileInput.files[0]) {
+                    imageUrl = await compressImageFile(fileInput.files[0], 1200, 0.8);
+                }
+
+                await addDoc(pathWinners(), {
+                    title,
+                    imageUrl,
+                    timestamp: serverTimestamp()
+                });
+
+                e.target.reset();
+                showToast("Senarai pemenang berjaya dimuat naik.");
+            } catch (err) {
+                console.error(err);
+                showToast("Gagal memuat naik gambar pemenang.", "error");
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // Add Gallery Image (Thumbnail Link)
+        document.getElementById('form-add-gallery').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(!isAdmin) return showToast("Sila log masuk sebagai admin.", "error");
+
+            const title = document.getElementById('gallery-title').value;
+            const url = document.getElementById('gallery-url').value.trim();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.textContent;
+
+            try {
+                btn.textContent = "Menyimpan...";
+                btn.disabled = true;
+
+                await addDoc(pathGallery(), {
+                    title, url,
+                    timestamp: serverTimestamp()
+                });
+
+                e.target.reset();
+                showToast("Gambar berjaya ditambah ke Galeri.");
+            } catch (err) {
+                console.error(err);
+                showToast("Gagal menambah gambar galeri.", "error");
             } finally {
                 btn.textContent = originalText;
                 btn.disabled = false;
@@ -1737,7 +2220,7 @@
         // Global Helper: Toggle Bahan Status (Admin)
         window.toggleBahanStatus = async function(checkbox, docId, fieldName = 'bahanSubmitted') {
             if(!isAdmin) {
-                checkbox.checked = !checkbox.checked; // Revert UI visually
+                checkbox.checked = !checkbox.checked;
                 return showToast("Akses ditolak. Sila log masuk admin.", "error");
             }
             try {
@@ -1748,7 +2231,7 @@
                 showToast("Status penghantaran berjaya dikemaskini.");
             } catch(e) {
                 console.error(e);
-                checkbox.checked = !checkbox.checked; // Revert UI visually on failure
+                checkbox.checked = !checkbox.checked;
                 showToast("Gagal mengemaskini status.", "error");
             }
         };
