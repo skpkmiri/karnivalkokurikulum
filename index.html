@@ -829,10 +829,44 @@
                         <div class="flex justify-between items-center mb-6">
                             <h2 class="text-2xl font-bold text-gray-900">Urus Pengumuman</h2>
                         </div>
+
+                        <!-- Form Tambah Poster (NEW) -->
+                        <form id="form-update-poster" class="bg-blue-50 p-6 rounded-xl border border-blue-200 mb-8 space-y-4 shadow-sm">
+                            <h3 class="font-bold text-blue-900 mb-2"><i class="fas fa-image mr-2"></i>Pengumuman Secara Poster (Pop-up)</h3>
+                            <p class="text-sm text-blue-700 mb-4">Muat naik poster yang akan dipaparkan secara automatik apabila pengguna membuka aplikasi.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-gray-700 mb-1">Muat Naik Gambar Poster</label>
+                                    <input type="file" id="poster-file" accept="image/*" class="w-full px-3 py-1.5 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-500 outline-none text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-700 mb-1">Atau Pautan URL Gambar</label>
+                                    <input type="text" id="poster-url" class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-white focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Cth: https://...">
+                                </div>
+                                <div class="md:col-span-2 flex items-center gap-3 bg-white p-3 rounded-lg border border-gray-200">
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" id="poster-active" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                    </label>
+                                    <span class="text-sm font-bold text-gray-800">Aktifkan Paparan Poster</span>
+                                </div>
+                            </div>
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition w-full md:w-auto mt-2">Simpan Tetapan Poster</button>
+                            
+                            <div class="mt-5 pt-4 border-t border-blue-200 flex items-center gap-4">
+                                <div>
+                                    <p class="text-xs text-blue-800 font-bold mb-1">Pratonton Semasa:</p>
+                                    <img id="admin-poster-thumb" src="https://placehold.co/400x300?text=Tiada+Poster" class="h-24 object-contain rounded border border-gray-300 bg-white">
+                                </div>
+                                <div class="flex-grow">
+                                    <span id="admin-poster-status" class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-gray-200 text-gray-600">Status: Tidak Aktif</span>
+                                </div>
+                            </div>
+                        </form>
                         
-                        <!-- Form Tambah -->
+                        <!-- Form Tambah Teks/Marquee -->
                         <form id="form-add-announcement" class="bg-gray-50 p-6 rounded-xl border border-gray-200 mb-8 space-y-4">
-                            <h3 class="font-bold text-gray-800 mb-2">Tambah Pengumuman Baru</h3>
+                            <h3 class="font-bold text-gray-800 mb-2">Tambah Pengumuman Teks Bergerak (Marquee)</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-sm text-gray-600 mb-1">Tajuk</label>
@@ -851,12 +885,12 @@
                                     <textarea id="ann-content" required rows="3" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
                                 </div>
                             </div>
-                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">Simpan Pengumuman</button>
+                            <button type="submit" class="bg-gray-800 text-white px-6 py-2 rounded-lg font-semibold hover:bg-gray-900 transition">Simpan Pengumuman Teks</button>
                         </form>
 
                         <!-- Senarai Pengumuman -->
                         <div>
-                            <h3 class="font-bold text-gray-800 mb-4">Senarai Semasa</h3>
+                            <h3 class="font-bold text-gray-800 mb-4">Senarai Teks Semasa</h3>
                             <div id="admin-announcements-list" class="space-y-3">
                                 <!-- Populated by JS -->
                             </div>
@@ -932,6 +966,7 @@
                                             <option value="SKPK Sibu">SKPK Sibu</option>
                                             <option value="SKPK Kota Samarahan">SKPK Kota Samarahan</option>
                                             <option value="SKPK Kuching">SKPK Kuching</option>
+                                            <option value="SK KG. BAKAM">SK KG. BAKAM</option>
                                         </optgroup>
                                         <optgroup label="Sabah">
                                             <option value="SKPK Kota Kinabalu">SKPK Kota Kinabalu</option>
@@ -1175,7 +1210,6 @@
                     <p class="text-gray-500 text-sm mb-5">Imbas kod QR di bawah atau klik butang untuk terus ke WhatsApp.</p>
                     
                     <div class="bg-gray-50 p-3 rounded-2xl inline-block mb-5 border border-gray-200 shadow-sm">
-                        <!-- Placeholder jika imej QR (cth: qr-tuaran.png) belum di-upload -->
                         <img id="qr-image" src="" onerror="this.src='https://placehold.co/200x200/ffffff/16a34a?text=Sila+Muat+Naik+QR'" alt="QR Code WhatsApp" class="w-48 h-48 object-cover rounded-xl">
                     </div>
                     <br>
@@ -1192,6 +1226,20 @@
                 <button onclick="closeImageModal()" class="absolute -top-10 right-0 text-white hover:text-red-400 text-2xl"><i class="fas fa-times"></i></button>
                 <img id="lightbox-img" src="" alt="Paparan Penuh" class="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl">
                 <p id="lightbox-caption" class="text-white font-semibold mt-3 text-center"></p>
+            </div>
+        </div>
+
+        <!-- Modal Popup Poster Pengumuman -->
+        <div id="popup-poster-modal" class="fixed inset-0 z-[120] hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+            <div class="relative max-w-2xl w-full flex flex-col items-center bg-white rounded-3xl p-3 shadow-2xl animate-[fadeIn_0.3s_ease-out]">
+                <div class="w-full flex justify-between items-center px-4 py-2 border-b border-gray-100 mb-3">
+                    <h3 class="font-bold text-gray-900 text-lg"><i class="fas fa-bullhorn text-red-500 mr-2"></i> Pengumuman Terkini</h3>
+                    <button onclick="closePopupPoster()" class="text-gray-400 hover:text-red-500 transition"><i class="fas fa-times text-xl"></i></button>
+                </div>
+                <img id="popup-poster-img" src="" alt="Pengumuman" class="w-full h-auto max-h-[70vh] object-contain rounded-xl bg-gray-50">
+                <button onclick="closePopupPoster()" class="mt-4 mb-2 w-full max-w-xs bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition-transform transform hover:-translate-y-1">
+                    Faham dan Tutup
+                </button>
             </div>
         </div>
 
@@ -1287,6 +1335,7 @@
         const db = getFirestore(app);
 
         let isAdmin = false;
+        let currentPosterId = null; // To manage popup session
 
         // Initialize state
         if(localStorage.getItem('karnival_admin') === 'true'){
@@ -1437,6 +1486,15 @@
             document.getElementById('image-lightbox-modal').classList.add('hidden');
         };
 
+        window.closePopupPoster = function() {
+            const modal = document.getElementById('popup-poster-modal');
+            if(modal) modal.classList.add('hidden');
+            if (currentPosterId) {
+                // Gunakan sessionStorage supaya ditutup sehingga tab atau browser dibuka semula (app dibuka)
+                sessionStorage.setItem(`seen_poster_${currentPosterId}`, 'true');
+            }
+        };
+
         // Mock Login Handler
         document.getElementById('admin-login-form').addEventListener('submit', (e) => {
             e.preventDefault();
@@ -1499,7 +1557,7 @@
             const floatingBanner = document.getElementById('floating-announcement');
             
             if(docs.length === 0) {
-                htmlAdmin = `<p class="text-gray-500 text-sm">Tiada rekod.</p>`;
+                htmlAdmin = `<p class="text-gray-500 text-sm">Tiada rekod teks bergerak.</p>`;
                 if(floatingBanner) {
                     floatingBanner.classList.remove('hidden');
                     document.getElementById('floating-badge').className = 'px-2 py-1 text-[10px] font-bold rounded whitespace-nowrap shadow-sm tracking-wider uppercase bg-white text-red-900';
@@ -1971,6 +2029,42 @@
                 }
             });
 
+            // Listen to Poster Settings (Pop-up Announcement)
+            onSnapshot(doc(db, 'settings', 'popup_poster'), (docSnap) => {
+                if(docSnap.exists()) {
+                    const data = docSnap.data();
+                    const modal = document.getElementById('popup-poster-modal');
+                    const img = document.getElementById('popup-poster-img');
+                    
+                    const adminThumb = document.getElementById('admin-poster-thumb');
+                    const adminStatus = document.getElementById('admin-poster-status');
+                    
+                    if (adminThumb) adminThumb.src = data.imageUrl || 'https://placehold.co/400x300?text=Tiada+Poster';
+                    if (adminStatus) {
+                        adminStatus.textContent = data.isActive ? 'Status: Aktif (Kelihatan)' : 'Status: Tidak Aktif (Tersembunyi)';
+                        adminStatus.className = data.isActive ? 'inline-block px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700' : 'inline-block px-3 py-1 rounded-full text-xs font-bold bg-gray-200 text-gray-600';
+                    }
+                    if (document.getElementById('poster-active')) document.getElementById('poster-active').checked = data.isActive;
+
+                    if (data.isActive && data.imageUrl) {
+                        let posterTs = 'static';
+                        if (data.updatedAt && typeof data.updatedAt.toMillis === 'function') {
+                            posterTs = data.updatedAt.toMillis();
+                        }
+                        
+                        const hasSeen = sessionStorage.getItem(`seen_poster_${posterTs}`);
+                        
+                        if (!hasSeen) {
+                            currentPosterId = posterTs;
+                            if(img) img.src = data.imageUrl;
+                            if(modal) modal.classList.remove('hidden');
+                        }
+                    } else {
+                        if(modal) modal.classList.add('hidden');
+                    }
+                }
+            });
+
             // Listen to Announcements
             onSnapshot(pathAnnouncements(), (snapshot) => {
                 const docs = [];
@@ -2014,6 +2108,54 @@
                 renderGallery(docs);
             }, (error) => console.error("Error fetching gallery:", error));
         }
+
+        // Add / Update Poster (Pop-up)
+        document.getElementById('form-update-poster').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(!isAdmin) return showToast("Sila log masuk sebagai admin.", "error");
+
+            const fileInput = document.getElementById('poster-file');
+            const urlInput = document.getElementById('poster-url').value.trim();
+            const isActive = document.getElementById('poster-active').checked;
+            const btn = e.target.querySelector('button');
+            const originalText = btn.textContent;
+
+            try {
+                btn.textContent = "Menyimpan...";
+                btn.disabled = true;
+
+                let imageUrl = urlInput;
+                
+                // Keep existing image if no new file/url is provided
+                const posterSnap = await getDoc(doc(db, 'settings', 'popup_poster'));
+                let currentUrl = '';
+                if (posterSnap.exists()) {
+                    currentUrl = posterSnap.data().imageUrl || '';
+                }
+
+                if (fileInput.files[0]) {
+                    imageUrl = await compressImageFile(fileInput.files[0], 1200, 0.8);
+                } else if (!urlInput && currentUrl) {
+                    imageUrl = currentUrl;
+                }
+
+                await setDoc(doc(db, 'settings', 'popup_poster'), {
+                    imageUrl: imageUrl,
+                    isActive: isActive,
+                    updatedAt: serverTimestamp()
+                }, { merge: true });
+
+                showToast("Tetapan poster berjaya disimpan.");
+                fileInput.value = "";
+                document.getElementById('poster-url').value = "";
+            } catch (err) {
+                console.error(err);
+                showToast("Gagal menyimpan poster.", "error");
+            } finally {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        });
 
         // Add Announcement
         document.getElementById('form-add-announcement').addEventListener('submit', async (e) => {
@@ -2351,3 +2493,10 @@
     </script>
 </body>
 </html>
+```eof
+
+Tindakan yang telah diambil berpandukan senarai yang anda berikan:
+
+1.  **Semua fungsi dan struktur asal telah dikekalkan** dengan jayanya, dan fail ini masih berjalan di bawah satu fail `.html` (termasuk CSS dan JavaScript).
+2.  **Bahagian Pengumuman Secara Poster** telah ditambah di dalam tab "Urus Pengumuman" portal Admin. Kini Admin boleh memuat naik poster (fail dari peranti atau pautan URL), dan mengaktifkannya. Poster ini akan terpapar sebagai pop-up sebaik sahaja pengguna membuka aplikasi, dan ia akan ditutup secara muktamad (*untuk sesi tersebut*) apabila pengguna menekan "Faham dan Tutup". Bahagian tetapan *Tambah Menu* asal telah dikekalkan.
+3.  **SK KG. BAKAM** telah dimasukkan dengan jayanya di bawah senarai nama sekolah kategori Sarawak dalam ruang borang *Tambah Rekod Penyertaan*.
