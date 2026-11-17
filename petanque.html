@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pertandingan Petanque Zon Borneo 2026</title>
+    <title>Kejohanan Petanque SKPK Zon Borneo 2026</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             theme: {
@@ -16,11 +20,11 @@
                     },
                     colors: {
                         petanque: {
-                            green: '#2d6a4f',
-                            lightgreen: '#40916c',
-                            silver: '#d8e2dc',
-                            gold: '#ffd700',
-                            red: '#d90429'
+                            light: '#4ade80', // Green for field
+                            DEFAULT: '#16a34a',
+                            dark: '#14532d',
+                            gold: '#fbbf24',
+                            metal: '#9ca3af'
                         }
                     }
                 }
@@ -29,529 +33,579 @@
     </script>
     <style>
         body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
             -webkit-tap-highlight-color: transparent;
         }
+        
         .tab-content {
             display: none;
             animation: fadeIn 0.3s ease-in-out;
         }
+        
         .tab-content.active {
             display: block;
         }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        /* Boule decorative background */
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
         .boule-bg {
-            background-image: radial-gradient(circle at top right, rgba(216, 226, 220, 0.1), transparent 40%),
-                              radial-gradient(circle at bottom left, rgba(45, 106, 79, 0.05), transparent 40%);
+            background-image: radial-gradient(circle at 30% 30%, #d1d5db, #6b7280);
+            box-shadow: inset -5px -5px 15px rgba(0,0,0,0.5), 5px 5px 10px rgba(0,0,0,0.2);
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans pb-20 md:pb-0 boule-bg min-h-screen">
+<body class="text-gray-800 pb-20 md:pb-0 pt-16 md:pt-20 min-h-screen flex flex-col">
 
-    <!-- Header / Top Bar -->
-    <header class="bg-petanque-green text-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto px-4 py-4 flex items-center gap-4">
-            <div class="w-12 h-12 rounded-full bg-petanque-silver flex items-center justify-center text-petanque-green shadow-inner border-2 border-gray-300">
-                <i class="fa-solid fa-baseball font-bold text-2xl"></i> <!-- Represents Boule -->
+    <!-- Top Navigation (Desktop & Mobile Header) -->
+    <header class="bg-petanque-dark text-white fixed top-0 w-full z-50 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center p-1 overflow-hidden">
+                    <!-- Logo Updated to pet.png -->
+                    <img src="pet.png" alt="Logo Petanque" class="w-full h-full object-contain">
+                </div>
+                <div>
+                    <h1 class="font-bold text-sm md:text-lg leading-tight">Petanque Khas Borneo 2026</h1>
+                    <p class="text-[10px] md:text-xs text-petanque-light">SK Pendidikan Khas Miri</p>
+                </div>
             </div>
-            <div>
-                <h1 class="text-lg md:text-xl font-bold leading-tight">PETANQUE ZON BORNEO 2026</h1>
-                <p class="text-xs md:text-sm text-green-200">Karnival Kokurikulum SPK • 19 Nov 2026</p>
-            </div>
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex gap-6">
+                <button onclick="switchTab('utama')" class="nav-btn-desktop text-white/80 hover:text-white font-medium transition active-tab-desktop" data-target="utama">Utama</button>
+                <button onclick="switchTab('jadual')" class="nav-btn-desktop text-white/80 hover:text-white font-medium transition" data-target="jadual">Jadual</button>
+                <button onclick="switchTab('keputusan')" class="nav-btn-desktop text-white/80 hover:text-white font-medium transition" data-target="keputusan">Keputusan</button>
+                <button onclick="switchTab('peraturan')" class="nav-btn-desktop text-white/80 hover:text-white font-medium transition" data-target="peraturan">Peraturan</button>
+            </nav>
         </div>
     </header>
 
-    <!-- Desktop Sidebar/Nav & Main Content Wrapper -->
-    <div class="max-w-4xl mx-auto md:flex md:gap-6 md:pt-6 md:px-4">
-        
-        <!-- Desktop Nav (Hidden on Mobile) -->
-        <nav class="hidden md:block w-64 shrink-0 bg-white rounded-xl shadow-md p-4 h-fit sticky top-28">
-            <ul class="space-y-2">
-                <li><button onclick="switchTab('utama')" id="nav-utama-desk" class="w-full text-left px-4 py-3 rounded-lg font-semibold text-petanque-green bg-green-50 transition"><i class="fa-solid fa-house w-6 text-center mr-2"></i> Utama</button></li>
-                <li><button onclick="switchTab('jadual')" id="nav-jadual-desk" class="w-full text-left px-4 py-3 rounded-lg font-semibold text-gray-600 hover:bg-gray-50 transition"><i class="fa-solid fa-calendar-days w-6 text-center mr-2"></i> Jadual</button></li>
-                <li><button onclick="switchTab('acara')" id="nav-acara-desk" class="w-full text-left px-4 py-3 rounded-lg font-semibold text-gray-600 hover:bg-gray-50 transition"><i class="fa-solid fa-medal w-6 text-center mr-2"></i> Acara & Hadiah</button></li>
-                <li><button onclick="switchTab('peraturan')" id="nav-peraturan-desk" class="w-full text-left px-4 py-3 rounded-lg font-semibold text-gray-600 hover:bg-gray-50 transition"><i class="fa-solid fa-book w-6 text-center mr-2"></i> Peraturan</button></li>
-            </ul>
-        </nav>
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-6xl mx-auto w-full p-4 md:p-6">
 
-        <!-- Main Content Area -->
-        <main class="flex-1 px-4 py-6 md:py-0 md:px-0 min-h-[70vh]">
+        <!-- 1. HALAMAN UTAMA -->
+        <section id="utama" class="tab-content active">
+            <!-- Hero Banner -->
+            <div class="relative bg-petanque rounded-2xl overflow-hidden shadow-lg mb-8">
+                <div class="absolute inset-0 bg-black/20"></div>
+                <!-- Abstract boules decoration -->
+                <div class="absolute -right-10 -bottom-10 w-40 h-40 rounded-full boule-bg opacity-80"></div>
+                <div class="absolute right-20 top-5 w-16 h-16 rounded-full bg-red-500/80 shadow-inner"></div> <!-- Jack/Cochonnet -->
+                
+                <div class="relative p-6 md:p-10 z-10 text-white">
+                    <span class="inline-block px-3 py-1 bg-petanque-gold text-petanque-dark text-xs font-bold rounded-full mb-3 shadow">KARNIVAL KOKURIKULUM 2026</span>
+                    <h2 class="text-2xl md:text-4xl font-extrabold mb-2 text-balance">Pertandingan Petanque Pendidikan Khas Zon Borneo</h2>
+                    <p class="text-sm md:text-base text-white/90 max-w-2xl mb-6">Mencungkil bakat murid berkeperluan pendidikan khas (MBPK) dalam sukan petanque serta mengeratkan ukhuwah antara sekolah-sekolah di Sarawak dan Sabah.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white/20 backdrop-blur-sm p-3 rounded-xl flex items-center gap-4">
+                            <i class="fa-regular fa-calendar-days text-2xl text-petanque-gold"></i>
+                            <div>
+                                <p class="text-xs text-white/70">Tarikh</p>
+                                <p class="font-bold">19 November 2026</p>
+                            </div>
+                        </div>
+                        <div class="bg-white/20 backdrop-blur-sm p-3 rounded-xl flex items-center gap-4">
+                            <i class="fa-regular fa-clock text-2xl text-petanque-gold"></i>
+                            <div>
+                                <p class="text-xs text-white/70">Masa</p>
+                                <p class="font-bold">8.00 Pagi - 4.00 Petang</p>
+                            </div>
+                        </div>
+                        <div class="bg-white/20 backdrop-blur-sm p-3 rounded-xl flex items-center gap-4">
+                            <i class="fa-solid fa-location-dot text-2xl text-petanque-gold"></i>
+                            <div>
+                                <p class="text-xs text-white/70">Tempat</p>
+                                <p class="font-bold text-sm">Gelanggang Petanque SKPK Miri</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Participating Schools -> Changed to Participants List -->
+            <h3 class="text-xl font-bold mb-4 text-petanque-dark flex items-center gap-2">
+                <i class="fa-solid fa-users"></i> Senarai Peserta
+            </h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                
+                <!-- SKPK Miri -->
+                <div class="bg-white rounded-xl shadow-md border-t-4 border-yellow-400 overflow-hidden">
+                    <div class="bg-gray-50 p-4 border-b flex items-center gap-4">
+                        <div class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center flex-shrink-0 overflow-hidden p-1">
+                            <img src="skpkm.png" alt="Logo SKPK Miri" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-bold text-lg text-gray-800 uppercase">SKPK MIRI</h4>
+                    </div>
+                    <div class="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <h5 class="text-xs font-bold text-petanque-dark mb-2 bg-green-100 inline-block px-2 py-1 rounded">MURID (B13)</h5>
+                            <ol class="text-xs text-gray-700 list-decimal pl-4 space-y-1">
+                                <li>ALEXZANDER NGAOH ANAK MOSES KUDI</li>
+                                <li>JOSELINE JONG SHI YING</li>
+                                <li>IZZ IBTISAM BIN AHMAD MUJAHID</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <h5 class="text-xs font-bold text-blue-800 mb-2 bg-blue-100 inline-block px-2 py-1 rounded">GURU & STAF</h5>
+                            <ol class="text-xs text-gray-700 list-decimal pl-4 space-y-1">
+                                <li>MOHAMAD ABIDIN BIN SIPEK</li>
+                                <li>SALIHIN BIN AHMAD</li>
+                                <li>EIFILISIA AMBER ANAK MERVIN</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SKPK Kuching -->
+                <div class="bg-white rounded-xl shadow-md border-t-4 border-yellow-400 overflow-hidden">
+                    <div class="bg-gray-50 p-4 border-b flex items-center gap-4">
+                        <div class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center flex-shrink-0 overflow-hidden p-1">
+                            <img src="skpkk.png" alt="Logo SKPK Kuching" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-bold text-lg text-gray-800 uppercase">SKPK KUCHING</h4>
+                    </div>
+                    <div class="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <h5 class="text-xs font-bold text-petanque-dark mb-2 bg-green-100 inline-block px-2 py-1 rounded">MURID (B13)</h5>
+                            <ol class="text-xs text-gray-700 list-decimal pl-4 space-y-1">
+                                <li>AHMAT DAIM BIN MOHD FAIRUZ</li>
+                                <li>ZAYYAN ZUHAIRY BIN MOHAMAD AL SIDDIQ</li>
+                                <li>MOHAMAD HAZMARUL BIN HAMSI (Simpanan)</li>
+                                <li>TRACY ANELDA ANAK SANDAH @GILIN</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <h5 class="text-xs font-bold text-blue-800 mb-2 bg-blue-100 inline-block px-2 py-1 rounded">GURU & STAF</h5>
+                            <ol class="text-xs text-gray-700 list-decimal pl-4 space-y-1">
+                                <li>NAJWA BINTI AHMAD TARMIZI</li>
+                                <li>RAHIMAN BIN JUMAT</li>
+                                <li>MUHAMMAD NASRULLAH BIN JAAFAR</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SKPK Kota Samarahan -->
+                <div class="bg-white rounded-xl shadow-md border-t-4 border-yellow-400 overflow-hidden">
+                    <div class="bg-gray-50 p-4 border-b flex items-center gap-4">
+                        <div class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center flex-shrink-0 overflow-hidden p-1">
+                            <img src="skpkks.png" alt="Logo SKPK Kota Samarahan" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-bold text-lg text-gray-800 uppercase">SKPK KOTA SAMARAHAN</h4>
+                    </div>
+                    <div class="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <h5 class="text-xs font-bold text-petanque-dark mb-2 bg-green-100 inline-block px-2 py-1 rounded">MURID (B13)</h5>
+                            <ol class="text-xs text-gray-700 list-decimal pl-4 space-y-1">
+                                <li>AZIFF MUKHRIZ BIN AZILIMAN</li>
+                                <li>QHADIELIEYN QHAUSYAR BINTI RAFAIE</li>
+                                <li>NUR SAKINAH BINTI ABDULLAH</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <h5 class="text-xs font-bold text-blue-800 mb-2 bg-blue-100 inline-block px-2 py-1 rounded">GURU & STAF</h5>
+                            <ol class="text-xs text-gray-700 list-decimal pl-4 space-y-1">
+                                <li>ALEXANDER ANAK JOIN</li>
+                                <li>AMIR MAHMUD BIN PIANG</li>
+                                <li>WAN MOHAMMAD AMIRUL BIN WAN ALI</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SKPK Sibu -->
+                <div class="bg-white rounded-xl shadow-md border-t-4 border-yellow-400 overflow-hidden">
+                    <div class="bg-gray-50 p-4 border-b flex items-center gap-4">
+                        <div class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center flex-shrink-0 overflow-hidden p-1">
+                            <img src="skpks.png" alt="Logo SKPK Sibu" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-bold text-lg text-gray-800 uppercase">SKPK SIBU</h4>
+                    </div>
+                    <div class="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <h5 class="text-xs font-bold text-petanque-dark mb-2 bg-green-100 inline-block px-2 py-1 rounded">MURID (B13)</h5>
+                            <ol class="text-xs text-gray-700 list-decimal pl-4 space-y-1">
+                                <li>JONIOR EBANSON WAN ANAK ENGKUANG</li>
+                                <li>MUHAMMAD ZULKARNAIN BIN ZAINAL</li>
+                                <li>NUR QAILINA BINTI HASHIM (Simpanan)</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <h5 class="text-xs font-bold text-blue-800 mb-2 bg-blue-100 inline-block px-2 py-1 rounded">GURU & STAF</h5>
+                            <ol class="text-xs text-gray-700 list-decimal pl-4 space-y-1">
+                                <li>ADAM FIRDAUS BIN ROZAINEEMAN</li>
+                                <li>MUHAMMAD NAJIB BIN AHIM</li>
+                                <li>LAURA ANAK LEO EMPAYUT</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SKPK Kota Kinabalu -->
+                <div class="bg-white rounded-xl shadow-md border-t-4 border-blue-400 overflow-hidden">
+                    <div class="bg-gray-50 p-4 border-b flex items-center gap-4">
+                        <div class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center flex-shrink-0 overflow-hidden p-1">
+                            <img src="skpkkk.png" alt="Logo SKPK Kota Kinabalu" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-bold text-lg text-gray-800 uppercase">SKPK KOTA KINABALU</h4>
+                    </div>
+                    <div class="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <h5 class="text-xs font-bold text-petanque-dark mb-2 bg-green-100 inline-block px-2 py-1 rounded">MURID (B13)</h5>
+                            <ol class="text-xs text-gray-700 list-decimal pl-4 space-y-1">
+                                <li>YANA BATISYAH BINTI AYUB</li>
+                                <li>BREVYN ROYDENN ROMMIE STEPHEN</li>
+                                <li>MUHAMMAD FAUZAN NAUFAL BIN ABDUL FAUZI</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <h5 class="text-xs font-bold text-blue-800 mb-2 bg-blue-100 inline-block px-2 py-1 rounded">GURU & STAF</h5>
+                            <ol class="text-xs text-gray-700 list-decimal pl-4 space-y-1">
+                                <li>SITI FARHANA BINTI KAWID</li>
+                                <li>MOHD KHAIRULLAH BIN JENULA</li>
+                                <li>SYAHFIQAH BINTI MOHD DAUD</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Contact/Urusetia -->
+            <div class="bg-blue-50 border border-blue-100 rounded-xl p-5 shadow-sm">
+                <h4 class="font-bold text-blue-800 mb-3"><i class="fa-solid fa-headset mr-2"></i> Hubungi Urusetia</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-center justify-between bg-white p-3 rounded-lg border border-blue-100">
+                        <div>
+                            <p class="font-semibold text-sm">Salihin Bin Ahmad</p>
+                            <p class="text-xs text-gray-500">PK Kokurikulum</p>
+                        </div>
+                        <a href="https://wa.me/60133598873" target="_blank" class="bg-green-100 text-green-700 hover:bg-green-200 transition-colors w-8 h-8 rounded-full flex items-center justify-center" title="WhatsApp Salihin">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                        </a>
+                    </div>
+                    <div class="flex items-center justify-between bg-white p-3 rounded-lg border border-blue-100">
+                        <div>
+                            <p class="font-semibold text-sm">Christian Simon</p>
+                            <p class="text-xs text-gray-500">Penyelaras Petanque</p>
+                        </div>
+                        <a href="https://wa.me/601164651922" target="_blank" class="bg-green-100 text-green-700 hover:bg-green-200 transition-colors w-8 h-8 rounded-full flex items-center justify-center" title="WhatsApp Christian">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. JADUAL TENTATIF -->
+        <section id="jadual" class="tab-content">
+            <h2 class="text-2xl font-bold mb-6 text-petanque-dark border-b-2 border-petanque-light pb-2">Jadual Kejohanan</h2>
             
-            <!-- TAB 1: UTAMA -->
-            <section id="utama" class="tab-content active space-y-6">
-                <!-- Welcome Banner -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border-t-4 border-petanque-lightgreen relative overflow-hidden">
-                    <div class="absolute -right-10 -bottom-10 opacity-10">
-                        <i class="fa-solid fa-bullseye text-9xl"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold text-petanque-green mb-2">Selamat Datang!</h2>
-                    <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-                        Aplikasi rujukan rasmi untuk Pertandingan Petanque Sempena Karnival Kokurikulum Sekolah-Sekolah Pendidikan Khas Zon Borneo 2026 anjuran <strong>Kelab Petanque SKPK Miri</strong>.
-                    </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
-                        <div class="flex items-center gap-3 bg-gray-50 p-3 rounded-lg border border-gray-100">
-                            <div class="w-10 h-10 rounded-full bg-green-100 text-petanque-green flex items-center justify-center shrink-0"><i class="fa-solid fa-calendar"></i></div>
-                            <div>
-                                <p class="text-xs text-gray-500 font-semibold">Tarikh</p>
-                                <p class="text-sm font-bold">19 November 2026 (Khamis)</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 bg-gray-50 p-3 rounded-lg border border-gray-100">
-                            <div class="w-10 h-10 rounded-full bg-green-100 text-petanque-green flex items-center justify-center shrink-0"><i class="fa-solid fa-clock"></i></div>
-                            <div>
-                                <p class="text-xs text-gray-500 font-semibold">Masa</p>
-                                <p class="text-sm font-bold">8.00 pagi - 4.00 petang</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 bg-gray-50 p-3 rounded-lg border border-gray-100 sm:col-span-2">
-                            <div class="w-10 h-10 rounded-full bg-green-100 text-petanque-green flex items-center justify-center shrink-0"><i class="fa-solid fa-map-location-dot"></i></div>
-                            <div>
-                                <p class="text-xs text-gray-500 font-semibold">Tempat</p>
-                                <p class="text-sm font-bold">Gelanggang Petanque SK Pendidikan Khas Miri</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sekolah Terlibat -->
-                <div>
-                    <h3 class="font-bold text-lg mb-3 flex items-center gap-2"><i class="fa-solid fa-users-line text-petanque-lightgreen"></i> Pasukan Bertanding</h3>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                        <div class="bg-white p-3 rounded-xl shadow-sm text-center border border-gray-100 flex flex-col items-center gap-2">
-                            <div class="w-12 h-12 flex items-center justify-center">
-                                <img src="skpkm.png" alt="Logo SKPK Miri" class="max-w-full max-h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/d8e2dc/2d6a4f?text=Miri'">
-                            </div>
-                            <span class="text-xs font-semibold">SKPK Miri</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-xl shadow-sm text-center border border-gray-100 flex flex-col items-center gap-2">
-                            <div class="w-12 h-12 flex items-center justify-center">
-                                <img src="skpks.png" alt="Logo SKPK Sibu" class="max-w-full max-h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/d8e2dc/2d6a4f?text=Sibu'">
-                            </div>
-                            <span class="text-xs font-semibold">SKPK Sibu</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-xl shadow-sm text-center border border-gray-100 flex flex-col items-center gap-2">
-                            <div class="w-12 h-12 flex items-center justify-center">
-                                <img src="skpkk.png" alt="Logo SKPK Kuching" class="max-w-full max-h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/d8e2dc/2d6a4f?text=Kuching'">
-                            </div>
-                            <span class="text-xs font-semibold">SKPK Kuching</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-xl shadow-sm text-center border border-gray-100 flex flex-col items-center gap-2">
-                            <div class="w-12 h-12 flex items-center justify-center">
-                                <img src="skpkks.png" alt="Logo SKPK Kota Samarahan" class="max-w-full max-h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/d8e2dc/2d6a4f?text=K.Sam'">
-                            </div>
-                            <span class="text-xs font-semibold text-center">SKPK Kota Samarahan</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-xl shadow-sm text-center border border-gray-100 flex flex-col items-center gap-2">
-                            <div class="w-12 h-12 flex items-center justify-center">
-                                <img src="skpkkk.png" alt="Logo SKPK Kota Kinabalu" class="max-w-full max-h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/d8e2dc/2d6a4f?text=K.Kin'">
-                            </div>
-                            <span class="text-xs font-semibold text-center">SKPK Kota Kinabalu</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- TAB 2: JADUAL -->
-            <section id="jadual" class="tab-content space-y-4">
-                <h2 class="text-2xl font-bold text-petanque-green mb-4">Tentatif Program</h2>
-                <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
-                    <div class="relative border-l-4 border-petanque-lightgreen ml-4 py-4 space-y-6">
-                        
-                        <!-- Timeline Item -->
-                        <div class="relative pl-6 pr-4">
-                            <div class="absolute w-3 h-3 bg-petanque-green rounded-full -left-[1.1rem] top-1.5 border-2 border-white"></div>
-                            <div class="text-xs font-bold text-petanque-lightgreen mb-1">7.00 AM</div>
-                            <div class="bg-gray-50 rounded-lg p-3 border border-gray-100">
-                                <p class="font-semibold text-sm">Pendaftaran Peserta</p>
-                                <p class="text-xs text-gray-500 mt-1"><i class="fa-solid fa-user-check mr-1"></i> Urusetia</p>
-                            </div>
-                        </div>
-
-                        <!-- Timeline Item -->
-                        <div class="relative pl-6 pr-4">
-                            <div class="absolute w-3 h-3 bg-blue-500 rounded-full -left-[1.1rem] top-1.5 border-2 border-white"></div>
-                            <div class="text-xs font-bold text-blue-500 mb-1">8.00 AM - 8.45 AM</div>
-                            <div class="bg-blue-50 rounded-lg p-3 border border-blue-100">
-                                <p class="font-semibold text-sm">Mixed Triple Murid</p>
-                                <p class="text-xs text-blue-700 mt-1">Pusingan 1 (Piste 1, 2, 3)</p>
-                            </div>
-                        </div>
-
-                        <!-- Timeline Item -->
-                        <div class="relative pl-6 pr-4">
-                            <div class="absolute w-3 h-3 bg-orange-500 rounded-full -left-[1.1rem] top-1.5 border-2 border-white"></div>
-                            <div class="text-xs font-bold text-orange-500 mb-1">9.00 AM - 9.45 AM</div>
-                            <div class="bg-orange-50 rounded-lg p-3 border border-orange-100">
-                                <p class="font-semibold text-sm">Mixed Triple Guru</p>
-                                <p class="text-xs text-orange-700 mt-1">Pusingan 1 (Piste 1, 2, 3)</p>
-                            </div>
-                        </div>
-
-                        <!-- Timeline Item -->
-                        <div class="relative pl-6 pr-4">
-                            <div class="absolute w-3 h-3 bg-blue-500 rounded-full -left-[1.1rem] top-1.5 border-2 border-white"></div>
-                            <div class="text-xs font-bold text-blue-500 mb-1">10.00 AM - 10.45 AM</div>
-                            <div class="bg-blue-50 rounded-lg p-3 border border-blue-100">
-                                <p class="font-semibold text-sm">Mixed Triple Murid</p>
-                                <p class="text-xs text-blue-700 mt-1">Pusingan 2 (Piste 1, 2, 3)</p>
-                            </div>
-                        </div>
-
-                        <!-- Timeline Item -->
-                        <div class="relative pl-6 pr-4">
-                            <div class="absolute w-3 h-3 bg-orange-500 rounded-full -left-[1.1rem] top-1.5 border-2 border-white"></div>
-                            <div class="text-xs font-bold text-orange-500 mb-1">11.00 AM - 11.45 AM</div>
-                            <div class="bg-orange-50 rounded-lg p-3 border border-orange-100">
-                                <p class="font-semibold text-sm">Mixed Triple Guru</p>
-                                <p class="text-xs text-orange-700 mt-1">Pusingan 2 (Piste 1, 2, 3)</p>
-                            </div>
-                        </div>
-
-                        <!-- Timeline Item -->
-                        <div class="relative pl-6 pr-4">
-                            <div class="absolute w-3 h-3 bg-blue-500 rounded-full -left-[1.1rem] top-1.5 border-2 border-white"></div>
-                            <div class="text-xs font-bold text-blue-500 mb-1">12.00 PM - 12.45 PM</div>
-                            <div class="bg-blue-50 rounded-lg p-3 border border-blue-100">
-                                <p class="font-semibold text-sm">Mixed Triple Murid</p>
-                                <p class="text-xs text-blue-700 mt-1">Pusingan 3 (Piste 1, 2, 3)</p>
-                            </div>
-                        </div>
-
-                        <!-- Timeline Item -->
-                        <div class="relative pl-6 pr-4">
-                            <div class="absolute w-3 h-3 bg-orange-500 rounded-full -left-[1.1rem] top-1.5 border-2 border-white"></div>
-                            <div class="text-xs font-bold text-orange-500 mb-1">1.00 PM - 1.45 PM</div>
-                            <div class="bg-orange-50 rounded-lg p-3 border border-orange-100">
-                                <p class="font-semibold text-sm">Mixed Triple Guru</p>
-                                <p class="text-xs text-orange-700 mt-1">Pusingan 3 (Piste 1, 2, 3)</p>
-                            </div>
-                        </div>
-
-                        <!-- Timeline Item -->
-                        <div class="relative pl-6 pr-4">
-                            <div class="absolute w-3 h-3 bg-purple-500 rounded-full -left-[1.1rem] top-1.5 border-2 border-white"></div>
-                            <div class="text-xs font-bold text-purple-500 mb-1">2.30 PM</div>
-                            <div class="bg-purple-50 rounded-lg p-3 border border-purple-100">
-                                <p class="font-semibold text-sm">Pointing Event Murid</p>
-                                <p class="text-xs text-purple-700 mt-1">2 peserta (1 pointing, 1 shooting atau 1 peserta untuk keduanya)</p>
-                            </div>
-                        </div>
-
-                        <!-- Timeline Item -->
-                        <div class="relative pl-6 pr-4">
-                            <div class="absolute w-3 h-3 bg-purple-500 rounded-full -left-[1.1rem] top-1.5 border-2 border-white"></div>
-                            <div class="text-xs font-bold text-purple-500 mb-1">3.30 PM</div>
-                            <div class="bg-purple-50 rounded-lg p-3 border border-purple-100">
-                                <p class="font-semibold text-sm">Shooting Event Murid</p>
-                                <p class="text-xs text-purple-700 mt-1">Selesai program bersurai</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- TAB 3: ACARA & HADIAH -->
-            <section id="acara" class="tab-content space-y-6">
+            <div class="relative border-l-2 border-petanque-light ml-4 md:ml-6 space-y-6 pb-8">
                 
-                <!-- Kategori & Hadiah -->
-                <div>
-                    <h2 class="text-2xl font-bold text-petanque-green mb-4">Kategori & Hadiah</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <!-- Card 1 -->
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-                            <div class="flex items-center gap-3 border-b pb-3 mb-3">
-                                <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-lg"><i class="fa-solid fa-children"></i></div>
-                                <div>
-                                    <h3 class="font-bold text-sm">Mixed Triple Murid</h3>
-                                    <p class="text-xs text-gray-500">Pasukan</p>
-                                </div>
-                            </div>
-                            <ul class="text-xs space-y-2 text-gray-600">
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-trophy text-yellow-500"></i> Johan: Wang, Medal, Piala, Sijil</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-medal text-gray-400"></i> N.Johan: Wang, Medal, Piala, Sijil</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-medal text-amber-700"></i> Ketiga (2 set): Wang, Medal, Piala, Sijil</li>
-                            </ul>
-                        </div>
-                        
-                        <!-- Card 2 -->
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-                            <div class="flex items-center gap-3 border-b pb-3 mb-3">
-                                <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-lg"><i class="fa-solid fa-chalkboard-user"></i></div>
-                                <div>
-                                    <h3 class="font-bold text-sm">Mixed Triple Guru</h3>
-                                    <p class="text-xs text-gray-500">Pasukan</p>
-                                </div>
-                            </div>
-                            <ul class="text-xs space-y-2 text-gray-600">
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-trophy text-yellow-500"></i> Johan: Wang, Medal, Piala, Sijil</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-medal text-gray-400"></i> N.Johan: Wang, Medal, Piala, Sijil</li>
-                                <li class="flex items-center gap-2"><i class="fa-solid fa-medal text-amber-700"></i> Ketiga (2 set): Wang, Medal, Piala, Sijil</li>
-                            </ul>
-                        </div>
+                <!-- Timeline Item -->
+                <div class="relative pl-6">
+                    <div class="absolute w-4 h-4 bg-petanque-gold rounded-full border-2 border-white -left-[9px] top-1"></div>
+                    <div class="text-sm text-petanque font-bold">7:00 AM</div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mt-1">
+                        <h4 class="font-bold text-gray-800">Pendaftaran Peserta</h4>
+                        <p class="text-xs text-gray-500 mt-1"><i class="fa-solid fa-location-dot mr-1"></i> Kaunter Urusetia</p>
                     </div>
                 </div>
 
-                <!-- MVP & Individual -->
-                <div class="bg-gradient-to-r from-petanque-green to-petanque-lightgreen text-white rounded-xl shadow-md p-5 relative overflow-hidden">
-                    <i class="fa-solid fa-star absolute -right-4 -bottom-4 text-7xl opacity-20"></i>
-                    <h3 class="font-bold text-lg mb-2"><i class="fa-solid fa-award text-yellow-300 mr-2"></i> Anugerah Khas Murid</h3>
-                    <div class="space-y-3 mt-4 relative z-10">
-                        <div class="bg-white/10 p-3 rounded-lg backdrop-blur-sm">
-                            <p class="font-semibold text-sm text-yellow-300">Most Valuable Player (MVP)</p>
-                            <p class="text-xs mt-1 leading-relaxed">Berdasarkan jumlah poin terkumpul: <br>• Emas (5 poin), Perak (3 poin), Gangsa (1 poin) untuk Mixed Triple. <br>• Ditambah mata dari Pointing & Shooting Event.</p>
-                        </div>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div class="bg-white/10 p-3 rounded-lg backdrop-blur-sm">
-                                <p class="font-semibold text-sm text-yellow-300">Best Pointer</p>
-                                <p class="text-xs mt-1">Piala & Sijil</p>
-                            </div>
-                            <div class="bg-white/10 p-3 rounded-lg backdrop-blur-sm">
-                                <p class="font-semibold text-sm text-yellow-300">Best Shooter</p>
-                                <p class="text-xs mt-1">Piala & Sijil</p>
-                            </div>
-                        </div>
+                <div class="relative pl-6">
+                    <div class="absolute w-4 h-4 bg-petanque rounded-full border-2 border-white -left-[9px] top-1"></div>
+                    <div class="text-sm text-petanque font-bold">8:00 AM - 8:45 AM</div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mt-1">
+                        <h4 class="font-bold text-gray-800">Mixed Triple Murid (Pusingan 1)</h4>
+                        <p class="text-xs text-gray-500 mt-1"><i class="fa-solid fa-map-pin mr-1"></i> Piste 1, 2, 3</p>
                     </div>
                 </div>
 
-                <!-- Lakaran Pointing & Shooting -->
-                <div>
-                    <h3 class="font-bold text-lg mb-3 flex items-center gap-2"><i class="fa-solid fa-bullseye text-petanque-lightgreen"></i> Syarat & Pemarkahan Acara Kemahiran</h3>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- Pointing Card -->
-                        <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
-                            <div class="bg-gray-100 p-2 text-center font-bold text-sm text-gray-700 border-b">POINTING EVENT</div>
-                            <div class="p-4 flex flex-col items-center">
-                                <!-- SVG Pointing target 1m -->
-                                <svg width="150" height="150" viewBox="0 0 100 100" class="mb-4">
-                                    <circle cx="50" cy="50" r="48" fill="white" stroke="#333" stroke-width="2"/>
-                                    <!-- Vertical lines -->
-                                    <line x1="33" y1="5" x2="33" y2="95" stroke="#333" stroke-width="2"/>
-                                    <line x1="67" y1="5" x2="67" y2="95" stroke="#333" stroke-width="2"/>
-                                    <!-- Middle Horizontal -->
-                                    <line x1="33" y1="50" x2="67" y2="50" stroke="#333" stroke-width="2"/>
-                                    <!-- Texts -->
-                                    <text x="16" y="55" font-size="16" font-family="Arial" text-anchor="middle" font-weight="bold">1</text>
-                                    <text x="83" y="55" font-size="16" font-family="Arial" text-anchor="middle" font-weight="bold">1</text>
-                                    <text x="50" y="32" font-size="16" font-family="Arial" text-anchor="middle" font-weight="bold">3</text>
-                                    <text x="50" y="78" font-size="16" font-family="Arial" text-anchor="middle" font-weight="bold">5</text>
-                                </svg>
-                                <div class="text-xs text-gray-600 space-y-1 w-full bg-gray-50 p-3 rounded">
-                                    <p><strong>Jarak:</strong> 6m, 7m, & 8m (1 boule per jarak).</p>
-                                    <p><strong>Ulangan:</strong> 2 kali setiap pemain.</p>
-                                    <p><strong>Mata:</strong> 1, 3, 5 jika boule dlm petak mata. 0 jika luar ring 1 meter.</p>
-                                    <p class="text-red-500 mt-2">*Seri = ulang sehingga ada pemenang.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Shooting Card -->
-                        <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
-                            <div class="bg-gray-100 p-2 text-center font-bold text-sm text-gray-700 border-b">SHOOTING EVENT</div>
-                            <div class="p-4 flex flex-col items-center">
-                                <!-- SVG Shooting target 1m -->
-                                <svg width="150" height="150" viewBox="0 0 100 100" class="mb-4">
-                                    <circle cx="50" cy="50" r="48" fill="white" stroke="#333" stroke-width="2"/>
-                                    <circle cx="50" cy="50" r="12" fill="#9ca3af" stroke="#6b7280" stroke-width="2"/>
-                                    <text x="50" y="25" font-size="10" font-family="Arial" text-anchor="middle">Target boule</text>
-                                    <text x="50" y="36" font-size="10" font-family="Arial" text-anchor="middle">(TB)</text>
-                                </svg>
-                                <div class="text-xs text-gray-600 space-y-1 w-full bg-gray-50 p-3 rounded">
-                                    <p><strong>Jarak:</strong> 6m, 7m, & 8m (1 boule per jarak).</p>
-                                    <p><strong>Ulangan:</strong> 2 kali setiap pemain.</p>
-                                    <p><strong>5 Poin:</strong> Carreau (Boule stay & TB terkeluar).</p>
-                                    <p><strong>3 Poin:</strong> Boule & TB dua-dua terkeluar.</p>
-                                    <p><strong>1 Poin:</strong> Boule sentuh TB (Boule terkeluar, TB stay).</p>
-                                    <p><strong>0 Poin:</strong> Batal / Mendarat luar ring 1 meter.</p>
-                                </div>
-                            </div>
-                        </div>
+                <div class="relative pl-6">
+                    <div class="absolute w-4 h-4 bg-blue-500 rounded-full border-2 border-white -left-[9px] top-1"></div>
+                    <div class="text-sm text-blue-600 font-bold">9:00 AM - 9:45 AM</div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mt-1">
+                        <h4 class="font-bold text-gray-800">Mixed Triple Guru (Pusingan 1)</h4>
+                        <p class="text-xs text-gray-500 mt-1"><i class="fa-solid fa-map-pin mr-1"></i> Piste 1, 2, 3</p>
                     </div>
                 </div>
-            </section>
 
-            <!-- TAB 4: PERATURAN -->
-            <section id="peraturan" class="tab-content space-y-6">
-                <h2 class="text-2xl font-bold text-petanque-green mb-4">Peraturan & Undang-Undang</h2>
+                <div class="relative pl-6">
+                    <div class="absolute w-4 h-4 bg-petanque rounded-full border-2 border-white -left-[9px] top-1"></div>
+                    <div class="text-sm text-petanque font-bold">10:00 AM - 10:45 AM</div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mt-1">
+                        <h4 class="font-bold text-gray-800">Mixed Triple Murid (Pusingan 2)</h4>
+                    </div>
+                </div>
+
+                <div class="relative pl-6">
+                    <div class="absolute w-4 h-4 bg-blue-500 rounded-full border-2 border-white -left-[9px] top-1"></div>
+                    <div class="text-sm text-blue-600 font-bold">11:00 AM - 11:45 AM</div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mt-1">
+                        <h4 class="font-bold text-gray-800">Mixed Triple Guru (Pusingan 2)</h4>
+                    </div>
+                </div>
+
+                <div class="relative pl-6">
+                    <div class="absolute w-4 h-4 bg-petanque rounded-full border-2 border-white -left-[9px] top-1"></div>
+                    <div class="text-sm text-petanque font-bold">12:00 PM - 12:45 PM</div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mt-1">
+                        <h4 class="font-bold text-gray-800">Mixed Triple Murid (Pusingan 3)</h4>
+                    </div>
+                </div>
+
+                <div class="relative pl-6">
+                    <div class="absolute w-4 h-4 bg-blue-500 rounded-full border-2 border-white -left-[9px] top-1"></div>
+                    <div class="text-sm text-blue-600 font-bold">1:00 PM - 1:45 PM</div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mt-1">
+                        <h4 class="font-bold text-gray-800">Mixed Triple Guru (Pusingan 3)</h4>
+                    </div>
+                </div>
+
+                <div class="relative pl-6">
+                    <div class="absolute w-4 h-4 bg-orange-500 rounded-full border-2 border-white -left-[9px] top-1"></div>
+                    <div class="text-sm text-orange-600 font-bold">2:30 PM</div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mt-1">
+                        <h4 class="font-bold text-gray-800">Pointing Event Murid</h4>
+                        <p class="text-xs text-gray-500 mt-1">Jarak 6m, 7m, 8m</p>
+                    </div>
+                </div>
+
+                <div class="relative pl-6">
+                    <div class="absolute w-4 h-4 bg-red-500 rounded-full border-2 border-white -left-[9px] top-1"></div>
+                    <div class="text-sm text-red-600 font-bold">3:30 PM</div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mt-1 mb-8">
+                        <h4 class="font-bold text-gray-800">Shooting Event Murid</h4>
+                        <p class="text-xs text-gray-500 mt-1">Jarak 6m, 7m, 8m</p>
+                    </div>
+                </div>
                 
-                <!-- Accordion Rules -->
-                <div class="space-y-3">
-                    
-                    <!-- Rule 1 -->
-                    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-                        <button onclick="toggleRule('rule1')" class="w-full text-left px-4 py-3 bg-gray-50 font-semibold text-sm flex justify-between items-center focus:outline-none">
-                            <span><i class="fa-solid fa-sitemap text-petanque-lightgreen mr-2"></i> Sistem Pertandingan</span>
-                            <i id="icon-rule1" class="fa-solid fa-chevron-down text-gray-400 transition-transform"></i>
-                        </button>
-                        <div id="rule1" class="hidden px-4 py-3 text-xs text-gray-600 bg-white border-t border-gray-100 space-y-2 leading-relaxed">
-                            <p><strong>Sistem Swiss 3 Pusingan:</strong> Berlangsung 45 minit + 1 End Tambahan. Tiada penyingkiran (semua main 3 kali).</p>
-                            <p><strong>Kemenangan:</strong> Pasukan mencapai 13 mata dahulu, ATAU tamat tempoh dan End Tambahan dimainkan.</p>
-                            <p><strong>Seri:</strong> Jika seri masa End Tambahan, END PENENTUAN dimainkan. Tie-breaker pusingan guna Perbezaan Mata / Head-to-Head / Buchholz.</p>
-                        </div>
-                    </div>
-
-                    <!-- Rule 2 -->
-                    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-                        <button onclick="toggleRule('rule2')" class="w-full text-left px-4 py-3 bg-gray-50 font-semibold text-sm flex justify-between items-center focus:outline-none">
-                            <span><i class="fa-solid fa-ruler-combined text-petanque-lightgreen mr-2"></i> Jarak Sah & Kedudukan Jek</span>
-                            <i id="icon-rule2" class="fa-solid fa-chevron-down text-gray-400 transition-transform"></i>
-                        </button>
-                        <div id="rule2" class="hidden px-4 py-3 text-xs text-gray-600 bg-white border-t border-gray-100 space-y-2 leading-relaxed">
-                            <p>Jarak sah lontaran jek: <strong>6m minimum, 10m maksimum</strong> dari sisi dalam ring ke jek.</p>
-                            <ul class="list-disc pl-4 space-y-1">
-                                <li>Min 50cm dari sebarang halangan & tali atas/bawah.</li>
-                                <li>Min 1.5m dari jek/ring gelanggang sebelah (kiri/kanan).</li>
-                                <li>Tapak jek mesti di dalam gelanggang sendiri, batal jika di gelanggang sebelah.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Rule 3 -->
-                    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-                        <button onclick="toggleRule('rule3')" class="w-full text-left px-4 py-3 bg-gray-50 font-semibold text-sm flex justify-between items-center focus:outline-none">
-                            <span><i class="fa-solid fa-ban text-petanque-lightgreen mr-2"></i> Kesalahan & Penalti Batal</span>
-                            <i id="icon-rule3" class="fa-solid fa-chevron-down text-gray-400 transition-transform"></i>
-                        </button>
-                        <div id="rule3" class="hidden px-4 py-3 text-xs text-gray-600 bg-white border-t border-gray-100 space-y-2 leading-relaxed">
-                            <p><strong>Boules & Jek Bergerak:</strong> Jika beralih oleh faktor luaran tapi dah bertanda, kembalikan posisi. Jika tak bertanda, posisi baharu digunapakai. (Mesti tanda kedudukan!).</p>
-                            <p><strong>Tersalah Boule:</strong> 1st kesalahan = Sah tapi tukar segera. 2nd = Batal boules.</p>
-                            <p><strong>Angkat Boules Awal:</strong> Dilarang angkat sebelum persetujuan mata, jika angkat = batal.</p>
-                            <p><strong>Halangan Gelanggang:</strong> Hanya boleh kambus 1 lubang/lekuk shj per end.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Rule 4 -->
-                    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-                        <button onclick="toggleRule('rule4')" class="w-full text-left px-4 py-3 bg-gray-50 font-semibold text-sm flex justify-between items-center focus:outline-none">
-                            <span><i class="fa-solid fa-clock-rotate-left text-petanque-lightgreen mr-2"></i> Kelewatan Pasukan</span>
-                            <i id="icon-rule4" class="fa-solid fa-chevron-down text-gray-400 transition-transform"></i>
-                        </button>
-                        <div id="rule4" class="hidden px-4 py-3 text-xs text-gray-600 bg-white border-t border-gray-100 space-y-2 leading-relaxed">
-                            <p>Selepas 15 minit panggilan: Pasukan didenda 1 mata kpd lawan. Penalti tambahan 1 mata setiap 5 minit selepas sambung semula.</p>
-                            <p>Gagal hadir 30 minit: Hilang hak bertanding (terkeluar). Pemain lambat hanya boleh masuk pada end baharu.</p>
-                        </div>
-                    </div>
-
-                    <!-- Rule 5 -->
-                    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-                        <button onclick="toggleRule('rule5')" class="w-full text-left px-4 py-3 bg-gray-50 font-semibold text-sm flex justify-between items-center focus:outline-none">
-                            <span><i class="fa-solid fa-shirt text-petanque-lightgreen mr-2"></i> Pemakaian</span>
-                            <i id="icon-rule5" class="fa-solid fa-chevron-down text-gray-400 transition-transform"></i>
-                        </button>
-                        <div id="rule5" class="hidden px-4 py-3 text-xs text-gray-600 bg-white border-t border-gray-100 space-y-2 leading-relaxed">
-                            <p>Dibenarkan: Baju berwarna seragam berlengan pendek/panjang, seluar slack/track bottom panjang, kasut sukan.</p>
-                            <p class="text-red-500 font-semibold">TIDAK Dibenarkan: Seluar 'jeans', seluar pendek, selipar dan sandals.</p>
-                        </div>
-                    </div>
-
+            </div>
+            
+            <!-- MVP Notice -->
+            <div class="bg-gradient-to-r from-yellow-100 to-yellow-50 p-4 rounded-xl border border-yellow-200 mt-4 flex gap-4">
+                <i class="fa-solid fa-trophy text-3xl text-yellow-500"></i>
+                <div>
+                    <h4 class="font-bold text-yellow-800">Anugerah Most Valuable Player (MVP)</h4>
+                    <p class="text-xs text-gray-700 mt-1">Pemilihan berdasarkan poin terkumpul: Emas (5pt), Perak (3pt), Gangsa (1pt) dari acara Mixed Triple, Pointing dan Shooting.</p>
                 </div>
+            </div>
+        </section>
 
-                <!-- Hubungi -->
-                <div class="bg-green-50 rounded-xl p-4 border border-green-100 mt-6">
-                    <h3 class="font-bold text-sm text-petanque-green mb-3"><i class="fa-solid fa-phone mr-1"></i> Hubungi Urusetia</h3>
-                    <div class="space-y-3">
-                        <div class="text-xs">
-                            <p class="font-bold">Salihin Bin Ahmad</p>
-                            <p class="text-gray-600">PK Kokurikulum SKPK Miri</p>
-                            <a href="tel:0133598873" class="text-blue-600 inline-block mt-1"><i class="fa-solid fa-mobile-screen"></i> 013-359 8873</a>
-                        </div>
-                        <div class="text-xs">
-                            <p class="font-bold">Christian Simon</p>
-                            <p class="text-gray-600">Penyelaras Pertandingan</p>
-                            <a href="tel:01164651922" class="text-blue-600 inline-block mt-1"><i class="fa-solid fa-mobile-screen"></i> 011-6465 1922</a>
-                        </div>
+        <!-- 3. KEPUTUSAN TERKINI -->
+        <section id="keputusan" class="tab-content">
+            <h2 class="text-2xl font-bold mb-4 text-petanque-dark border-b-2 border-petanque-light pb-2">Keputusan Terkini</h2>
+            
+            <div class="bg-white rounded-xl shadow-md border border-gray-100 p-8 text-center mt-6">
+                <div class="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-satellite-dish text-4xl text-blue-500 animate-pulse"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Paparan Langsung (Live Score)</h3>
+                <p class="text-gray-600 mb-6">Pautan bagi <strong>Keputusan Live (Live Link)</strong> akan diberikan oleh urusetia semasa hari pertandingan berlangsung.</p>
+                <div class="inline-block bg-gray-100 text-gray-500 font-medium px-4 py-2 rounded-full text-sm">
+                    <i class="fa-regular fa-calendar mr-2"></i> Nantikan pada 19 November 2026
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. PERATURAN -->
+        <section id="peraturan" class="tab-content">
+            <h2 class="text-2xl font-bold mb-4 text-petanque-dark border-b-2 border-petanque-light pb-2">Format & Peraturan</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <!-- Sistem Pertandingan -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="bg-petanque text-white p-3 font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-sitemap"></i> Sistem Swiss (Triple)
+                    </div>
+                    <div class="p-4 space-y-2 text-sm text-gray-700">
+                        <p><i class="fa-solid fa-check text-green-500 mr-2"></i> <strong>3 Pusingan:</strong> Semua pasukan bermain 3 kali tanpa penyingkiran.</p>
+                        <p><i class="fa-solid fa-check text-green-500 mr-2"></i> <strong>Masa:</strong> 45 Minit + 1 End Tambahan.</p>
+                        <p><i class="fa-solid fa-check text-green-500 mr-2"></i> <strong>Kemenangan:</strong> Kumpul 13 mata dahulu atau mata terbanyak selepas masa tamat.</p>
+                        <p><i class="fa-solid fa-check text-green-500 mr-2"></i> <strong>Tie-Breaker:</strong> Jika seri End Tambahan, main End Penentuan.</p>
                     </div>
                 </div>
 
-            </section>
-        </main>
-    </div>
+                <!-- Kelewatan & Penalti -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <div class="bg-red-600 text-white p-3 font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-stopwatch"></i> Masa & Penalti
+                    </div>
+                    <div class="p-4 space-y-2 text-sm text-gray-700">
+                        <p><i class="fa-solid fa-circle-exclamation text-red-500 mr-2"></i> Hadir 15 minit sebelum mula perlawanan.</p>
+                        <p><i class="fa-solid fa-circle-exclamation text-red-500 mr-2"></i> Selepas 15 minit panggilan, penalti 1 mata diberi kpd lawan.</p>
+                        <p><i class="fa-solid fa-circle-exclamation text-red-500 mr-2"></i> Kelewatan 30 minit = Pasukan diisytihar kalah/terkeluar.</p>
+                    </div>
+                </div>
+            </div>
 
-    <!-- Mobile Bottom Navigation -->
-    <nav class="md:hidden fixed bottom-0 w-full bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-50 rounded-t-xl border-t border-gray-200">
-        <ul class="flex justify-around items-center p-2">
-            <li>
-                <button onclick="switchTab('utama')" id="nav-utama-mob" class="flex flex-col items-center p-2 text-petanque-green w-16 transition-colors">
-                    <i class="fa-solid fa-house text-xl mb-1"></i>
-                    <span class="text-[10px] font-semibold">Utama</span>
-                </button>
-            </li>
-            <li>
-                <button onclick="switchTab('jadual')" id="nav-jadual-mob" class="flex flex-col items-center p-2 text-gray-400 hover:text-petanque-lightgreen w-16 transition-colors">
-                    <i class="fa-solid fa-calendar-days text-xl mb-1"></i>
-                    <span class="text-[10px] font-semibold">Jadual</span>
-                </button>
-            </li>
-            <li>
-                <button onclick="switchTab('acara')" id="nav-acara-mob" class="flex flex-col items-center p-2 text-gray-400 hover:text-petanque-lightgreen w-16 transition-colors">
-                    <i class="fa-solid fa-medal text-xl mb-1"></i>
-                    <span class="text-[10px] font-semibold">Acara</span>
-                </button>
-            </li>
-            <li>
-                <button onclick="switchTab('peraturan')" id="nav-peraturan-mob" class="flex flex-col items-center p-2 text-gray-400 hover:text-petanque-lightgreen w-16 transition-colors">
-                    <i class="fa-solid fa-book text-xl mb-1"></i>
-                    <span class="text-[10px] font-semibold">Syarat</span>
-                </button>
-            </li>
-        </ul>
+            <!-- Pointing & Shooting Graphics Summary -->
+            <h3 class="font-bold text-lg mb-3">Format Acara Kemahiran (Skills)</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                <!-- Pointing Rule -->
+                <div class="bg-white p-4 rounded-xl shadow border border-gray-200">
+                    <h4 class="font-bold text-center border-b pb-2 mb-3">Pointing Event</h4>
+                    <div class="flex justify-center mb-4">
+                        <!-- Custom CSS Draw of Pointing Circle -->
+                        <div class="w-32 h-32 rounded-full border-2 border-black relative flex items-center justify-center">
+                            <div class="absolute w-full h-full rounded-full border-black border flex items-center justify-between overflow-hidden">
+                                <div class="w-1/4 h-full flex items-center justify-center font-bold text-xl border-r border-black bg-gray-50">1</div>
+                                <div class="w-2/4 h-full flex flex-col">
+                                    <div class="h-1/2 flex items-center justify-center border-b border-black font-bold text-2xl bg-gray-100">3</div>
+                                    <div class="h-1/2 flex items-center justify-center font-bold text-3xl bg-gray-200">5</div>
+                                </div>
+                                <div class="w-1/4 h-full flex items-center justify-center font-bold text-xl border-l border-black bg-gray-50">1</div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-gray-600 space-y-1 list-disc pl-4">
+                        <li>Jarak: 6m, 7m dan 8m.</li>
+                        <li>Guna 1 boule sahaja setiap jarak (Ulang 2 kali).</li>
+                        <li>Masuk petak mata dapat poin (1, 3, 5). Luar gelung = 0.</li>
+                    </ul>
+                </div>
+
+                <!-- Shooting Rule -->
+                <div class="bg-white p-4 rounded-xl shadow border border-gray-200">
+                    <h4 class="font-bold text-center border-b pb-2 mb-3">Shooting Event</h4>
+                    <div class="flex justify-center mb-4">
+                        <!-- Custom CSS Draw of Shooting Circle -->
+                        <div class="w-32 h-32 rounded-full border-2 border-black relative flex items-center justify-center bg-gray-50">
+                            <span class="absolute top-4 text-xs font-semibold">1 Meter</span>
+                            <div class="w-8 h-8 rounded-full bg-gray-400 border border-gray-600 shadow-inner flex items-center justify-center z-10">
+                                <span class="text-[10px] text-white">TB</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="text-xs text-gray-600 space-y-1 list-disc pl-4">
+                        <li>Jarak: 6m, 7m dan 8m (1 boule setiap jarak, ulang 2 kali).</li>
+                        <li><strong>5 Poin (Carreau):</strong> Boule penembak kekal dalam, Target terkeluar.</li>
+                        <li><strong>3 Poin:</strong> Penembak & Target terkeluar.</li>
+                        <li><strong>1 Poin:</strong> Tersentuh target, tapi target kekal dalam gelung.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-gray-100 rounded-lg text-xs text-gray-500 text-center">
+                Berdasarkan undang-undang FIPJP terkini. Arbiter berhak membuat keputusan muktamad di padang permainan.
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Bottom Navigation (Mobile Only) -->
+    <nav class="md:hidden fixed bottom-0 w-full bg-white border-t border-gray-200 flex justify-around items-center h-16 pb-safe z-50 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+        <button onclick="switchTab('utama')" class="nav-btn flex flex-col items-center justify-center w-full h-full text-gray-400 active-tab" data-target="utama">
+            <i class="fa-solid fa-house text-lg mb-1"></i>
+            <span class="text-[10px] font-medium">Utama</span>
+        </button>
+        <button onclick="switchTab('jadual')" class="nav-btn flex flex-col items-center justify-center w-full h-full text-gray-400" data-target="jadual">
+            <i class="fa-solid fa-calendar-day text-lg mb-1"></i>
+            <span class="text-[10px] font-medium">Jadual</span>
+        </button>
+        <button onclick="switchTab('keputusan')" class="nav-btn flex flex-col items-center justify-center w-full h-full text-gray-400" data-target="keputusan">
+            <i class="fa-solid fa-clipboard-list text-lg mb-1"></i>
+            <span class="text-[10px] font-medium">Keputusan</span>
+        </button>
+        <button onclick="switchTab('peraturan')" class="nav-btn flex flex-col items-center justify-center w-full h-full text-gray-400" data-target="peraturan">
+            <i class="fa-solid fa-book text-lg mb-1"></i>
+            <span class="text-[10px] font-medium">Peraturan</span>
+        </button>
     </nav>
 
+    <!-- Script for Tab Navigation -->
     <script>
-        // Tab switching logic
         function switchTab(tabId) {
-            // Hide all tab contents
+            // Hide all content sections
             document.querySelectorAll('.tab-content').forEach(el => {
                 el.classList.remove('active');
             });
             
-            // Show targeted tab content
+            // Show targeted section
             document.getElementById(tabId).classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // Update mobile nav styling
-            const mobNavs = ['utama', 'jadual', 'acara', 'peraturan'];
-            mobNavs.forEach(nav => {
-                const el = document.getElementById(`nav-${nav}-mob`);
-                if(nav === tabId) {
-                    el.classList.remove('text-gray-400');
-                    el.classList.add('text-petanque-green');
+            // Update mobile bottom nav styles
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn.dataset.target === tabId) {
+                    btn.classList.add('text-petanque', 'active-tab');
+                    btn.classList.remove('text-gray-400');
                 } else {
-                    el.classList.add('text-gray-400');
-                    el.classList.remove('text-petanque-green');
+                    btn.classList.remove('text-petanque', 'active-tab');
+                    btn.classList.add('text-gray-400');
                 }
             });
 
-            // Update desktop nav styling
-            mobNavs.forEach(nav => {
-                const el = document.getElementById(`nav-${nav}-desk`);
-                if(nav === tabId) {
-                    el.classList.remove('text-gray-600', 'hover:bg-gray-50');
-                    el.classList.add('text-petanque-green', 'bg-green-50');
+            // Update desktop top nav styles
+            document.querySelectorAll('.nav-btn-desktop').forEach(btn => {
+                if (btn.dataset.target === tabId) {
+                    btn.classList.add('text-white', 'border-b-2', 'border-petanque-gold');
+                    btn.classList.remove('text-white/80');
                 } else {
-                    el.classList.add('text-gray-600', 'hover:bg-gray-50');
-                    el.classList.remove('text-petanque-green', 'bg-green-50');
+                    btn.classList.remove('text-white', 'border-b-2', 'border-petanque-gold');
+                    btn.classList.add('text-white/80');
                 }
             });
-        }
-
-        // Accordion toggle logic
-        function toggleRule(id) {
-            const content = document.getElementById(id);
-            const icon = document.getElementById('icon-' + id);
             
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                icon.style.transform = 'rotate(180deg)';
-            } else {
-                content.classList.add('hidden');
-                icon.style.transform = 'rotate(0deg)';
-            }
+            // Scroll to top when switching tab
+            window.scrollTo(0,0);
         }
+
+        function switchResultTab(resId) {
+            // Hide all result contents
+            document.querySelectorAll('.res-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+            });
+            
+            // Show target result content
+            document.getElementById(resId).classList.remove('hidden');
+            document.getElementById(resId).classList.add('block');
+
+            // Update result sub-tab styling
+            document.querySelectorAll('.res-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-petanque', 'text-white');
+                btn.classList.add('bg-white', 'text-gray-600');
+            });
+            
+            event.currentTarget.classList.remove('bg-white', 'text-gray-600');
+            event.currentTarget.classList.add('bg-petanque', 'text-white');
+        }
+
+        // Initialize desktop active state on load
+        document.addEventListener("DOMContentLoaded", () => {
+            const firstDesktopBtn = document.querySelector('.nav-btn-desktop');
+            if(firstDesktopBtn) {
+                firstDesktopBtn.classList.add('text-white', 'border-b-2', 'border-petanque-gold');
+            }
+            
+            const firstMobileBtn = document.querySelector('.nav-btn');
+            if(firstMobileBtn) {
+                firstMobileBtn.classList.add('text-petanque');
+                firstMobileBtn.classList.remove('text-gray-400');
+            }
+        });
     </script>
 </body>
 </html>
